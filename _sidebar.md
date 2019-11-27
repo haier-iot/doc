@@ -28,12 +28,12 @@
     * [家庭数据订阅](zh-cn/)  
 
 * [设备中心](zh-cn/DeviceManage)
-	* [权限管理](zh-cn/) 
-	* [信息管理](zh-cn/)     
-	* [实时控制](zh-cn/)  
-	* [预约控制](zh-cn/)  
-	* [数据查询](zh-cn/)    
-    * [数据订阅](zh-cn/)  
+	* [权限管理](zh-cn/DeviceManage/authorization) 
+	* [信息管理](zh-cn/DeviceManage/information)     
+	* [实时控制](zh-cn/DeviceManage/real-time)  
+	* [预约控制](zh-cn/DeviceManage/reservation)  
+	* [数据查询](zh-cn/DeviceManage/dataquery)    
+    * [数据订阅](zh-cn/DeviceManage/datasubscription)  
 
 
 * [场景中心](zh-cn/IFTTT)  
