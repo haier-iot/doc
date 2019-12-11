@@ -20,12 +20,12 @@
 	* [企业账号](zh-cn/)   
     * [数据订阅](zh-cn/) 
 
-* [家庭中心](zh-cn/FamilyManage)  
-	* [家庭管理](zh-cn/)    
-	* [房间管理](zh-cn/)    
-	* [家庭成员管理](zh-cn/)  
-	* [家庭设备管理](zh-cn/)  
-    * [家庭数据订阅](zh-cn/)  
+* [家庭中心](zh-cn/FamilyCenter)  
+	* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
+	* [房间管理](zh-cn/FamilyManage/FamilyRoomManage)    
+	* [家庭成员管理](zh-cn/FamilyManage/FamilyMembersManage)  
+	* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
+    * [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage)  
 
 * [设备中心](zh-cn/DeviceManage)
 	* [权限管理](zh-cn/DevicesManage/authorization) 
