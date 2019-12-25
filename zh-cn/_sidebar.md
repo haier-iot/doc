@@ -11,14 +11,13 @@
 	* [常见问题](zh-cn/Standard/Question)  
 
 
-* [用户中心](zh-cn/DeviceManage)  
-	* [注册登录](zh-cn/) 
-	* [信息管理](zh-cn/)    	
-	* [预约控制](zh-cn/Scheduler)  
-	* [OAuth授权<sup style="color:red">(new)<sup>](zh-cn/)  
-	* [静默授权](zh-cn/)  
-	* [企业账号](zh-cn/)   
-    * [数据订阅](zh-cn/) 
+* [用户中心](zh-cn/AccountManage)  
+	* [注册登录](zh-cn/AccountManage/signIn) 
+	* [信息管理](zh-cn/AccountManage/infoManage)    	
+	* [OAuth授权<sup style="color:red">(new)<sup>](zh-cn/AccountManage/oauth)  
+	* [静默授权](zh-cn/AccountManage/silentAuth)  
+	* [企业账号](zh-cn/AccountManage/enterpriseAcc)   
+    * [数据订阅](zh-cn/AccountManage/) 
 
 * [家庭中心](zh-cn/FamilyCenter)  
 	* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
