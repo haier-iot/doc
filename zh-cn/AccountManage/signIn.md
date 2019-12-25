@@ -1,9 +1,8 @@
 !> **更新时间**：{docsify-updated}  
 
 
-## 接口列表
 
-### 获取应用级保护的access_token接口
+## 获取应用级保护的access_token接口
 
 Request:
 
@@ -46,7 +45,7 @@ Response:
 |invalid_scope| 400| scope 非法|
 
 
-### 判断账号是否可用
+## 判断账号是否可用
 
 注: 此接口使用的 access_token ( Authorization: Bearer yyyyy ) 依赖应用级token
 
@@ -83,7 +82,7 @@ Response:
 |insufficient_scope |403|权限不足，未获得接口所需的scope|
 
 
-### 获取(刷新)图形验证码
+## 获取(刷新)图形验证码
 
 注: 此接口使用的 access_token ( Authorization: Bearer yyyyy ) 依赖应用级token
 
@@ -113,7 +112,7 @@ Response:
 |insufficient_scope |403|权限不足，未获得接口所需的scope|
 
 
-### 发送短信验证码  
+## 发送短信验证码  
 
 注: 此接口使用的 access_token ( Authorization: Bearer yyyyy ) 依赖应用级token  
 
@@ -187,7 +186,7 @@ Error:
 |captcha_required| 400|失败次数过多，须输入验证码|
 |too_often |400|发送过于频繁，同时会增加delay字段指示需要等待的剩余秒数|    
 
-### 注册接口    
+## 注册接口    
 
 注: 此接口使用的 access_token ( Authorization: Bearer yyyyy ) 依赖应用级token  
 
@@ -256,7 +255,7 @@ Error:
 
 
 
-### 短信随机码快速登录     
+## 短信随机码快速登录     
 
 注: 此接口不受个人或者应用token保护，由特殊参数保护。    
 
@@ -334,7 +333,7 @@ Error:
 |bad_credentials| 400|密码或短信验证码不正确|
 |uhome_token_request_error |400|获取Uhome设备令牌失败|  
 
-### 账号密码登录      
+## 账号密码登录      
 
 注: 此接口不受个人或者应用token保护，由特殊参数保护。    
 
@@ -426,7 +425,7 @@ Error:
 |captcha_required |400|失败次数过多，须输入验证码；或者验证码不正确|
 |uhome_token_request_error |400|获取Uhome设备令牌失败|   
 
-### 刷新普通登录        
+## 刷新普通登录        
 
 注: 此接口不受个人或者应用token保护，由特殊参数保护。    
 
@@ -491,7 +490,7 @@ Error:
 |invalid_grant| 400 |refresh_token非法|  
 |uhome_token_request_error| 400 |获取Uhome设备令牌失败|   
 
-### 社交登录后绑定手机          
+## 社交登录后绑定手机          
 
 注: 此接口不受个人或者应用token保护，由特殊参数保护。    
 
@@ -578,7 +577,7 @@ Error:
 |uhome_token_request_error| 400 |获取Uhome设备令牌失败|  
 
 
-### 刷新社交登录            
+## 刷新社交登录            
 
 注: 此接口不受个人或者应用token保护，由特殊参数保护。    
 

@@ -1,9 +1,8 @@
 !> **更新时间**：{docsify-updated}  
 
 
-## 接口列表
 
-### 获取用户基本信息            
+## 获取用户基本信息            
 
 注: 此接口使用`access_token ( Authorization: Bearer yyyyy )`仰赖个人级token。    
 
@@ -63,7 +62,7 @@ Error:
 |insufficient_scope| 403 |权限不足，未获得接口所需的scope|  
 
 
-### 修改密码              
+## 修改密码              
 
 注: 此接口使用`access_token ( Authorization: Bearer yyyyy )`仰赖个人级token。    
 
@@ -116,7 +115,7 @@ Error:
 |insufficient_scope| 403 |权限不足，未获得接口所需的scope|  
  
 
-### 找回密码              
+## 找回密码              
 
 注: 此接口使用`access_token ( Authorization: Bearer yyyyy )`仰赖个人级token。    
 
@@ -184,7 +183,7 @@ Error:
 |invalid_password|400|密码格式非法|    
 
 
-### 退出接口              
+## 退出接口              
 
 注: 此接口使用`access_token ( Authorization: Bearer yyyyy )`仰赖个人级token。    
 
@@ -231,7 +230,7 @@ Error:
 
 
 
-### 更新用户基本信息                
+## 更新用户基本信息                
 
 注: 此接口使用`access_token ( Authorization: Bearer yyyyy )`仰赖个人级token。    
 
