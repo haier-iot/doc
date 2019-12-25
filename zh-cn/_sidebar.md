@@ -26,7 +26,7 @@
 	* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
     * [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage)  
 
-* [设备中心](zh-cn/DeviceManage)
+* [设备中心](zh-cn/DevicesManage)
 	* [权限管理](zh-cn/DevicesManage/authorization) 
 	* [信息管理](zh-cn/DevicesManage/information)     
 	* [实时控制](zh-cn/DevicesManage/real-time)  
