@@ -231,6 +231,16 @@ connectionStatus|String|设备连接状态|online：在线；offline：离线
 ProdcutCodeT|String|产品型号编码|
 ProcutNameT|String|产品型号名称|
 
+###DeviceProductInfo
+参数名|类型|说明|备注
+:-|:-:|:-:|:-
+deviceId|	String|	设备Id	
+sern|	String|	机器编码	
+productCodeT|	String|	产品型号编码	
+productNameT|	String|	产品型号名称	
+timestamp|	Long|	时间戳|	修改时间
+factoryNum|	String|	工厂编码	
+
 
 
 ### 设备信息管理接口
@@ -449,6 +459,83 @@ Header：
 
 > A00001、B00001、G20202、A00004、B00001、D00006
 
+#### 根据设备列表查询设备型号
+> 根据设备列表查询设备型号
+
+##### 1、接口定义
+
+?> **接入地址：** `/udse/v1/devices/getProductInfos`</br>
+**HTTP Method：** POST
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+|List<String>|Body|必填|设备id集合
+
+**输出参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+deviceProductInfos|Map<String,DeviceProductInfo>|body|必填|设备型号信息集合
+
+##### 2、请求样例
+
+**请求样例**
+
+```
+请求地址：/udse/v1/devices/getProductInfos
+Header：
+appId: SV-*****-0000
+appVersion: 99.99.99.99990
+clientId: 123
+sequenceId: 2014022801010
+sign: 0e120bba*************0549e6bf3eb77f9d
+timestamp: 1491014237857 
+language: zh-cn
+timezone: +8
+appKey: 2**************a3a
+Content-Encoding: utf-8
+Content-type: application/json
+
+[
+    "DC****799325","DC****992B1"
+]
+
+```
+
+**请求应答**
+
+```
+{
+  "deviceProductInfos": {
+    "DC****992B1": {
+      "deviceId": "DC3****992B1",
+      "productCodeT": "GD0QZ6005",
+      "productNameT": "JSQ38-20CR7NPU1",
+      "sern": "2",
+      "sourceFrom": 2,
+      "timestamp": 1564642994000
+    },
+    "DC****99325": {
+      "deviceId": "DC33****9325",
+      "productCodeT": "GA0SNC01C",
+      "productNameT": "ES85H-PLUS9(U1)",
+      "sern": "2",
+      "sourceFrom": 2,
+      "timestamp": 1563862732000
+    }
+  },
+  "retCode": "00000",
+  "retInfo": "成功!"
+}
+
+
+```
+
+##### 3、接口错误码
+
+> A00001、B00001、20903
 
 
 #### 更新位置信息
