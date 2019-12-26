@@ -54,7 +54,7 @@ brand|String|设备品牌|
 model|String|设备型号|
 others|Map<String,Strng>|其他属性|
 
-### DeviceVersion
+## DeviceVersion
 设备详细信息
 
 参数名|类型|说明|备注
