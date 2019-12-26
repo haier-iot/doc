@@ -544,6 +544,188 @@ Header：
 
 
 
+#### 查询设备是否在线
+> 用户可以查看设备是否在线（公共部分参考权限管理）
+
+##### 1、接口定义
+?> **接入地址：** `/uds/v1/protected/{deviceId}/isOnline`</br>
+**HTTP Method：** GET
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+deviceId|String|url|必填|设备ID
+
+**输出参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+isOnline|String|Body|必填|状态信息
+
+##### 2、请求样例
+
+**请求样例**
+
+```
+请求地址：/uds/v1/protected/DC330D01FBF1/isOnline
+Header：
+    appId: MB-****-0000
+    appVersion: 99.99.99.99990
+    clientId: 123
+    sequenceId: 2014022801010
+    accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+    sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
+    timestamp: 1491014596343 
+    language: zh-cn
+    timezone: +8
+    appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+    Content-Encoding: utf-8
+    Content-type: application/json
+```
+
+**请求应答**
+
+```
+{
+    "isonline": "true",
+    "retCode": "00000",
+    "retInfo": "成功!"
+}
+```
+
+##### 3、接口错误码
+> A00001、B00001、G20202、A00004、B00001、D00006
+
+
+
+#### 查询设备信号强度
+> 获取设备的信号强度（公共部分参考权限管理）
+
+##### 1、接口定义
+
+?> **接入地址：** `/uds/v1/protected/{deviceId}/deviceNetQuality`</br>
+**HTTP Method：** GET
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+deviceId|String|url|必填|设备ID
+
+**输出参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+deviceNetQuality|DeviceNetQualityDto|Body|必填|设备ID
+
+##### 2、请求样例
+
+**请求样例**
+
+```
+请求地址：/uds/v1/protected/DC330D01FBF1/deviceNetQuality
+Header：
+    appId: MB-****-0000
+    appVersion: 99.99.99.99990
+    clientId: 123
+    sequenceId: 2014022801010
+    accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+    sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
+    timestamp: 1491014596343 
+    language: zh-cn
+    timezone: +8
+    appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+    Content-Encoding: utf-8
+    Content-type: application/json
+```
+
+**请求应答**
+
+```
+{
+    "deviceNetQualityDto":
+    {
+        "hardwareType":"R",
+        "hardwareVers":"1.0.00",
+        "softwareType":"UDISCOVERY_UWT",
+        "softwareVers":"2.3.12",
+        "netType":"Wifi",
+        "strength":"100"
+    },
+    "retCode": "00000",
+    "retInfo": "成功!"
+}
+```
+
+##### 3、接口错误码
+> A00001、B00001、G20202、A00004、D00006
+
+
+
+#### 获取设备最新状态
+> 获取到用户最新上报的状态信息（公共部分参考权限管理）
+
+##### 1、接口定义
+?> **接入地址：** `/uds/v1/protected/{deviceId}/lastReportStatus`</br>
+**HTTP Method：** GET
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+deviceId|String|url|必填|设备ID
+
+**输出参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+DeviceStatus|DeviceStatus|Body|必填|设备状态
+
+##### 2、请求样例
+
+**请求样例**
+
+```
+请求地址：/uds/v1/protected/DC330D01FBF1/lastReportStatus
+Header：
+    appId: MB-****-0000
+    appVersion: 99.99.99.99990
+    clientId: 123
+    sequenceId: 2014022801010
+    accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+    sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
+    timestamp: 1491014596343 
+    language: zh-cn
+    timezone: +8
+    appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+    Content-Encoding: utf-8
+    Content-type: application/json
+```
+
+**请求应答**
+
+```
+{
+    "devicestatus":
+    {
+        "timestamp":"1502854990142",
+        "deviceId":"DC330D003121",
+        "statuses":
+        [
+            {"name":"2000ZX","value":""},
+            {"name":"623006","value":"323000"}
+        ]
+    },
+    "retCode": "00000",
+    "retInfo": "成功!"
+}
+```
+
+##### 3、接口错误码
+> A00001、B00001、G20202、A00004、D00006
+
+
 
 
 #### 添加设备品牌信息
