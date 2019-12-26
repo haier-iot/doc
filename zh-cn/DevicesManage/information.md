@@ -231,7 +231,7 @@ connectionStatus|String|设备连接状态|online：在线；offline：离线
 ProdcutCodeT|String|产品型号编码|
 ProcutNameT|String|产品型号名称|
 
-###DeviceProductInfo
+### DeviceProductInfo
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 deviceId|	String|	设备Id	
