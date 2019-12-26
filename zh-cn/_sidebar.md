@@ -11,7 +11,7 @@
 	* [常见问题](zh-cn/Standard/Question)  
 
 
-* [用户中心](zh-cn/AccountManage/readme)  
+* [用户中心](zh-cn/AccountManage)  
 	* [注册登录](zh-cn/AccountManage/signIn) 
 	* [信息管理](zh-cn/AccountManage/infoManage)    	
 	* [OAuth授权<sup style="color:red">(new)<sup>](zh-cn/AccountManage/oauth)  
