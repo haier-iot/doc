@@ -41,13 +41,13 @@
 
 
 1)下文将依据不同的应用种类,进行流程的描述,先给出一些约定:
-下文描述本平台的服务地址均使用https://idp.com和com.idp://,其中前者为web服务
-域名地址,后者为原生 APP应用自定义scheme地址;真实对接的域名如下,请开发者注意替换使用
+
+下文描述本平台的服务地址均使用https://idp.com和com.idp://,其中前者为web服务域名地址,后者为原生 APP应用自定义scheme地址;真实对接的域名如下,请开发者注意替换使用
 
 
 o测试环境:http://taccount.haier.com
-o正式环境:http://account.haier.com 和http://account-api.haier.net(只有/userinfo接口
-使用)
+
+o正式环境:http://account.haier.com 和http://account-api.haier.net(只有/userinfo接口使用)
 
 2)相同的,我们擅自的将应用的回跳域名描述成https://rp.com和com.rp://,请替换成确切
 的域名。此域名需要区分测试环境和正式环境,提供给用户中心配置回调白名单。
@@ -61,8 +61,7 @@ o正式环境:http://account.haier.com 和http://account-api.haier.net(只有/us
 
 2.此时应用要生成授权URL,如下
 https://idp.com/oauth/authorize?
-client_id=rptest&response_type=code&state=xyz&redirect_uri=https://rp.com/login_cal
-lback
+client_id=rptest&response_type=code&state=xyz&redirect_uri=https://rp.com/login_callback
 
 
 需要特别注意的是,若采用webview打开HTTP 授权URL,则无法享受单点登录特性,APP内
@@ -107,8 +106,7 @@ URL),即是将授权码给予了应用
 
 
 6.应用(的后端)取得授权码后(指通过访问4.中URL 使得后端程序得到code),在后端发起
-HTTPPOST请求向本平台交换访问令牌,其中,参
-数uhome_client_id,uhome_app_id,uhome_sign,type_uhome 为设备token鉴权必须,如果
+HTTPPOST请求向本平台交换访问令牌,其中,参数uhome_client_id,uhome_app_id,uhome_sign,type_uhome 为设备token鉴权必须,如果
 无须设备鉴权,则无须传入此四个参数;uhome_sign 的获取方法请参考附录一。 如下例:
 
 
@@ -201,15 +199,19 @@ ca008e569a67&&TGT1UA9G6BABCBD52NZCRQR2KONSTO&&100013957366165837",
 access_token区分步骤6是否区分设备鉴权来解析:
 
 
-**有设备鉴权的情况**,access_token即为token信息的组合,由三部分组成,
-即<access_token>&&<uhome_access_token>&&<uhome_user_id>,字符串由两
+**有设备鉴权的情况**,access_token即为token信息的组合,
+
+由三部分组成,即<access_token>&&<uhome_access_token>&&<uhome_user_id>,字符串由两
 个&&符号分隔为三部分,第一部分为用户中心访问令牌access_token,第二部分为云平台
 token,第三部分为云平台user_id
 
 
 **无须设备鉴权的情况**,access_token 即为用户中心访问令牌。
+
 refresh_token即为刷新令牌,可调用接口刷新access_token
+
 expires_in 即为 access_token过期时间(单位秒),access_token 默认有效期为10天,
+
 source为单点登录的被登录方可接收到的源登录方信息client_id信息。
 
 
@@ -260,55 +262,72 @@ Content-Type:application/json;charset=UTF-8
 
 11.应用应当在1.中记住用户本要访问的URL,(本例中为https://rp.com/user/me),本文档
 推荐应用在session中保存此URL;在"登录"成功后,引导用户返回
-https://rp.com/user/me;而原生APP往往不会这么做,直接返回首页即可.
+https://rp.com/user/me; 而原生APP往往不会这么做,直接返回首页即可.
 
 
 
 注册
+
 场景:用户点击委托方注册链接
+
 第一步:委托方引导用户进入提供方注册地址,附加上委托方标识(client_id)和回跳地址(redirect_uri)
+
 http://idp.com/register?client_id=rptest&redirect_uri=https://client.com
+
 第二步:用户在提供方完成了注册,提供方依照委托方指定回跳至委托方地址https://client.com
+
 注意:
+
 此处的redirect_uri没有白名单限制
-idp.com 需替换为测试环境:http://taccount.haier.com 正式环
-境:http://account.haier.com
+
+idp.com 需替换为测试环境:http://taccount.haier.com 正式环境:http://account.haier.com
 
 
 
 登出
 应用前端跳转(href)
+
 http://idp.com/logout?
 client_id=rptest&post_logout_redirect_uri=http://client.com/api/user/logout
+
 其中参数
 client_id为应用ID,我们使用例子中的 rptest
-post_logout_redirect_uri为回跳退出链接,用户回跳退出各应用,http://client.com/logout为退
-出范例
+
+post_logout_redirect_uri为回跳退出链接,用户回跳退出各应用,http://client.com/logout为退出范例
+
 注意:
 
-
 此处post_logout_redirect_uri没有白名单限制
-idp.com 需替换为测试环境:http://taccount.haier.com 正式环
-境:http://account.haier.com
+
+idp.com 需替换为测试环境:http://taccount.haier.com 正式环境:http://account.haier.com
 
 
 附录1
+
 1.uhome签名认证说明
+
 应用需要对发送到openapi的请求进行签名,执行签名计算的签名值需要赋值到Header头中的
 sign属性(见公共部分说明),以便服务端进行签名验证。
+
 注:本文档接口中需要的uhome_sign不是通过Header传输,请参考具体接口调用形式。
 
 
 2.uhome签名认证参数介绍
+
 待签名字符串为:appld+appkey+clientid;其中:
+
 appld,uhome应用ID,40位以内字符,Haier U+云平台全局唯一;
+
 appKey,uhome平台分配给应用的appKey,不能明文发送;
+
 clientld,客户端ID,主要用途为唯一标识客户端(例如,手机)。可调用usdk得到客户端ID的
 值。;
 
 
 3.uhome签名认证算法
+
 签名算法就是对待签名字符串计算64位小写sha256值.
+
 Java程序示例:
 
 ```
@@ -339,11 +358,17 @@ return hex.tostring();
 ```
 
 4.uhome签名认证示例
+
 appKey:e8a1e19058c0928d7690cfd59c6b062d
+
 appld:MB-ABC-0000
+
 clientld:357070051953752-88329BFE7949
-待签名字符串:(注意必须appld+appKey+clientld,顺序不能变!)
+
+待签名字符串:(注意必须appld+appKey+clientld, **顺序不能变!**)
+
 MB-ABC-0000e8a1e19058c0928d7690cfd59c6b062d357070051953752-88329BFE7949
+
 经过计算,签名字符串为:
 09868caa8236d713460667abdc85155edbc084b3b397cc577fc37be72df84484
 
