@@ -54,7 +54,7 @@ brand|String|设备品牌|
 model|String|设备型号|
 others|Map<String,Strng>|其他属性|
 
-## Deviceversion
+### DeviceVersion
 设备详细信息
 
 参数名|类型|说明|备注
@@ -65,6 +65,13 @@ wifiType|String|wifi类型|
 deviceType|String|设备类型|
 baseProperty|BaseProperty|品牌信息|
 location|Location|位置信息|
+productNameT|	String|	产品型号名称	
+productCodeT|	String|	产品型号编码	
+deviceRole|	String|	设备角色：1 普通设备;2 网关设备;3 附件设备;4 子设备;仅返回数字，角色信息不返回	
+parentDeviceId|	String|	主设备Id：若该设备本身为主设备，该字段为null；若该设备为从设备，该字段为主设备Id	
+deviceRoleType|	String|	设备类别：三种：主设备；从设备；无	
+slaveDeviceIds|	List<String>|	所属从设备Id的集合：若无从设备该字段为空	
+
 
 ## Module
 模块信息
