@@ -725,7 +725,7 @@ resCode值|说明|备注
 >注意：以上错误码，除200以外，其他错误码均为设备直接返回，而具体返回该错误码的处理逻辑请直接咨询设备方。
 
 ###业务通道下行args说明
-3.13业务通道（下行）中args：
+业务通道（下行）中args：
 Base64加密值：e++协议中，8D下行透传数据内容，源数据Base64编码后的字符串
 
 例如要发给底板0x010203040506， 
@@ -734,7 +734,7 @@ byte[] b = hexStringToBytes(cSrc);
 args = byteToBase64(b); 
 args就是base64编码后的内容
 
-3.9章节的用户设备操作-控制通道-非标准模型中operateCode：
+用户设备操作-控制通道-非标准模型中operateCode：
 json对象base64之后的值，例：
 String dataString={"data": args}// args就是base64编码后的内容
 operateCodes=Base64Base64.encodeBase64String(dataString.getBytes())
