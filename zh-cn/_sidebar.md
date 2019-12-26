@@ -17,7 +17,7 @@
 	* [OAuth授权<sup style="color:red">(new)<sup>](zh-cn/AccountManage/oauth)  
 	* [静默授权](zh-cn/AccountManage/silentAuth)  
 	* [企业账号](zh-cn/AccountManage/enterpriseAcc)   
-    * [数据订阅](zh-cn/AccountManage/) 
+  
 
 * [家庭中心](zh-cn/FamilyManage)  
 	* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
