@@ -655,25 +655,6 @@ Body
 
 
 
-
-
-## 关于设备控制接口参数填写与返回值
-
-### 非标准设备单命令参数
-
-```
-category: 'AttrOp',
-name: '20g10o',
-operateCodes:base64({"value":"30g106"})
-```
-### 非标准设备组命令重要参数
-```
-category: 'GroupOp',
-name: '000001',
-operateCodes:base64({"value":[{"name":"20g10o","value":"30g106"},{"name":"20g10m","value":"12"},{"name":"20g10d","value":"30g101"}]})
-```
->ID文档中，name有可能写成0x0001，请传递参数时，使用000001
-
 ## 关于设备控制接口参数填写与返回值
 
 ### 非标准设备单命令参数
