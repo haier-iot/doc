@@ -20,7 +20,7 @@
 	* [企业账号](zh-cn/)   
     * [数据订阅](zh-cn/) 
 
-* [家庭中心](zh-cn/FamilyCenter)  
+* [家庭中心](zh-cn/FamilyManage)  
 	* [家庭管理](zh-cn/FamilyCenter/FamilyManage)    
 	* [房间管理](zh-cn/FamilyCenter/FamilyRoomManage)    
 	* [家庭成员管理](zh-cn/FamilyCenter/FamilyMembersManage)  
