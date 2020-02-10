@@ -7,7 +7,7 @@
 家庭管理实现的是一种以“家庭”为基础的相关服务，使用此服务可以建立“家庭”组，在组下管理家庭及相关消息。
 
 
-## 家庭管理接口列表  
+### 家庭管理接口列表  
 
 
 #### 家庭管理员创建家庭
@@ -29,24 +29,24 @@
 | **名称** | 家庭信息对象 |&emsp;| FamilyInfo |   
 | ------------- |:----------:|:-----:|:--------:|  
 |**字段名**|**类型**|**说明**|**备注**|  
-|familyId| String | 家庭id，以字符串形式传递的Long型变量，会自动转换字符串为合适的整型 |不填|  
+|familyId| String | 家庭id，以字符串形式传递的Long型变量，会自动转换字符串为合适的整型 |必填|  
 |familyName| String | 家庭名称 |必填|  
-|familyOwner| UserBriefInfo | 家庭管理员用户简明信息 |不填|  
+|familyOwner| UserBriefInfo | 家庭管理员用户简明信息 |必填|  
 |ownerName| String | 家庭管理员家庭中用户昵称 |可不填，自动生成名字admin+六位随机数字| 
 |familyLable| String | 家庭标签 |非必填 APP定义，如父母等| 
 |familyDesc| String | 家庭描述 |非必填| 
-|appId| String | 应用Id |不填| 
-|createtime| date | 家庭创建时间 |不填| 
+|appId| String | 应用Id |必填| 
+|createtime| date | 家庭创建时间 |必填| 
 |familyLogo| String | 家庭logo |必填，默认值为平台内置家庭logo url| 
 |familyPicture| String | 家庭图片 |非必填，默认值为平台内置家庭图片 url| 
 |familyLocation| Location | 家庭位置信息 |必填，家庭位置信息| 
 |familyPosition| String | 家庭位置 |必填，小区等信息| 
 |familyExternData| String | 扩展信息 |非必填，IOT平台可定义，json|    
-|familyLastUpdater| String | 家庭最后修改人 |不填|  
-|LastUpdateTime| date | 家庭最后修改时间 |精确到秒，含年月日信息，不填|  
-|securityLevel| int | 安全级别 |不填|  
+|familyLastUpdater| String | 家庭最后修改人 |必填|  
+|LastUpdateTime| date | 家庭最后修改时间 |精确到秒，含年月日信息，必填|  
+|securityLevel| int | 安全级别 |必填|  
 |memberCount| int | 家庭成员数 |为虚拟成员，真实成员，家庭管理员的总数|  
-|deviceCount| int | 设备数量 |不填|  
+|deviceCount| int | 设备数量 |必填|  
   
 
 
@@ -130,7 +130,7 @@ Body:
 |**字段名**|**类型**|**说明**|**备注**|  
 |familyId| String | 家庭id，以字符串形式传递的Long型变量，会自动转换字符串为合适的整型 |必填|  
 |familyName| String | 家庭名称 |必填|  
-|familyOwner| UserBriefInfo | 家庭管理员用户简明信息 |不填|  
+|familyOwner| UserBriefInfo | 家庭管理员用户简明信息 |必填|  
 |ownerName| String | 家庭管理员家庭中用户昵称 |可不填，自动生成名字admin+六位随机数字| 
 |familyLable| String | 家庭标签 |非必填 APP定义，如父母等| 
 |familyDesc| String | 家庭描述 |非必填| 
@@ -141,10 +141,10 @@ Body:
 |familyLocation| Location | 家庭位置信息 |可不填，家庭位置信息| 
 |familyPosition| String | 家庭位置 |可不填，小区等信息| 
 |familyExternData| String | 扩展信息 |可不填，IOT平台可定义，json|    
-|familyLastUpdater| String | 家庭最后修改人 |不填|  
+|familyLastUpdater| String | 家庭最后修改人 |必填|  
 |LastUpdateTime| date | 家庭最后修改时间 |精确到秒，含年月日信息，不填|  
-|securityLevel| int | 安全级别 |不填|  
-|deviceCount| int | 设备数量 |不填|  
+|securityLevel| int | 安全级别 |必填|  
+|deviceCount| int | 设备数量 |必填|  
 
 
 **输出参数**  
@@ -875,217 +875,475 @@ String|familyId|body|必填|家庭id,加入家庭成功或者用户已经加入�
 
 
 
-#### 虚拟用户加入家庭
-
-> 实体账户作为家庭成员添加虚拟用户进入家庭，实体账户必须为虚拟账户的宿主账户
-
-##### 1、接口定义
-
-?> **接入地址：** `/ufm/v1/protected/familyService/joinFamily/virtualFamilyMember`
-
-**HTTP Method：** `POST`
-
-**输入参数**
-
-类型|参数名|位置|必填|说明
-:-:|:-:|:-:|:-:|:-
-String|	virtualUCId|	Body|	必填	虚拟用户用户中心ID
-String| 	familyId|	Body|	必填	要加入的家庭ID
-String|	userFamilyName|	Body|	必填	用户加入家庭附属参数,为用户在家庭中昵称
-
-
-**输出参数**
-
-类型|参数名|位置|必要性|说明
-:-:|:-:|:-:|:-:|:-
-String|	virtualUserId|	Body|	必填|	用户在iot平台分配的userId
-
-
-##### 2、请求样例
-**用户请求**
-```
-{
-	"familyId":"444130753006000000",
-	"userFamilyName":"test",
-	"virtualUCId":"237"
-}
 
 
 
-```
-
-**输出参数**
-
-```
-{
-"retCode":"00000",
-"retInfo":"成功",
-"familyId":"164131078929000000",
-"virtualUserId":"100013957366167109"
-}
-
-
-```
-
-##### 3、错误码
-
-> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408、E31409
-
-
-#### 虚拟用户退出家庭
-
-> 实体账户必须为虚拟账户的宿主账户，实体账户协助虚拟账户退出家庭
+#### 用户设置默认家庭
+> 设置用户分享设备的默认家庭，更新时依然使用此接口，只能设备用户管理的家庭或用户加入的家庭。    
 
 ##### 1、接口定义
+?> **接入地 址：**  `/ufm/v1/protected/familyService/setDefaultFamily`  
+ **HTTP Method：** POST
 
-?> **接入地址：** `/ufm/v1/protected/familyService/leaveFamily/virtualFamilyMember`
+**输入参数**  
 
-**HTTP Method：** `POST`
+| 类型  | 参数名      | 位置  | 必填|说明|
+| ------- |:--------:|:-----:|:-------:|:-------:|
+|  String    | familyId | Body| 必填|默认的家庭|  
 
-**输入参数**
+**输出参数**  
 
-类型|参数名|位置|必填|说明
-:-:|:-:|:-:|:-:|:-
-String|	virtualUserId|	Body|	必填|	虚拟用户在IOT平台的用户ID
-String| 	familyId|	Body|	必填	|要加入的家庭ID
+|   类型      |     参数名      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+| FamilyInfo |  familyInfo  |   Body  |  必填  | 家庭信息 |
 
+##### 2、请求样例  
 
-
-**输出参数**
-
-类型|参数名|位置|必要性|说明
-:-:|:-:|:-:|:-:|:-
-
-
-
-##### 2、请求样例
 **用户请求**
-```
-{ 
-"familyId":"164131078929000000",
-"virtualUserId":"100013957366167109"
-}	
-
-
-
-
-```
-
-**输出参数**
-
-```
+```java  
+Header：
+appId: MB-****-0000
+appVersion: 99.99.99.99990
+clientId: 123
+sequenceId: 2014022801010
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+sign: e5bd9aefd68c16a9d441a636081f11ceaed51ff58ec608e5d90048f975927e7f
+timestamp: 1491014447260 
+language: zh-cn
+timezone: +8
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+Content-Encoding: utf-8
+Content-type: application/json 
+body：
 {
-    "retCode": "00000",
-	"retInfo": "成功"
+" familyId ":"647112241261000000"
 }
 
 
-```
+```  
 
-##### 3、错误码
+**请求应答**
 
-> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408
-
-
-#### 查询虚拟成员所在家庭
-
-> 实体账户查询虚拟用户所在的家庭
-
-##### 1、接口定义
-
-?> **接入地址：** `/ufm/v1/protected/familyService/queryFamily /virtualFamilyMember`
-
-**HTTP Method：** `POST`
-
-**输入参数**
-
-类型|参数名|位置|必填|说明
-:-:|:-:|:-:|:-:|:-
-String|	virtualUserId|	Body|	必填	|虚拟用户在IOT平台的用户ID
-
-
-
-**输出参数**
-
-类型|参数名|位置|必要性|说明
-:-:|:-:|:-:|:-:|:-
-FamilyInfo[]|	families|	Body|	必填	|家庭信息
-
-
-##### 2、请求样例
-**用户请求**
-```
-{
-"virtualUserId":"1111111111111"
-}
-
-
-```
-
-**输出参数**
-
-```
+```java
 {
 	"retCode": "00000",
 	"retInfo": "成功",
-	"families": [{
-		"familyId": "693130509064000000",
-		"familyName": "Aalitest",
-		"familyOwner": {
-			"isVirtualUser": "false",
-			"email": "",
-			"name": "187****6123",
-			"userId": "100013957366158663",
-			"ucUserId": "2005021119",
-			"avatar": "https://account.haier.com/avatar/b1120a5ef93ed15e792e557124139a12.jpg",
-			"mobile": "18730000000"
-		},
-		"appId": "MB-UBOT-0009",
-		"createTime": "2019-08-28 02:31:04",
-		"familyLocation": {},
-		"securityLevel": "0",
-		"deviceCount": "0",
-		"memberCount": "3"
-	}, {
-		"familyId": "693130508700000000",
-		"familyName": "我的家庭",
-		"familyOwner": {
-			"isVirtualUser": "false",
-			"email": "",
-			"name": "187****6123",
-			"userId": "100013957366158663",
-			"ucUserId": "2005021119",
-			"avatar": "https://account.haier.com/avatar/b1120a5ef93ed15e792e557124139a12.jpg",
-			"mobile": "1873000000"
-		},
-		"appId": "MB-UBOT-0009",
-		"createTime": "2019-08-28 02:25:01",
-		"familyLocation": {},
-		"securityLevel": "0",
-		"deviceCount": "0",
-		"memberCount": "4"
-	}
-],
-	"totalCount": "2"
+    "familyInfo": {
+        "familyId": "647112241261000000",
+        "familyName": "ke",
+        "familyOwner": {
+            "userId": "100013957366154693",
+            "mobile": "136****8934"
+        },
+        "appId": "MB-UBOT-0009",
+        "createTime": "2019-02-26 11:27:42",
+        "familyLocation": {
+            "latitude": "23.5",
+            "cityCode": "29544",
+            "longitude": "45.62"
+        },
+        "familyPosition": "ke",
+        "securityLevel": "2",
+        "deviceCount": "0",
+        "memberCount": "1"
+    }
+
+}
+
+```
+
+##### 3、错误码  
+> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408  
+
+
+
+
+
+#### 用户获取默认家庭
+> 用户获取默认家庭信息,用户未设置返回用户创建的第一个家庭；用户设置后返回用户设置家庭；用户未设置且用户没有管理家庭，创建后设置为默认家庭，并返回；家庭被删除后返回，默认家庭被清理，取消该默认家庭。   
+
+##### 1、接口定义
+?> **接入地 址：**  `/ufm/v1/protected/familyService/defaultFamily`  
+ **HTTP Method：** GET
+
+**输入参数**  
+
+| 类型  | 参数名      | 位置  | 必填|说明|
+| ------- |:--------:|:-----:|:-------:|:-------:|
+|  &emsp;    | &emsp; | &emsp;| &emsp;|&emsp;|  
+
+**输出参数**  
+
+|   类型      |     参数名      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+| FamilyInfo |  familyInfo  |   Body  |  必填  | 家庭信息 |
+
+##### 2、请求样例  
+
+**用户请求**
+```java  
+Header：
+appId: MB-****-0000
+appVersion: 99.99.99.99990
+clientId: 123
+sequenceId: 2014022801010
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+sign: e5bd9aefd68c16a9d441a636081f11ceaed51ff58ec608e5d90048f975927e7f
+timestamp: 1491014447260 
+language: zh-cn
+timezone: +8
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+Content-Encoding: utf-8
+Content-type: application/json 
+
+```  
+
+**请求应答**
+
+```java
+{
+    "retCode": "00000",
+    "retInfo": "成功",
+    "familyInfo": {
+        "familyId": "647112241261000000",
+        "familyName": "ke",
+        "familyOwner": {
+            "userId": "100013957366154693",
+            "mobile": "136****8934"
+        },
+        "appId": "MB-UBOT-0009",
+        "createTime": "2019-02-26 11:27:42",
+        "familyLocation": {
+            "latitude": "23.5",
+            "cityCode": "29544",
+            "longitude": "45.62"
+        },
+        "familyPosition": "ke",
+        "securityLevel": "2",
+        "deviceCount": "0",
+        "memberCount": "1"
+    }
+}
+
+```
+
+##### 3、错误码  
+> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408    
+
+
+
+
+
+#### 用户撤销家庭邀请
+> 用户撤销家庭邀请，撤销后本家庭中所有邀请被邀请用户的邀请记录都将被撤销。   
+
+##### 1、接口定义
+?> **接入地 址：**  `/ufm/v1/protected/familyService/invitation/cancelInvitation`  
+ **HTTP Method：** POST
+
+**输入参数**  
+
+| 类型  | 参数名      | 位置  | 必填|说明|
+| ------- |:--------:|:-----:|:-------:|:-------:|
+|  String    | familyId | Body| 必填|家庭ID|  
+|  String    | userId | Body| 必填|被邀请用户ID|  
+
+**输出参数**  
+
+|   类型      |     参数名      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+| &emsp; |  &emsp;  |   &emsp;  |  &emsp;  | &emsp; |
+
+##### 2、请求样例  
+
+**用户请求**
+```java  
+Header：
+appId: MB-****-0000
+appVersion: 99.99.99.99990
+clientId: 123
+sequenceId: 2014022801010
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+sign: e5bd9aefd68c16a9d441a636081f11ceaed51ff58ec608e5d90048f975927e7f
+timestamp: 1491014447260 
+language: zh-cn
+timezone: +8
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+Content-Encoding: utf-8
+Content-type: application/json 
+body：
+{
+" familyId ":"647112241261000000",
+" userId ":"100013957366154693"
+
+}
+
+
+```  
+
+**请求应答**
+
+```java
+{
+    "retCode": "00000",
+	"retInfo": "成功
 }
 
 
 ```
 
-##### 3、错误码
-
-> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408
-
+##### 3、错误码  
+> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408    
 
 
 
 
+#### 用户查询家庭邀请记录  
+> 家庭成员查询家庭的邀请记录， 包含家庭ID，被邀请用户信息，邀请时间，家庭名称，当前邀请状态，每个用户只取最后发生的一条，每页最大20个，请求参数超过20个按20个处理。   
+
+##### 1、接口定义
+?> **接入地 址：**  `/ufm/v1/protected/familyService/invitation/invitationRecords`  
+ **HTTP Method：** POST
+
+**输入参数**  
+
+| 类型  | 参数名      | 位置  | 必填|说明|
+| ------- |:--------:|:-----:|:-------:|:-------:|
+|  String    | familyId | Body| 必填|家庭ID|  
+|  String    | pageNumber | Body| 必填|当前请求页数，起始页数为1|  
+|  String    | pageSize | Body| 必填|每页的对象数，如果不足，有多少显示多少，最大不超过系统规定的上限数，超过按上限处理|   
+
+
+
+**输出参数**  
+
+|   类型      |     参数名      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+| FamilyInvitationInfo[] |  invitations |  Body  | 必填 | 家庭邀请信息 |  
+| String |  familyId |  Body  | 必填 | 家庭ID |
+| String |  familyName |  Body  | 必填 | 家庭名称 |
+| String|  totalCount |  Body  | 必填 | 总数 |
+| String|  pageSize |  Body  | 必填 | 当前返回页实际数量，不超过规定的最大数上限 |
+
+
+##### 2、请求样例  
+
+**用户请求**
+```java  
+Header：
+appId: MB-****-0000
+appVersion: 99.99.99.99990
+clientId: 123
+sequenceId: 2014022801010
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+sign: e5bd9aefd68c16a9d441a636081f11ceaed51ff58ec608e5d90048f975927e7f
+timestamp: 1491014447260 
+language: zh-cn
+timezone: +8
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+Content-Encoding: utf-8
+Content-type: application/json 
+body：
+{
+" familyId ":"647112241261000000",
+" pageNumber ":"1",
+" pageSize ":"20",
+}
+
+
+
+```  
+
+**请求应答**
+
+```java
+{
+"retCode": "00000",
+"retInfo": "成功",
+" familyId ": "647112241261000000",
+" familyName ": "测试家庭",
+"invitations":[{
+" userInfo ":{
+" name ":"测试用户",
+" email ":"aa@sina.com",
+" userId ":"647112241261000000",
+" mobile ":"136****8934",
+" avatarUrl ":"",
+" isVirtualUser ":"false",
+" ucUserId ":"1122567"},
+" invitationUID ":"9de5705ae9fb4567a3735aedaef853e8",
+" invitationStatus ":"0",
+" invitationtTime": "2019-10-01 00:00:00"},
+{
+" userInfo ":{
+" name ":"测试用户",
+" email ":"aa@sina.com",
+" userId ":"647112241261000000",
+" mobile ":"136****8934",
+" avatarUrl ":"",
+" isVirtualUser ":"false",
+" ucUserId ":"1122567"},
+" invitationUID ":"9de5705ae9fb4567a3735aedaef853e8",
+" invitationStatus ":"0",
+"invitationtTime": "2019-10-01 00:00:00"}
+],
+"totalCount": "20",
+"pageSize": "3",
+"pageNumber": "1"
+}
+
+```
+
+##### 3、错误码  
+> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408   
 
 
 
 
+#### 用户查询二维码家庭信息  
+> 用户查询二维码对应的家庭信息。   
+
+##### 1、接口定义
+?> **接入地 址：**  `/ufm/v1/protected/familyService/family/QRCode/familyInfo`  
+ **HTTP Method：** POST
+
+**输入参数**  
+
+| 类型  | 参数名      | 位置  | 必填|说明|
+| ------- |:--------:|:-----:|:-------:|:-------:|
+|  String    | qrCode | Body| 必填|二维码ID|  
 
 
+
+**输出参数**  
+
+|   类型      |     参数名      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+| FamilyInfo|  familyInfo |  Body  | 必填 | 家庭信息 |  
+| UserBriefInfo |  inviter |  Body  | 必填 | 邀请者信息 |
+
+
+
+##### 2、请求样例  
+
+**用户请求**
+```java  
+Header：
+appId: MB-****-0000
+appVersion: 99.99.99.99990
+clientId: 123
+sequenceId: 2014022801010
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+sign: e5bd9aefd68c16a9d441a636081f11ceaed51ff58ec608e5d90048f975927e7f
+timestamp: 1491014447260 
+language: zh-cn
+timezone: +8
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+Content-Encoding: utf-8
+Content-type: application/json 
+body：
+{
+" qrCode ":"9de5705ae9fb4567a3735aedaef853e8"
+}
+
+
+```  
+
+**请求应答**
+
+```java
+{
+    "retCode": "00000",
+"retInfo": "成功",
+"familyInfo": {
+        "familyId": "647112241261000000",
+        "familyName": "ke",
+        "appId": "MB-UBOT-0009"
+}，
+"inviter":{
+"isVirtualUser": "false",
+		"email": "",
+		"name": "187****6123",
+		"userId": "100013957366158663",
+		"ucUserId": "2005021119",		"avatar":"https://account.haier.com/avatar/b1120a5ef93ed15e792e557124139a12.jpg",
+		"mobile": "18730000000"
+}
+
+}
+
+
+```
+
+##### 3、错误码  
+> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408    
+
+
+
+
+#### 用户删除家庭邀请信息  
+> 用户删除对指定家庭，指定用户的家庭邀请记录。   
+
+##### 1、接口定义
+?> **接入地 址：**  `/ufm/v1/protected/familyService/invitation/removeInvitation`  
+ **HTTP Method：** POST
+
+**输入参数**  
+
+| 类型  | 参数名      | 位置  | 必填|说明|
+| ------- |:--------:|:-----:|:-------:|:-------:|
+|  String    | familyId | Body| 必填|家庭ID|  
+|  String    | userId | Body| 必填|被邀请用户ID|  
+
+
+
+**输出参数**  
+
+|   类型      |     参数名      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+| &emsp; |  &emsp;  |   &emsp;  |  &emsp;  | &emsp; |
+
+
+
+##### 2、请求样例  
+
+**用户请求**
+```java  
+Header：
+appId: MB-****-0000
+appVersion: 99.99.99.99990
+clientId: 123
+sequenceId: 2014022801010
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
+sign: e5bd9aefd68c16a9d441a636081f11ceaed51ff58ec608e5d90048f975927e7f
+timestamp: 1491014447260 
+language: zh-cn
+timezone: +8
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
+Content-Encoding: utf-8
+Content-type: application/json 
+body：
+{
+" familyId ":"647112241261000000",
+" userId ":"100013957366154693"
+
+}
+
+
+```  
+
+**请求应答**
+
+```java
+{
+    "retCode": "00000",
+	"retInfo": "成功
+}
+
+
+```
+
+##### 3、错误码  
+> A00001、A00002、A00003、A00004、A00005、B00001、B00002、B00003、B00004、B00006、C00001、C00002、C00003、C00004、D00001、D00002、D00003、D00004、D00005、D00006、D00007、D00008、E31105、E31108、E31137、E31138、 E31140、E31141、E31142、E31408     
 
 
 
