@@ -47,7 +47,7 @@
 
 o测试环境:http://taccount.haier.com
 
-o正式环境:http://account.haier.com 和http://account-api.haier.net(只有/userinfo接口使用)
+o正式环境:https://account.haier.com 和https://account-api.haier.net(只有/userinfo接口使用)
 
 2)相同的,我们擅自的将应用的回跳域名描述成https://rp.com和com.rp://,请替换成确切
 的域名。此域名需要区分测试环境和正式环境,提供给用户中心配置回调白名单。
@@ -113,8 +113,8 @@ HTTPPOST请求向本平台交换访问令牌,其中,参数uhome_client_id,uhome_
 **需要设备鉴权:**
 ```
 POST /oauth/token HTTP/1.1
-Host:idp.com[测试环境http://taccount.haier.com 正式环境
-http://account.haier.com]
+Host:idp.com
+[测试环境http://taccount.haier.com  正式环境https://account.haier.com]
 Authorization:Basic cnBOZXNOOnJwc2VjcmVO
 Content-Type:application/x-www-form-urlencoded
 grant_type=authorization_code&code=ksdfj&redirect_uri=https%3A%2F%2Frp.com%2F1
@@ -123,8 +123,8 @@ ogin_callback&uhome_client_id=123456&uhome_app_id=MB-RSQCSAPP-
 43&type_uhome=type_uhome_common_token
 或者
 POST /oauth/token HTTP/1.1
-Host:idp.com[测试环境http://taccount.haier.com 正式环境
-http://account.haier.com]
+Host:idp.com
+[测试环境http://taccount.haier.com 正式环境 https://account.haier.com]
 Content-Type:application/x-www-form-urlencoded
 client_id=rptest&client_secret=rpsecret&grant_type=authorization_code&code=ksd
 fj&redirect_uri=https%3A%2F%2Frp.com%2Flogin_callback&uhome_client_id=123456&u
@@ -136,16 +136,16 @@ home_app_id=MB-RSQCSAPP-
 **无须设备鉴权:**
 ```
 POST /oauth/token HTTP/1.1
-Host:idp.com[测试环境http://taccount.haier.com 正式环境
-http://account.haier.com]
+Host:idp.com
+[测试环境http://taccount.haier.com 正式环境 https://account.haier.com]
 Authorization:Basic cnBOZXNOOnJwc2Vjcmvo
 Content-Type:application/x-www-form-urlencoded
 grant_type=authorization_code&code=ksdfj&redirect_uri=https%3A%2F%2Frp.com%2F1
 ogin_callback
 或者
 POST/oauth/token HTTP/1.1
-Host:idp.com[测试环境http://taccount.haier.com 正式环境
-http://account.haier.com]
+Host:idp.com
+[测试环境http://taccount.haier.com 正式环境 https://account.haier.com]
 Content-Type:application/x-www-form-urlencoded
 client_id=rptest&client_secret=rpsecret&grant_type=authorization_code&code=ksd
 fj&redirect_uri=https%3A%2F%2Frp.com%2Flogin_callback
@@ -220,8 +220,8 @@ source为单点登录的被登录方可接收到的源登录方信息client_id�
 息:
 ```
 GET/userinfo HTTP/1.1
-Host:idp.com[测试环境http://taccount.haier.com 正式环境http://account-
-api.haier.net]
+Host:idp.com
+[测试环境http://taccount.haier.com 正式环境https://account-api.haier.net]
 Authorization:Bearer 2YotnFZFEjr1zCsicMWpAA
 
 ```
@@ -280,7 +280,7 @@ http://idp.com/register?client_id=rptest&redirect_uri=https://client.com
 
 此处的redirect_uri没有白名单限制
 
-idp.com 需替换为测试环境:http://taccount.haier.com 正式环境:http://account.haier.com
+idp.com 需替换为测试环境:http://taccount.haier.com 正式环境:https://account.haier.com
 
 
 
@@ -299,7 +299,7 @@ post_logout_redirect_uri为回跳退出链接,用户回跳退出各应用,http:/
 
 此处post_logout_redirect_uri没有白名单限制
 
-idp.com 需替换为测试环境:http://taccount.haier.com 正式环境:http://account.haier.com
+idp.com 需替换为测试环境:http://taccount.haier.com 正式环境:https://account.haier.com
 
 
 附录1
