@@ -628,9 +628,10 @@ return true;
 ####  8、 整示例代码（可复用）
 
 代码功能：  
-(1)	支持Client端订阅消息。  
-(2)	支持心跳检测，心跳功能简单支持当客户端和服务器端连接处于无数据交互状态时才发送心跳检测消息，有数据交互时不发送。  
-(3)	支持连接断开后每55s进行一次重连尝试。  
+(1)	支持Client端订阅消息。
+(2)	支持心跳检测，心跳功能简单支持当客户端和服务器端连接处于无数据交互状态时才发送心跳检测消息，有数据交互时不发送。
+(3)	支持连接断开后指定时间进行重连尝试。
+
 
 
 import 引用头：  
@@ -653,7 +654,6 @@ import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 import javax.websocket.CloseReason;
 import org.eclipse.jetty.util.component.LifeCycle;
-
 
 
 ```
