@@ -113,7 +113,7 @@ Header 中appid 字段填写内容为系统ID，即systemid。 此字段需要�
 
 
 
-#### 用户设备操作-控制通道-非标准模型
+#### 用户设备操作-（非标准模型的单命令/组命令操作）
 > 用户设备操作-控制通道，支持非标准模型（6位码设备）设备的操作
 
 ##### 1、接口定义
@@ -191,85 +191,7 @@ Body
 
 
 
-
-#### 用户读属性-异步接口-标准模型
-
-> 用户读属性-异步接口，支持标准模型的
-
-
-
-##### 1、接口定义
-?> **接入地址：** `/udse/v1/propertyRead`</br>
-**HTTP Method：** POST
-
-**输入参数**
-
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-deviceId|String|Body|必填|设备ID
-sn|String|Body|必填|操作流水号，必须唯一
-property|String|Body|必填|设备读属性的属性名
-callbackUrl|String|Body|非必填|操作应答回调地址,只支持http协议
-accessToken|String|Header|必填|用户token
-
-**输出参数**
-
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-usn|String|Body|必填|操作序列号
-
-
-##### 2、请求示例
-
-**请求示例**
-```
-请求地址：/udse/v1/propertyRead
-Header：
-	appId:SV-****-0000
-	appVersion:2015110401
-	clientId:356877020056553-08002700DC94
-	sequenceId:08002700DC94-15110519074300001
-	accessToken: TGTFUNXMDK4AQIN2I9SJ8M9MGV1D00
-	sign:bd4495183b97e8133aeab2f1916fed41
-	timestamp: 1436236880183
-	language:zh-cn
-	timezone:8
-	Content-type: application/json
-Body
-{
-	"deviceId": "0007A893C119",
-	"property": "propertyName",
-	"sn": "FJIJ2L3-FSFRFGRTWT-HYRH"",
-	"callbackUrl": "https://www.uhome.haier.net/callback.html"
-}
-```
-
-**请求应答**
-```
-{
-	"retCode": "00000",
-	"retInfo": "成功!",
-	"usn": "600ce95da3e14fc7a68f483dd14db864"
-}
-```
-
-**操作应答**
-```
-{
-	"retCode": "00000",
-	"retInfo": "成功!",
-	"usn": "600ce95da3e14fc7a68f483dd14db864",
-	"deviceId": "0007A893C119",
-	"result": "ewogICAgImV4dERhdGEiOiB7fSwKICAgICJhcmdzIjogWwogICAgICAgIHsKICAgICAgICAgICAgIm5hbWUiOiAiKioqIiwKICAgICAgICAgICAgInZhbHVlIjogIioqKiIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgIm5hbWUiOiAiKioqIiwKICAgICAgICAgICAgInZhbHVlIjogIioqKiIKICAgICAgICB9CiAgICBdCn0="
-}
-```
-
-
-##### 3、请求错误码
-> B00001、B00004、A00001、D00006、G20202、G03002
-
-
-#### 用户写属性-异步接口-标准模型
+#### 用户写属性-异步接口-(标准模型-单命令写操作）
 > 用户写属性-异步接口，支持标准模型的属性写
 
 ##### 1、接口定义
@@ -344,7 +266,7 @@ Body
 
 
 
-#### 用户设备操作-异步接口-标准模型
+#### 用户设备操作-异步接口-（标准模型-组命令操作）
 > 用户设备操作-异步接口，支持标准模型设备操作
 
 ##### 1、接口定义
@@ -424,16 +346,16 @@ Body
 
 
 
-## 关于设备控制接口参数填写与返回值
+###关于设备控制接口参数填写与返回值<sup style="color:red">(注意)<sup>
 
-### 非标准设备单命令参数
+#### 非标准设备单命令参数
 
 ```
 category: 'AttrOp',
 name: '20g10o',
 operateCodes:base64({"value":"30g106"})
 ```
-### 非标准设备组命令重要参数
+#### 非标准设备组命令重要参数
 ```
 category: 'GroupOp',
 name: '000001',
@@ -441,7 +363,7 @@ operateCodes:base64({"value":[{"name":"20g10o","value":"30g106"},{"name":"20g10m
 ```
 >ID文档中，name有可能写成0x0001，请传递参数时，使用000001
 
-### sn与usn
+#### sn与usn
 
 sn由调用方生成，指请求的流水号。云平台应答该请求时，会返回usn，如果涉及到回调，回调中的usn也表示是对请求sn的回答。</br>
 即，完整会话为：</br>
@@ -451,11 +373,11 @@ sn，callback  ——>对应示例中的“用户请求” </br>
 调用方callback接收：usn ——>对应示例中的“操作应答数据” </br>
 > sn与usn一一对应，请保证sn的唯一。
 
-### retCode与resCode
+#### retCode与resCode
 retCode为云平台对请求的执行应答，见各接口的返回值及公共返回值</br>
 resCode为设备对命令的执行情况的应答，在回调中出现，当为0时，表示设备成功执行，其他值均为错误，具体错误信息需查看错误码列表或查询ID文档或咨询设备开发工程师。
 
-### 控制resCode错误码列表
+#### 控制resCode错误码列表
 
 resCode值|说明|备注
 :-:|:-|:-:
@@ -474,7 +396,7 @@ resCode值|说明|备注
 
 >注意：以上错误码，除200以外，其他错误码均为设备直接返回，而具体返回该错误码的处理逻辑请直接咨询设备方。
 
-### 业务通道下行args说明
+#### 业务通道下行args说明
 业务通道（下行）中args：
 Base64加密值：e++协议中，8D下行透传数据内容，源数据Base64编码后的字符串
 

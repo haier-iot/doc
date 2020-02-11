@@ -1,6 +1,4 @@
-
->  **当前版本**：[UWS 设备影子服务 V1.0.0](zh-cn/ChangeLog/DevicesShadow)  
- **更新时间**：{docsify-updated} 
+!> **更新时间**：{docsify-updated}  
 
 ## 简介  
 
