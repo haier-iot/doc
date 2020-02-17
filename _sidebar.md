@@ -36,12 +36,12 @@
 
 
 * [场景中心](zh-cn/IFTTT)
-	* [场景引擎](zh-cn/IFTTT)  
+	* [场景引擎](zh-cn/IFTTTManage/IFTTT)  
     * [场景数据订阅](zh-cn/)  
 
 
 * [消息中心](zh-cn/MessagePush)   
-	* [消息推送](zh-cn/MessagePush)   
+	* [消息推送](zh-cn/MessageManage/MessagePush)   
 
 
 * [内容及服务中心](zh-cn/)   

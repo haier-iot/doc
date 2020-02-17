@@ -35,13 +35,13 @@
     * [数据订阅](zh-cn/DevicesManage/datasubscription)   
 
 
-* [场景中心](zh-cn/ifttt)
-	* [场景引擎](zh-cn/ifttt)  
+* [场景中心](zh-cn/IFTTTManage)
+	* [场景引擎](zh-cn/IFTTTManage/IFTTT)  
     * [场景数据订阅](zh-cn/)  
 
 
-* [消息中心](zh-cn/messagepush)   
-	* [消息推送](zh-cn/messagepush)   
+* [消息中心](zh-cn/MessageManage)   
+	* [消息推送](zh-cn/MessageManage/MessagePush)    
 
 * [内容及服务中心](zh-cn/)   
 	* [天气服务](zh-cn/)   

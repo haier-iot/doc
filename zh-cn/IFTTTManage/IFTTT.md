@@ -1436,7 +1436,7 @@ Body
 
 | 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
 | ------- |:------:|:-----:|:----:|:----:|:----:|
-| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/MessageManage/IFTTT_jsonDataStructure)|           
+| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTT_jsonDataStructure)|           
  
 
 **输出参数**  
@@ -1561,7 +1561,7 @@ Body
 
 | 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
 | ------- |:------:|:-----:|:----:|:----:|:----:|
-| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/MessageManage/IFTTT_jsonDataStructure)|           
+| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTT_jsonDataStructure)|           
  
 
 **输出参数**  
@@ -2766,7 +2766,7 @@ data|List< ComponentFunctionsDto >|Body|必填|{<br>"componentId":""，<br>"comp
 
 
 [^-^]:常用图片注释
-[IFTTT_type]:../_media/_IFTTT/IFTTT_type.png
-[IFTTT_liucheng]:../_media/_IFTTT/IFTTT_liucheng.png
+[IFTTT_type]:_media/_IFTTT/IFTTT_type.png
+[IFTTT_liucheng]:_media/_IFTTT/IFTTT_liucheng.png
 
 
