@@ -35,20 +35,17 @@
     * [数据订阅](zh-cn/DevicesManage/datasubscription)   
 
 
-* [场景中心](zh-cn/IFTTT)  
-	* [场景创建](zh-cn/)    
-	* [场景控制](zh-cn/)    
-	* [场景查询](zh-cn/)  
-	* [预约执行场景<sup style="color:red">(new)<sup>](zh-cn/)   
+* [场景中心](zh-cn/ifttt)
+	* [场景引擎](zh-cn/ifttt)  
     * [场景数据订阅](zh-cn/)  
 
 
-* [消息中心](zh-cn/MessagePush)   
-	* [消息推送](zh-cn/MessagePush)   
+* [消息中心](zh-cn/messagepush)   
+	* [消息推送](zh-cn/messagepush)   
 
 * [内容及服务中心](zh-cn/)   
 	* [天气服务](zh-cn/)   
-	* [食材管理](zh-cn/)   
+	 
 
 * [设备接入<sup style="color:red">(new)<sup>](zh-cn/Cloudgw)
 
