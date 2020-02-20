@@ -173,7 +173,7 @@ App端或应用服务通过UWS获取的数据等要确保存储安全。
 应用开发时，请连接开发者环境进行开发、测试；
 
 > 生产环境域名：`https://uws.haier.net`  
-> 开发者环境域名：`https://dev-uws.haigeek.com`
+> 开发者环境域名：`https://uws.haier.net` 通过设置本地路由器DNS为`39.97.52.209`跳转访问服务。
 
 
 
@@ -245,6 +245,13 @@ Content-Length: 24
 **待签名字符串为：** url字符串 + Body字符串+appId+appKey +timestamp；
 
 **url 字符串：**指请求的接口地址去除https://uws.haier.net 后剩余的路径部分；
+```
+注意：get 请求不带参数
+如：GET https://uws.haier.net/ufm/v1/protected/familyService/868072664569000000/familyMembers?pageNumber=1&pageSize=10
+
+计算签名的url是从/ufm开始，Members结束，即/ufm/v1/protected/familyService/868072664569000000/familyMembers
+
+```
 
 **Body字符串：**指应用发送请求的Body部分去除所有空白字符后的JSON字符串，没有body时为空字符串（不是null）。
 
