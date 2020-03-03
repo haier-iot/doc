@@ -9,7 +9,7 @@
 
 ## 服务说明
 	
-> 第三方应用程序登录海尔优家IOT平台时，须提供第三方云秘钥clientKey、第三方云秘钥clientSecret、以及海尔Iot云平台回调第三方接口验证授权码的URL地址。同时需要第三方云开发者在海尔开放平台[海极网][haigeek]创建自己的移动应用，并告知应用的AppId信息。
+> 第三方应用程序登录海尔优家IOT平台时，须提供第三方云秘钥clientKey、第三方云秘钥clientSecret、以及海尔Iot云平台回调第三方接口验证授权码的URL地址。同时需要第三方云开发者在海尔开放平台[海极网] [haigeek]创建自己的移动应用，并告知应用的AppId信息。
 
 
 
@@ -176,7 +176,8 @@ Content-Length: 27
 
 
 
-[haigeek]:(http://www.haigeek.com)
+
 [^-^]:常用图片注释
+[haigeek]:(http://www.haigeek.com)
 [thirdpartUserCheck]:_media/_thirdpartUserLogin/thirdpartUserCheck.png
 
