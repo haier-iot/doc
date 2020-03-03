@@ -39,7 +39,7 @@
 
 * [场景中心](zh-cn/IFTTTManage)
 	* [场景引擎](zh-cn/IFTTTManage/IFTTT)  
-    * [场景数据订阅](zh-cn/)  
+   
 
 
 * [消息中心](zh-cn/MessageManage)   
