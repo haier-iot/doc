@@ -1,6 +1,6 @@
 * 快速开始 
 
-	* [平台介绍](zh-cn/)  
+	* [平台介绍](zh-cn/README)  
 
 	* [商务合作](zh-cn/Business)  
 
