@@ -16,7 +16,8 @@
 	* [信息管理](zh-cn/AccountManage/infoManage)    	
 	* [OAuth授权<sup style="color:red">(new)<sup>](zh-cn/AccountManage/oauth)  
 	* [静默授权](zh-cn/AccountManage/silentAuth)  
-	* [企业账号](zh-cn/AccountManage/enterpriseAcc)   
+	* [企业账号](zh-cn/AccountManage/enterpriseAcc)
+	* [第三方云登录](zh-cn/AccountManage/thirdpartUserLogin)   
   
 
 * [家庭中心](zh-cn/FamilyManage)  
@@ -24,7 +25,8 @@
 	* [房间管理](zh-cn/FamilyManage/FamilyRoomManage)    
 	* [家庭成员管理](zh-cn/FamilyManage/FamilyMembersManage)  
 	* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
-    * [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage)  
+    * [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage) 
+    * [个人用户关系](zh-cn/FamilyManage/UserRelationship) 
 
 * [设备中心](zh-cn/DevicesManage)
 	* [权限管理](zh-cn/DevicesManage/authorization) 
