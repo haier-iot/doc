@@ -45,9 +45,6 @@
 * [消息中心](zh-cn/MessageManage)   
 	* [消息推送](zh-cn/MessageManage/MessagePush)   
 
-
-* [内容及服务中心](zh-cn/)   
-	* [天气服务](zh-cn/)   
 	  
 
 * [设备接入<sup style="color:red">(new)<sup>](zh-cn/Cloudgw)
