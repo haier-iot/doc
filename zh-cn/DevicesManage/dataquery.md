@@ -198,9 +198,9 @@ Body
 
 ```java
 {
-    "retCode": "00000",
+"retCode": "00000",
 "retInfo": "成功",
-"shadowInfo": {
+"detailInfo": {
 	"shadowInfo": {
 		"shadowVersion": "20160101",
 		"reportedTimestamp": 123456,
