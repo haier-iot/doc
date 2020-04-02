@@ -7,13 +7,13 @@
 
 #### 设备指令执行操作接口（经过逻辑运算）
 
-> 领域模型接口使用Https协议，使用`https://uws.haier.net /+接口地址`进行访问
+> 领域模型接口使用Https协议，使用`https://uws.haier.net/+接口地址`进行访问
 
 统一接收标准模型的命令，命令经过逻辑运算、转换、补偿后下发到设备
 
 
 ##### 1、接口定义
-?> **接入地址：** `stdudse/v1/modfier/operate`</br>
+?> **接入地址：** `/stdudse/v1/modfier/operate`</br>
 **HTTP Method：** POST
 
 **输入参数**
