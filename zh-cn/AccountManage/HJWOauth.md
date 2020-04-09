@@ -250,7 +250,7 @@ error|String|Body|否|授权token失效时返回D00006错误码
 
 
 [^-^]:常用图片注释
-[pic1]:../_media/_HJWOauth/pic1.png
+[pic1]:../_media/_HJWOauth/pic1.jpg
 [pic2]:../_media/_HJWOauth/pic2.png
 [pic3]:../_media/_HJWOauth/pic3.png
 [pic4]:../_media/_HJWOauth/pic4.png
