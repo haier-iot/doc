@@ -60,9 +60,9 @@ http://resource.haigeek.com/download/resource/selfService/haigeek/mobile-page/Oa
 
 ![开通服务1][pic4]图1	 ![开通服务2][pic5]图2
 
-1、	输入海尔账号登录名（支持手机号和用户名）和密码，点击授权并登录；如未注册国海尔账号，请点击右上方的app下载注册链接，注册海尔账号；如图1所示。
-2、	支持使用手机号直接登录，手机接收验证码短信，输入短信验证码即可完成授权，如图2所示。
-3、	用户需要勾选权限和登录协议才能点击授权并登录按钮。
+1、	输入海尔账号登录名（支持手机号和用户名）和密码，点击授权并登录；如未注册国海尔账号，请点击右上方的app下载注册链接，注册海尔账号；如图1所示。</br>
+2、	支持使用手机号直接登录，手机接收验证码短信，输入短信验证码即可完成授权，如图2所示。</br>
+3、	用户需要勾选权限和登录协议才能点击授权并登录按钮。</br>
 4、	如输入密码错误次数过多，会提示图形验证码界面，强制用户输入验证才能完成授权，当用户输入密码错误次数达到限制，系统会锁定该用户帐号，5小时后自动解锁。
 
 
@@ -79,7 +79,7 @@ Location: {redirect_uri}?code=SplxlOBeZQQYbYS6WxSbIA&state={state}
 ### 4.3	获取授权token 
 
 ?> **请求地址：** `https://uws.haier.net/oauth2/v1/token`</br>
-**HTTP Method：** POST
+**HTTP Method：** POST </br>
 **Content-Type：** application/x-www-form-urlencoded
 
 
@@ -119,7 +119,7 @@ POST /token HTTP/1.1
 
 
 ?> **请求地址：** `https://uws.haier.net/oauth2/v1/token`</br>
-**HTTP Method：** POST
+**HTTP Method：** POST </br>
 **Content-Type：** application/x-www-form-urlencoded
 
 
@@ -169,7 +169,7 @@ scope|String|json|是|访问令牌实际权限范围
 
 3、回调地址的定义
 
-**接口名称：**  第三方提供取消授权回调地址
+**接口名称：**  第三方提供取消授权回调地址 </br>
 ?> **请求地址：** `第三方自定义，例：https://www.abc.com/oauth/cancel/callback?token=xyz`</br>
 **HTTP Method：** GET
 
@@ -189,7 +189,7 @@ token|String|Param|是|授权token
 #### 5.2.1取消授权接口
 
 
-**接口名称：** 在第三方应用端取消授权
+**接口名称：** 在第三方应用端取消授权</br>
 ?> **请求地址：** `https://uws.haier.net/uaccount/v1/oauth/thirdpart/cancel`</br>
 **HTTP Method：** POST
 
@@ -217,7 +217,7 @@ clientId|String|Body|是|云应用授权时的终端ID；用于标识授权终�
 #### 5.2.2 获取云应用授权时的终端ID
 
 
-**接口名称：** 获取云应用授权时的终端ID
+**接口名称：** 获取云应用授权时的终端ID </br>
 ?> **请求地址：** `https://uws.haier.net/oauth/2.0/tokeninfo`</br>
 **HTTP Method：** POST
 
