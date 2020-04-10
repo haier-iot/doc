@@ -253,7 +253,7 @@ error|String|Body|否|授权token失效时返回D00006错误码
 [pic1]:../_media/_HJWOauth/pic1.jpg
 [pic2]:../_media/_HJWOauth/pic2.png
 [pic3]:../_media/_HJWOauth/pic3.png
-[pic4]:../_media/_HJWOauth/pic4.png =400x300
+[pic4]:../_media/_HJWOauth/pic4.png
 [pic5]:../_media/_HJWOauth/pic5.png
 [pic6]:../_media/_HJWOauth/pic6.png
 [pic7]:../_media/_HJWOauth/pic7.png
