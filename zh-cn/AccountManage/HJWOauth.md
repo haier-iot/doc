@@ -8,7 +8,7 @@
 为第三方应用提供海尔账号的Oauth授权服务，允许用户使用海尔帐号登录第三方应用，访问和控制自己的海尔设备。
 
 接入流程
-![test](../_media/_HJWOauth/pic1.jpg){:height="100" width="100"}
+![test](../_media/_HJWOauth/pic1.jpg =100*100)
 ![接入流程][pic1]
 
 ## 2.注册成为开发者
