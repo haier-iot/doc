@@ -58,7 +58,6 @@ http://resource.haigeek.com/download/resource/selfService/haigeek/mobile-page/Oa
 
 输入上面的授权请求地址后，出现如下界面：
 
-<img src="https://haier-iot.github.io/doc/#/zh-cn/_media/_HJWOauth/pic4.png" width = 50% height = 50%  />
 ![开通服务1][pic4]图1	 ![开通服务2][pic5]图2
 
 1、	输入海尔账号登录名（支持手机号和用户名）和密码，点击授权并登录；如未注册国海尔账号，请点击右上方的app下载注册链接，注册海尔账号；如图1所示。</br>
