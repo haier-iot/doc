@@ -58,7 +58,7 @@ http://resource.haigeek.com/download/resource/selfService/haigeek/mobile-page/Oa
 
 输入上面的授权请求地址后，出现如下界面：
 
-![开通服务1][pic4 =400x300]图1	 ![开通服务2][pic5]图2
+![开通服务1][pic4]图1	 ![开通服务2][pic5]图2
 
 1、	输入海尔账号登录名（支持手机号和用户名）和密码，点击授权并登录；如未注册国海尔账号，请点击右上方的app下载注册链接，注册海尔账号；如图1所示。</br>
 2、	支持使用手机号直接登录，手机接收验证码短信，输入短信验证码即可完成授权，如图2所示。</br>
@@ -253,7 +253,7 @@ error|String|Body|否|授权token失效时返回D00006错误码
 [pic1]:../_media/_HJWOauth/pic1.jpg
 [pic2]:../_media/_HJWOauth/pic2.png
 [pic3]:../_media/_HJWOauth/pic3.png
-[pic4]:../_media/_HJWOauth/pic4.png
+[pic4]:../_media/_HJWOauth/pic4.png =400x300
 [pic5]:../_media/_HJWOauth/pic5.png
 [pic6]:../_media/_HJWOauth/pic6.png
 [pic7]:../_media/_HJWOauth/pic7.png
