@@ -10,7 +10,7 @@
 接入流程
 
 <div align=center>
-<img src=../_media/_HJWOauth/pic1.jpg width="300"> 
+<img src="../_media/_HJWOauth/pic1.jpg" width="300"> 
 </div>
 
 ![接入流程][pic1]
