@@ -14,10 +14,11 @@
 * [用户中心](zh-cn/AccountManage)  
 	* [注册登录](zh-cn/AccountManage/signIn) 
 	* [信息管理](zh-cn/AccountManage/infoManage)    	
-	* [OAuth授权<sup style="color:red">(new)<sup>](zh-cn/AccountManage/oauth)  
+	* [集团Oauth授权服务](zh-cn/AccountManage/oauth)   
 	* [静默授权](zh-cn/AccountManage/silentAuth)  
 	* [企业账号](zh-cn/AccountManage/enterpriseAcc)
-	* [第三方云登录](zh-cn/AccountManage/thirdpartUserLogin)   
+	* [第三方云登录](zh-cn/AccountManage/thirdpartUserLogin) 
+	* [海极网Oauth授权服务<sup style="color:red">(new)<sup>](zh-cn/AccountManage/HJWOauth)  
   
 
 * [家庭中心](zh-cn/FamilyManage)  
