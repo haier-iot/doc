@@ -153,7 +153,7 @@
 | ------------- |:-------------:|:-----:|:-------------:|   
 |**字段名**|**类型**|**说明**|**备注**|    
 |deviceName|String|设备名称，等同于别名|&emsp;|  
-|deviceId|String|设备ID|&emsp;|  
+|deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符|  
 |wifiType|String|设备wifitype|&emsp;|  
 |deviceType|String|设备类别|&emsp;| 
 |online|Boolean|是否在线|&emsp;|     
@@ -201,7 +201,7 @@ Map<String,String> 用户属性值key/value
   
 字段名|类型|说明|备注
 :-:|:-:|:-:|:-
-deviceId|String|设备ID|
+deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 devName|String|设备名称|
 devOwner|String|设备主人|
 devFamilyId|String|设备所属家庭Id|
@@ -216,7 +216,7 @@ permission|Permission|权限|
 字段名|类型|说明|备注
 :-:|:-:|:-:|:-
 deviceName|String|设备名称，等同于别名|
-deviceId|String|设备ID|
+deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 wifiType|String|设备wifitype|
 deviceType|String|设备类别|
 room|String|设备房间位置信息|   
