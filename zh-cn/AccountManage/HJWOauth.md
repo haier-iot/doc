@@ -226,7 +226,7 @@ clientId|String|Body|是|云应用授权时的终端ID；用于标识授权终�
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-accessToken|String|Param|是|授权token；
+access_Token|String|Param|是|授权token；
 
 **输出参数**
 
