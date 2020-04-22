@@ -214,4 +214,4 @@ connectionStatus|String|设备连接状态|online：在线；offline：离线
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 ProdcutCodeT|String|产品型号编码|
-ProcutNameT|String|产品型号名称|
+ProcutNameT|String|产品型号名称|  
