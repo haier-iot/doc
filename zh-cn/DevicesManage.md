@@ -24,7 +24,7 @@ authType|String|权限类型|home：家庭分享</br>share：个人分享</br>ow
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 deviceName|String|设备名称，等同于别名|
-deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
+deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
 wifiType|String|设备WiFitype|
 deviceType|String|设备类别|
 online|Boolean|是否在线|
@@ -38,7 +38,7 @@ online|Boolean|是否在线|
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 deviceName|String|设备名称，等同于别名|
-deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
+deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
 wifiType|String|设备wifi|
 deviceType|String|设备类型|
 totalPermission|AuthInfo|权限和，权限信息的综合|
@@ -59,7 +59,7 @@ others|Map<String,Strng>|其他属性|
 
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
-deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
+deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
 modules|Set<Module>|模块信息|
 wifiType|String|wifi类型|
 deviceType|String|设备类型|
@@ -109,7 +109,7 @@ strength|String|信号强度|
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 timestamp|long|时间戳|
-deviceId|String|设备Id|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
+deviceId|String|设备Id|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
 statuses|Map<String,String>|设备状态|
 
 ## RoomInfoLocation
@@ -118,8 +118,8 @@ statuses|Map<String,String>|设备状态|
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 userId|String|用户ID|
-deviceId|String|设备Id|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
-room|String|设备房间位置信息|
+deviceId|String|设备Id|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
+room|String|设备房间位置信息| 
 
 ## DeviceRoomInfoDto
 设备房间位置信息
@@ -127,7 +127,7 @@ room|String|设备房间位置信息|
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 deviceName|String|设备名称，等同于别名|
-deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
+deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
 wifiType|String|设备wifitype|
 deviceType|String|设备类别|
 room|String|设备房间位置信息|
@@ -141,7 +141,7 @@ online|Boolean|是否在线|
 :-|:-:|:-:|:-
 brand|String|品牌|
 model|String|型号|
-deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
+deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符    
 
 
 ## DevFWVersion  
@@ -193,7 +193,7 @@ value|String|值|
 参数名|类型|说明|备注
 :-|:-:|:-:|:-
 usn|String|操作序列号|
-deviceId|String|操作设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
+deviceId|String|操作设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符  
 result|String|操作应答结果|是一个base64码，标准模型设备解密后的结果为：`{"extData":{},"args":[]}`，其中[]中的数据为多个由name,value组成的键值对；</br>非标准模型设备解密后的结果为:`{"extData":{},"statuses":[]}`，其中[]中的数据为多个由name,value组成的键值对
 
 ## DeviceBaseInfo
