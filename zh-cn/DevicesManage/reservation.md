@@ -46,7 +46,7 @@
 |taskName|	String	|任务名称|	varchar(50)
 |schedulerType|	int	|预约类型（1=设备），此版本仅支持设备预约；|	int(2)|
 |typeId|	String	|设备型号|	varchar(100)
-|deviceId|	String	|设备mac	|varchar(50)
+|deviceId|	String	|设备mac	|varchar(16) 格式：大写字母和数字 不包含特殊字符
 |appInfo|	appInfo[]	|应用信息 |	&emsp;|
 |createUserInfo|	UserInfo[]	|创建者|	&emsp;|
 |createTime|	dateTime	|创建时间: 日期时间类型的字符串|`yyyy-MM-dd hh:mm:ss`|
@@ -140,7 +140,7 @@
 |oid|long|	数据代理主键		|只读|
 |cmdSn|String|	批量指令的总sn		|只读|
 |cmdSubSn|String|	本条指令的sn，发送到领域模型。组成为：总sn+“：”+指令序号|只读|
-|deviceId|String|	设备Id	|只读|
+|deviceId|String|	设备Id	|只读| 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 |execStep|int	|本条指令的执行步骤|只读|	
 |execResult|boolean|	本条指令本步骤的执行结果；true为成功、false为失败：如超时、异常等|只读|
 |execResultCode|String	|本条指令本步骤的执行结果说明，错误码|只读|	
@@ -161,7 +161,7 @@
 | 预约定时修改     | 适用于单设备单任务场景 | 是| 无|
 | 预约定时批量修改 | 适应于单设备批量定时和批量设备单定时场景 | 是| 无|
 | 根据userid查询预约| 根据userId查询创建人或编辑人为自己预约（不做用户鉴权，有可能查到用户已取消分享的设备预约） | 是| 无|
-| 根据deviceid查询预约| 根据deviceid查询预约详情 | 是| 无|
+| 根据deviceid查询预约| 根据deviceid查询预约详情 | 是| 长度范围：1~16 格式：大写字母和数字 不包含特殊字符|
 | 根据taskId查询预约| 根据taskid查询预约详情 | 是| 无|
 | 预约定时执行日志查询| 预约定时执行日志查询 | 是| 无|
 | 预约任务执行预览| 任务立即下发一次 | 是| 无|
@@ -709,7 +709,7 @@ Body:
 
 | 参数名        | 类型          | 位置  | 必填|说明|
 | ------------- |:-------------:|:-----:|:-------------:|:-----:|
-|deviceId|	String|	Body|	选填	|设备id；如果不为空，根据userId和deviceId查询，为空根据userId查询|
+|deviceId|	String|	Body|	选填	|设备id；长度范围：1~16 格式：大写字母和数字 不包含特殊字符；如果不为空，根据userId和deviceId查询，为空根据userId查询|
 |startNumber|	int	|Body 	|选填	|分页参数，起始值；如果不填写，默认值为1|
 |length	|int|	Body| 	选填	|分页参数，长度；如果不填写，默认值为100|
 
@@ -838,7 +838,7 @@ Body
 
 | 参数名        | 类型          | 位置  | 必填|说明|
 | ------------- |:-------------:|:-----:|:-------------:|:-----:|
-|deviceId|	String|	Body|	必填|	设备id|
+|deviceId|	String|	Body|	必填|设备id 长度范围：1~16 格式：大写字母和数字 不包含特殊字符|
 |startNumber|	int|	Body|	选填	|分页参数，起始值；如果不填写，默认值为1|
 |length|	int|	Body|	选填	|分页参数，长度；如果不填写，默认值为100|
 

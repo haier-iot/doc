@@ -424,7 +424,7 @@ Content-type: application/json
 | **名称** | 设备简明信息 |&emsp;| DeviceBriefInfo |   
 | ------------- |:----------:|:-----:|:--------:|  
 |**字段名**|**类型**|**说明**|**备注**|  
-|deviceId| String | 设备ID|必填|  
+|deviceId| String | 设备ID|必填 长度范围：1~16 格式：大写字母和数字 不包含特殊字符|  
 
 
 

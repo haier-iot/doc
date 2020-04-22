@@ -280,7 +280,7 @@ page|否|Page|消息分页信息，详见Page对象定义
 属性|是否必填|值类型|描述
 :-:|:-:|:-:|:-
 typeId|否|string|设备typeid
-deviceId|是|string|设备mac地址
+deviceId|是|string|设备id 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 deviceName|否|string|设备名称    
 
 ###### DevControl   
@@ -291,7 +291,7 @@ deviceName|否|string|设备名称
 属性|是否必填|值类型|描述
 :-:|:-:|:-:|:-
 callId|否|int|调用者id。若为空或无此字段，则代表自动调用，此时ExtData中的device对象数据不能为空，否则无法执行
-deviceId|是|string|设备mac地址
+deviceId|是|string|设备id 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 groupName|否|string|组命令名称  
 cmdList|是|json object|标准模型的命令键值对集合   
 

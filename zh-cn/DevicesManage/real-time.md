@@ -21,7 +21,7 @@
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 accessToken|String|上下文|必填|用户token
-deviceId|String|Body|必填|设备ID
+deviceId|String|Body|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 cmdName|String|Body|否|组命令id（1、若该操作为组命令操作，则该值必填。2、若该操作为单命令操作，则该值不需要传递）
 cmdArgs|Map<String,String>|Body|必填|一组命令,即属性集合（key-value）。（若该操作为单命令操作，则该值必须只有一对key-value。）
 callbackUrl|String|Body|非必填|操作应答回调地址，只支持http协议
@@ -124,7 +124,7 @@ Header 中appid 字段填写内容为系统ID，即systemid。 此字段需要�
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|Body|必填|设备ID
+deviceId|String|Body|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 sn|String|Body|必填|操作流水号，必须唯一
 category|String|Body|必填|操作的分类</br>单命令："AttrOp";组命令："GroupOp"
 name|String|Body|必填|操作名称
@@ -202,7 +202,7 @@ Body
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|Body|必填|设备ID
+deviceId|String|Body|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 sn|String|Body|必填|操作流水号，必须唯一
 property|String|Body|必填|设备写属性的属性名
 value|String|Body|必填|设备写属性的属性名
@@ -277,7 +277,7 @@ Body
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|Body|必填|设备ID
+deviceId|String|Body|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 sn|String|Body|必填|设备操作请求序列号
 operationName|String|Body|必填|操作名称
 operationValue|List<OpPropertyValue>|Body|必填|属性值的列表，由模型文档决定是否必填及如何填

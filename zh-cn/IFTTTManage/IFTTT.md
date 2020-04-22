@@ -631,7 +631,7 @@ Cron表达式说明
 |familyId    |String |家庭Id                       |必填：最大长度32                                                                                                 |
 |logType     |String |日志类型                     |必填：最大长度32，日志类型分三种：</br>messagePush消息推送</br>deviceControl设备控制</br>reservationTime预约定时 |
 |triggerMac  |String |触发场景的设备mac            |必填：最大长度32                                                                                                 |
-|deviceId    |String |设备控制时，需要控制的设备Id |必填：最大长度32                                                                                                 |
+|deviceId    |String |设备控制时，需要控制的设备Id |必填：最大长度16 格式：大写字母和数字 不包含特殊字符                                                                                                 |
 |Business    |String |业务信息json结构             |必填：最大长度600                                                                                                |
 |retCode     |String |请求返回码                   |必填：最大长度32                                                                                                 |
 |retInfo     |String |请求结果                     |必填：最大长度32                                                                                                 |

@@ -17,7 +17,7 @@
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数**
 
@@ -73,7 +73,7 @@ Header：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数**
 
@@ -135,7 +135,7 @@ Header：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数**
 
@@ -311,7 +311,7 @@ Content-type: application/json
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 loc|Location|body|必填|位置信息
 
 **输出参数:** 输出标准应答参数
@@ -371,7 +371,7 @@ body
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 aliasName|String|body|必填|设备新别名
 
 **输出参数:** 输出标准应答参数
@@ -555,7 +555,7 @@ Header：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数**
 
@@ -611,7 +611,7 @@ Header：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数**
 
@@ -674,7 +674,7 @@ Header：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数**
 
@@ -799,7 +799,7 @@ POST data
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 token|String|上下文|必填|用户token
-deviceId|String|url|必填|设备ID
+deviceId|String|url|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数：** 
 
@@ -860,7 +860,7 @@ Header：
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 token|String|Header|必填|用户token
-deviceId|String|Body|必填|设备ID
+deviceId|String|Body|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数：** 
 
@@ -937,7 +937,7 @@ Header：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|Body|是|设备id
+deviceId|String|Body|是|设备id 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 
 **输出参数**
 
@@ -991,7 +991,7 @@ Body：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|Body|是|设备id
+deviceId|String|Body|是|设备id 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 codeType|Integer|Body|是|1、机器编码；2、产品型号编码
 code|String|Body|是|具体编码
 modifyType|String|Body|否|修改方式：1、APP扫码更新；2、APP用户选择；3、其他，请描述

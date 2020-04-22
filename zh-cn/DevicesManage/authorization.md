@@ -20,7 +20,7 @@
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|body|必填|设备ID
+deviceId|String|body|必填|设备ID 长度范围：1~16 格式：大写字母和数字 不包含特殊字符
 name|String|body|必填|设备名称
 data|String|body|必填|绑定加密数据
 
