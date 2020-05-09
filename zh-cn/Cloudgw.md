@@ -162,6 +162,7 @@ Content-Type|String|Header|是|本接口Payload内容仅支持UTF-8编码的Json
 |11|控制指令执行超时。|
 |12|无效命令。主要指命令执行逻辑错误。例如关机状态下再关机等。|
 |13|非法值。主要指设备操作的操作值非法。例如温度设置的温度值越界。|
+|16|设备不在线。主要指向设备下发控制指令时，设备实际已经离线，则需在异步应答中通知平台设备不在线，平台收到该错误码后会将设备置为不在线状态，不会再向设备下发控制命令，直到设备主动上线，或者设备信息查询回调查到设备在线。|  
 |17|不支持的命令。主要指读属性或写属性请求时，设备无此属性，或者操作时，设备不支持此操作。|
 
 
@@ -210,7 +211,9 @@ Content-Type|String|Header|是|本接口Payload内容仅支持UTF-8编码的Json
 machineId|String|Body|是|要注册的设备的物理唯一标识，该标识在同一systemId下需唯一。字符串长度范围：1~32。对于WIFI类设备，建议使用MAC地址，格式为全大写无连接符十六进制字符串，例如CC1122334455。对于2G或NB类设备，建议使用IMEI地址，格式为全数据字符串，例如860123456789876。
 uPlusID|String|Body|是|U+产品编号，接入U+产品的唯一标识，由U+统一定义。字符串长度范围：64。
 devSign|String|Body|是|设备产品信息签名，用于设备身份认证，全小写十六进制字符串，字符串长度范围：64。例如：996a4a51cfc228f7d5044319767d6f792f106460e86a9050b79dcee0a6dd31d9 算法如下（+表示字符串拼接）：SHA256（machineId+uPlusID+deviceKey+ timestamp）其中：deviceKey为海极网创建uPlusID时分配；timestamp为HTTP Header中的时间戳字段；
-online|Boolean|Body|是|设备当前在线状态。true为在线；false为离线；  
+online|Boolean|Body|是|设备当前在线状态。true为在线；false为离线；    
+uPlusCodeT|String|Body|否|U+产品整机型号编码（即成品编码）。设备上报的型号编码必须是在海极网注册或录入的，否则设备注册会失败。设备上报型号信息后，会直接覆盖平台该设备现有型号信息。字符串长度范围：9~11。
+ 
 
 
 
@@ -232,12 +235,14 @@ deviceId|String|Body|是|注册成功后Iot平台分配的设备ID。字符串�
 ```
 请求地址：https://uws.haier.net/cloudgw/v1/dev/reg
 Body：
-	{
+{
     "deviceMac" : "***",
     "uPlusID" : "***",
     "devSign" : "***",
-    "online" : true | false
-	}
+	"online" : true | false,
+    "uPlusCodeT" : "***"
+}
+
 
 ```
 **请求应答**
@@ -252,7 +257,7 @@ Body：
 <!-- 注释开始
 #### 设备绑定
 > 调用Iot平台。  
-> 设备在Iot平台注册，即可将该设备绑定在一个优家用户下。调用本接口绑定设备时，设备绑定必须先由uSDK对要绑定的用户开启绑定时间窗（每次开启，20分钟内有效，且只能绑定一次），否则即绑定失败。如果绑定成功，本设备与之前其他用户的绑定关系会被自动解除。一个优家用户，最多可以绑定300个设备。  
+> 设备在Iot平台注册，即可将该设备绑定在一个优家用户下。调用本接口绑定设备时，设备绑定必须先由uSDK对要绑定的用户开启绑定时间窗（每次开启，20分钟内有效，且只能绑定一次），否则即绑定失败。如果绑定成功，本设备与之前其他用户的绑定关系会被自动解除。一个优家用户，最多可以绑定300个设备。如果存在alias字段，设备绑定成功后，会设置设备的别名，如果绑定失败，则不会设置。  
 
 
 ##### 1、接口定义
@@ -264,7 +269,8 @@ Body：
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 deviceId|String|Body|是|设备ID。字符串长度范围：1~32。  
-token|String|Body|否|设备要绑定的用户Token。字符串长度范围：1~32。
+token|String|Body|是|设备要绑定的用户Token。字符串长度范围：1~32。 
+alias|String|Body|否|设备别名。字符串长度范围：1~32。
 
 
 
@@ -287,7 +293,8 @@ retInfo|String|Body|是|错误描述信息，本描述信息仅是用于调试�
 Body：
 {
     "deviceId" : "***",
-    "token" : "***"
+    "token" : "***",
+    "alias" : "***"
 }
 
 ```
@@ -467,8 +474,9 @@ Body：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-deviceId|String|Body|是|设备ID。字符串长度范围：1~32。  
 callbackType|String|Body|是|回调类型，值固定为：`devInfoQuery`  
+deviceId|String|Body|是|设备ID。字符串长度范围：1~32。  
+machineId|String|Body|是|设备注册时使用的设备物理唯一标识。字符串长度范围：1~32。     
 rptProperty|Boolean|Body|是|是否立即上报属性状态。如果值为true，则第三方云服务在应答本接口后，应立即调用“设备属性状态上报”接口上报设备当前全部属性状态。如果值为false，则忽略。
 rptAlarm|Boolean|Body|是|是否立即上报报警状态。如果值为true，则第三方云服务在应答本接口后，应立即调用“设备报警状态上报”接口上报设备当前全部报警状态。如果值为false，则忽略。
  
@@ -660,7 +668,9 @@ Body：
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 callbackType|String|Body|是|回调类型，值固定为：`propertyRead`  
-deviceId|String|Body|是|设备ID。字符串长度范围：1~32。
+deviceId|String|Body|是|设备ID。字符串长度范围：1~32。  
+machineId|String|Body|是|设备注册时使用的设备物理唯一标识。字符串长度范围：1~32。  
+token|String|Body|否|设备绑定的第三方用户token，字符串长度范围：1~32。如当前设备没有授权的第三方用户，则无此字段。      
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同。字符串长度范围：1~64。
 propertyName|String|Body|是|要读取的设备属性名。字符串长度范围：无限制。
 
@@ -682,10 +692,13 @@ retInfo|String|Body|是|错误描述信息，本描述信息仅是用于调试�
 Body：
 {
     "callbackType" : "propertyRead",
-    "deviceId" : "***",
+	"deviceId" : "***",
+	"machineId" : "***",
+	"token" : "***",
     "sn" : "***",
     "propertyName" : "***"
  }
+
 
 ```
 **请求应答**
@@ -770,6 +783,8 @@ Body：
 :-|:-:|:-:|:-:|:-
 callbackType|String|Body|是|回调类型，值固定为：`propertyWrite`  
 deviceId|String|Body|是|设备ID。字符串长度范围：1~32。
+machineId|String|Body|是|设备注册时使用的设备物理唯一标识。字符串长度范围：1~32。  
+token|String|Body|否|设备绑定的第三方用户token，字符串长度范围：1~32。如当前设备没有授权的第三方用户，则无此字段。
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同。字符串长度范围：1~64。
 propertyName|String|Body|是|要写入的设备属性名。字符串长度范围：无限制。
 propertyValue|String|Body|是|要写入的设备属性值。字符串长度范围：无限制。
@@ -793,11 +808,14 @@ retInfo|String|Body|是|错误描述信息，本描述信息仅是用于调试�
 Body：
 {
     "callbackType" : "propertyWrite",
-    "deviceId" : "***",
+	"deviceId" : "***",
+	"machineId" : "***",
+	"token" : "***",
     "sn" : "***",
     "propertyName" : "***",
     "propertyValue" : "***"
-}
+ }
+
 
 ```
 **请求应答**
@@ -882,6 +900,8 @@ Body：
 :-|:-:|:-:|:-:|:-
 callbackType|String|Body|是|回调类型，值固定为：`operation`  
 deviceId|String|Body|是|设备ID。字符串长度范围：1~32。
+machineId|String|Body|是|设备注册时使用的设备物理唯一标识。字符串长度范围：1~32。 
+token|String|Body|否|设备绑定的第三方用户token，字符串长度范围：1~32。如当前设备没有授权的第三方用户，则无此字段。   
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同。字符串长度范围：1~64。
 propertyName|String|Body|是|设备操作名。字符串长度范围：无限制。
 parameters|Parameter数组|Body|是|设备操作请求参数列表。如当前操作请求无参数，则值为空数组[]。数组长度范围：无限制。
@@ -913,7 +933,9 @@ value|String|Body|是|参数值。字符串长度范围：无限制。
 Body：
 {
     "callbackType" : "operation",
-    "deviceId" : "***",
+	"deviceId" : "***",
+	"machineId" : "***",
+	"token" : "***",
     "sn" : "***",
     "operationName" : "***",
     "parameters" : [
@@ -921,7 +943,8 @@ Body：
         { "name" : "***", "value" : "***" },
         ……
     ]
-}
+ }
+
 
 ```
 **请求应答**
@@ -952,7 +975,7 @@ deviceId|String|Body|是|设备ID。字符串长度范围：1~32。
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同。字符串长度范围：1~64。
 errNo|Integer|Body|是|设备控制应答错误码，表示本次设备控制结果，该错误码会直接返回至App处理。可返回错误码见[第三方云设备控制异步应答错误码](#jump1)定义。
 parameters|[Parameter数组](#jump)|Body|是|设备操作应答参数列表。
-如当前操作应答无参数，则值为空数组[]。数组长度范围：1~256。
+如当前操作应答无参数，则值为空数组[]。数组长度范围：0~256。
 
 
 **输出参数:**  
