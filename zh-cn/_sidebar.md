@@ -21,7 +21,7 @@
 	* [海极网Oauth授权服务<sup style="color:red">(new)<sup>](zh-cn/AccountManage/HJWOauth)     
   	  
 
-* [家庭中心](zh-cn/FamilyManage)  
+* [家庭中心](zh-cn/FamilyManage/Introduce)  
 	* [介绍](zh-cn/FamilyManage/Introduce)  
     * [接口说明](zh-cn/FamilyManage)  
 		* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
