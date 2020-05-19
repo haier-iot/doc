@@ -22,12 +22,15 @@
   	  
 
 * [家庭中心](zh-cn/FamilyManage)  
-	* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
-	* [房间管理](zh-cn/FamilyManage/FamilyRoomManage)    
-	* [家庭成员管理](zh-cn/FamilyManage/FamilyMembersManage)  
-	* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
-    * [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage)  
-    * [个人用户关系](zh-cn/FamilyManage/UserRelationship)
+	* [介绍](zh-cn/FamilyManage)  
+    * [接口说明](zh-cn/FamilyManage)  
+		* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
+		* [房间管理](zh-cn/FamilyManage/FamilyRoomManage)    
+		* [家庭成员管理](zh-cn/FamilyManage/FamilyMembersManage)  
+		* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
+    	* [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage)  
+   		* [个人用户关系](zh-cn/FamilyManage/UserRelationship)
+     * [最佳实践](zh-cn/FamilyManage)  
 
 * [设备中心](zh-cn/DevicesManage)
 	* [权限管理](zh-cn/DevicesManage/authorization) 
