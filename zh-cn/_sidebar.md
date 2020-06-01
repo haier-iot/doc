@@ -31,7 +31,7 @@
     	* [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage)  
 		* [个人用户关系](zh-cn/FamilyManage/UserRelationship)  
 	* [最佳实践](zh-cn/FamilyManage/BestPractices)  
-
+		* [家数据融合](zh-cn/FamilyManage/BestPractices/BestPractices)  
 * [设备中心](zh-cn/DevicesManage)
 	* [权限管理](zh-cn/DevicesManage/authorization) 
 	* [信息管理](zh-cn/DevicesManage/information)     
