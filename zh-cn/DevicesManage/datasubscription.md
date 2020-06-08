@@ -966,6 +966,7 @@ public class TextEncoder  implements Encoder.Text<String>{
 ### 自动重连机制    
 
 由于网络闪断、Websocket Server服务端重启升级等原因，势必造成已有Websocket Client接入端连接中断，所以强烈建议Websocket Client接入端代码增加自动重连机制，可参照以上“自动重连机制”示例或在此基础上优化。
+
 注：</br>
 (1)	自动重连尝试间隔可逐步递增，如5s尝试一次连接，如果不成功则2min后再尝试一次连接，如果还未成功则5min后再尝试连接一次。</br>
 (2)	如果(1)未重连成功，则可尝试在以(1)为一个周期，持续循环重连。</br>
