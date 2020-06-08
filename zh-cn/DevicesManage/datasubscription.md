@@ -381,7 +381,7 @@ wss://mp-stp.haier.net/wssubscriber/msgplatform/websocket?systemId=SV-BLKALPHA21
 
 ##### 1、接口定义  
 ######	按typeId取消订阅
-按typeId取消订阅和3.4.1.1按typeId订阅中的JSON字符串格式数据结构一致，只是将JSON字符串格式数据结构中的subscribe关键字换成unsubscribe关键字即可，如下（`DEV_EVENT、101c1200240008101e0a00000141414100000000020000000000000000000000`为示例数据）：
+按typeId取消订阅和按typeId订阅中的JSON字符串格式数据结构一致，只是将JSON字符串格式数据结构中的subscribe关键字换成unsubscribe关键字即可，如下（`DEV_EVENT、101c1200240008101e0a00000141414100000000020000000000000000000000`为示例数据）：
 ``` 
 {
   "cmd": "unsubscribe",
@@ -415,13 +415,14 @@ wss://mp-stp.haier.net/wssubscriber/msgplatform/websocket?systemId=SV-BLKALPHA21
 }
 
 ```
-也支持按*号等通配符取消,其命令结构和3.4.1.1按typeId订阅中的通配符订阅结构等描述情况一致，只是将JSON字符串格式数据结构中的subscribe关键字换成unsubscribe关键字即可，这里不在列举； 
-   备注：订阅端一次最多能发起500个待取消的订阅关系（约typeId数乘以topic数）。
+也支持按*号等通配符取消,其命令结构和按typeId订阅中的通配符订阅结构等描述情况一致，只是将JSON字符串格式数据结构中的subscribe关键字换成unsubscribe关键字即可，这里不在列举； 
+   
+备注：订阅端一次最多能发起500个待取消的订阅关系（约typeId数乘以topic数）。
 
 
 #####  按deviceId取消订阅
 
-按deviceId取消订阅情况和3.4.1.2按deviceId订阅中的消息结构基本一致，只是将JSON字符串格式数据结构中的subscribe关键字换成unsubscribe关键字即可，这里不再列举，此外按deviceId也不支持按通配符取消订阅；
+按deviceId取消订阅情况和按deviceId订阅中的消息结构基本一致，只是将JSON字符串格式数据结构中的subscribe关键字换成unsubscribe关键字即可，这里不再列举，此外按deviceId也不支持按通配符取消订阅；
 
 注：具体按什么形式订阅，就按类似的形式取消，如果混用则不一定有实际意义，比如订阅时是按typeId订阅的，取消订阅时却按deviceId取消订阅，不会达到效果，也无实际意义。
 
@@ -965,9 +966,9 @@ public class TextEncoder  implements Encoder.Text<String>{
 ### 自动重连机制    
 
 由于网络闪断、Websocket Server服务端重启升级等原因，势必造成已有Websocket Client接入端连接中断，所以强烈建议Websocket Client接入端代码增加自动重连机制，可参照以上“自动重连机制”示例或在此基础上优化。
-注：
-(1)	自动重连尝试间隔可逐步递增，如5s尝试一次连接，如果不成功则2min后再尝试一次连接，如果还未成功则5min后再尝试连接一次。
-(2)	如果(1)未重连成功，则可尝试在以(1)为一个周期，持续循环重连。
+注：</br>
+(1)	自动重连尝试间隔可逐步递增，如5s尝试一次连接，如果不成功则2min后再尝试一次连接，如果还未成功则5min后再尝试连接一次。</br>
+(2)	如果(1)未重连成功，则可尝试在以(1)为一个周期，持续循环重连。</br>
 (3)	建议重连尝试间隔不易过短或频繁,如几秒钟一循环,以防止瞬间大量访问,对服务端造成连接压力。
 
 
