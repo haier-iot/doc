@@ -156,7 +156,7 @@ String getSign(String systemId, String systemKey, String timestamp) {
 systemId|String|url|必填|应用ID，50位以内字符,Haier U+ 云平台全局唯一  
 timestamp|long|url|必填|Unix时间戳，精确到毫秒  
 sign|String|url|必填|对请求进行签名运算产生的签名 见签名算法   
-isSubscribeEarliestMessage|String|url|必填|决定该链接对应的收消息方式。<br>true: 从最早开始收消息<br>false或不填： 从当前开始收最新消息  
+isSubscribeEarliestMessage|String|url|选填|决定该链接对应的收消息方式。<br>true: 从最早开始收消息<br>false或不填： 从当前开始收最新消息  
 
 **输出参数**
 
@@ -200,7 +200,7 @@ wss://mp-stp.haier.net/wssubscriber/msgplatform/websocket?systemId=SV-BLKALPHA21
 ### 订阅接口  
 > 订阅指定topic消息，消息订阅必须在建立连接成功的前提下进行，如果建立连接返回成功，才可以发送订阅，如果失败，则无法进行订阅。  
 
-注意：Websocket订阅服务的订阅范围只针对详细订阅，不包括全量订阅，这点和SDK是有区别的。  
+  
 
 ##### 1、接口定义  
 ######	按typeId订阅
@@ -225,8 +225,7 @@ wss://mp-stp.haier.net/wssubscriber/msgplatform/websocket?systemId=SV-BLKALPHA21
 }
 
 ```
-说明：(1)注意，客户端一个连接情况下只能发起一次订阅消息(服务器端做了限制，多发不起作用)，订阅信息中的多个topic多个keys，其中如果有任何一个订阅验证失败，则本次请求全部订阅均失败，只有当全部topic的keys订阅成功，则本次订阅成功。</br>
-(2)订阅端一次最多能发起500个订阅关系（约typeId数乘以topic数）。
+说明：(1)注意，客户端一个连接情况下只能发起一次订阅消息(服务器端做了限制，多发不起作用)，订阅信息中的多个topic多个keys，其中如果有任何一个订阅验证失败，则本次请求全部订阅均失败，只有当全部topic的keys订阅成功，则本次订阅成功。(2)订阅端一次最多能发起500个订阅关系（约typeId数乘以topic数）。
 
 
 云端向客户端返回订阅结果的响应JSON字符串格式数据如下（`SV-BLKALPHA21-0001-123、101c1200240008101e0a00000141414100000000020000000000000000000000 _DEV_EVENT`为示例数据）：
@@ -244,7 +243,7 @@ wss://mp-stp.haier.net/wssubscriber/msgplatform/websocket?systemId=SV-BLKALPHA21
 
 
 ```
-另外,客户端在按typeId 订阅时支持*号通配符订阅,向云端发送的JSON字符串格式数据如下（`DEV_EVENT`、`*` 为示例数据）
+另外,客户端在按typeId 订阅时支持`*`号通配符订阅,向云端发送的JSON字符串格式数据如下（`DEV_EVENT`、`*` 为示例数据）
 
 情况1 订阅指定topic下的所有typeId集合的消息：
 ```
