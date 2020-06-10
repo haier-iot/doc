@@ -21,17 +21,18 @@
 	* [海极网Oauth授权服务<sup style="color:red">(new)<sup>](zh-cn/AccountManage/HJWOauth)     
   	  
 
-* [家庭中心](zh-cn/FamilyManage/Introduce)  
+* [家庭中心]()  
 	* [介绍](zh-cn/FamilyManage/Introduce)  
-    * [接口说明](zh-cn/FamilyManage)  
+	* [接口说明](#) 
+	    * [公共参数](zh-cn/FamilyManage/FamilyManageAPI) 
 		* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
 		* [房间管理](zh-cn/FamilyManage/FamilyRoomManage)    
 		* [家庭成员管理](zh-cn/FamilyManage/FamilyMembersManage)  
 		* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
-    	* [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage)  
+		* [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage) 
 		* [个人用户关系](zh-cn/FamilyManage/UserRelationship)  
 	* [最佳实践](zh-cn/FamilyManage/BestPractices)  
-		* [家数据融合](zh-cn/FamilyManage/BestPractices/BestPractices)  
+
 * [设备中心](zh-cn/DevicesManage)
 	* [权限管理](zh-cn/DevicesManage/authorization) 
 	* [信息管理](zh-cn/DevicesManage/information)     
@@ -41,9 +42,11 @@
     * [数据订阅](zh-cn/DevicesManage/datasubscription)   
 	* [设备OTA升级](zh-cn/DevicesManage/deviceupgradeOTA) 
 
-* [场景中心](zh-cn/IFTTTManage)
-	* [场景引擎](zh-cn/IFTTTManage/IFTTT)  
-   
+* [场景中心](zh-cn/IFTTTManage/Introduce)
+	* [介绍](zh-cn/IFTTTManage/Introduce)  
+	* [接口说明](zh-cn/IFTTTManage/IFTTT)  
+	* [最佳实践](zh-cn/IFTTTManag/BestPractices)  
+		* [详情页场景](zh-cn/IFTTTManag/BestPractices/BestPractices)    
 
 
 * [消息中心](zh-cn/MessageManage)   

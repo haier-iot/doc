@@ -99,11 +99,14 @@
   <script src="//unpkg.com/docsify-edit-on-github@1.0.1/index.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-bash.js"></script>  
    <script src="//unpkg.com/prismjs/components/prism-java.js"></script>  
-   <script>
+
+   <!--
+<script>
   if (typeof navigator.serviceWorker !== 'undefined') {
     navigator.serviceWorker.register('sw.js')
   }
 </script>
+-->
 
 <script src="//unpkg.com/docsify-copy-code"></script>
 
@@ -115,7 +118,7 @@
   const gitalk = new Gitalk({
     clientID: 'e6c7f3bde76e9040afc4',
     clientSecret: '20096fe6a5b800eb53f0511f27b3488ddc283b96',
-    repo: 'guide',
+    repo: 'doc',
     owner: 'haier-iot',
     admin: ['tbdream'],
     // facebook-like distraction free mode

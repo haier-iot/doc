@@ -22,12 +22,9 @@
   
 
 * [家庭中心](zh-cn/FamilyManage)  
-	* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
-	* [房间管理](zh-cn/FamilyManage/FamilyRoomManage)    
-	* [家庭成员管理](zh-cn/FamilyManage/FamilyMembersManage)  
-	* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
-    * [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage) 
-    * [个人用户关系](zh-cn/FamilyManage/UserRelationship) 
+	* [介绍](zh-cn/FamilyManage/Introduce)  
+	* [接口说明](zh-cn/FamilyManage) 
+	* [最佳实践](zh-cn/FamilyManage/BestPractices)  
 
 * [设备中心](zh-cn/DevicesManage)
 	* [权限管理](zh-cn/DevicesManage/authorization) 
@@ -40,7 +37,9 @@
 
 
 * [场景中心](zh-cn/IFTTTManage)
-	* [场景引擎](zh-cn/IFTTTManage/IFTTT)  
+	* [介绍](zh-cn/IFTTTManage/Introduce)  
+	* [接口说明](zh-cn/IFTTTManage/IFTTT)  
+	* [最佳实践](zh-cn/IFTTTManag/BestPractices)  
    
 
 
