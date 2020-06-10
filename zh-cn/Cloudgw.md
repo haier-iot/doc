@@ -728,8 +728,9 @@ Body：
 deviceId|String|Body|是|设备ID。字符串长度范围：1~32。
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同。字符串长度范围：1~64。
 errNo|Integer|Body|是|设备控制应答错误码，表示本次设备控制结果，该错误码会直接返回至App处理。可返回错误码见[第三方云设备控制异步应答错误码](#jump1)定义。
-propertyName|String|Body|是|要读取的设备属性名。字符串长度范围：1~64。
-propertyValue|String|Body|是|读取到的设备属性值。字符串长度范围：0~64。
+propertyName|String|Body|否|要读取的设备属性名，字符串长度范围：1~64。仅errNo不为0时（表示控制失败），本字段可以不存在；
+propertyValue|String|Body|否|读取到的设备属性值，字符串长度范围：0~64。仅errNo不为0时（表示控制失败），本字段可以不存在；
+
 
 
 **输出参数:**  
