@@ -1512,8 +1512,8 @@ content-type|String|header|是|必须为applicationg/json;charset=UTF-8
 
 参数名|类型|位置|必填|说明
 :-:|:-:|:-:|:-:|:-
-toUsers|List<String>|body|是|接受消息的用户ID列表
-toApps|List<String>|body|是|接受消息的APP列表
+toUsers|List<String>|body|是|接受消息的用户ID列表，list 最大200
+toApps|List<String>|body|是|接受消息的APP列表，list 最大200
 messages|UpMsg|body|是|推送消息内容定义
 tag|String|body|否|标签。例如家庭推送时可以存入家庭
 isBurn|Integer|body|否|是否阅后即焚
