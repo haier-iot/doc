@@ -453,8 +453,12 @@ Body:
 "deviceId": "100823"
 },
 "devName":"test",
+"devfamilyId":"",
+"devRoomId":"",
+"devRoomName":"测试一下",
 "permission":{ "authType":"home",
-"auth":{ "view": true, "set": false, "control": false}},
+"auth":{ "view": true, "set": true, "control": true}},
+/** view 查看权；set 配置权；control 控制权；家庭中心交互要求此处都为true  **/
 " devFamilyId":"1256738"
 }
 }
@@ -742,7 +746,8 @@ Body：
 "devRoomId":"",
 "devRoomName":"测试一下",
 "permission":{ "authType":"home",
-"auth":{ "view": true, "set": false, "control": false}},
+"auth":{ "view": true, "set": true, "control": true}},
+/** view 查看权；set 配置权；control 控制权；家庭中心交互要求此处都为true  **/
 " devFamilyId":"1256738"
 },{
 "devInfo":{           
@@ -753,7 +758,7 @@ Body：
 "devRoomId":"",
 "devRoomName":"测试一下",
 "permission":{ "authType":"home",
-"auth":{ "view": true, "set": false, "control": false}},
+"auth":{ "view": true, "set": true "control": true}},
 " devFamilyId":"1256738"
 },{
 "devInfo":{           
@@ -764,7 +769,7 @@ Body：
 "devRoomId":"",
 "devRoomName":"测试一下",
 "permission":{ "authType":"home",
-"auth":{ "view": true, "set": false, "control": false}},
+"auth":{ "view": true, "set": true, "control": true}},
 " devFamilyId":"1256738"
 }]
 }
