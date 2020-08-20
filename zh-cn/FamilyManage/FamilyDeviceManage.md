@@ -706,7 +706,7 @@ Body：
 |devInfo|DeviceBriefInfo|设备简明信息|必填|  
 |devRoomId|String|设备所在房间|选填，不填进入默认房间，按规则生成| 
 |devRoomName|String|设备所在房间名称|选填，优先级低于devRoomId，devRoomId如果填写，则本字段被忽略| 
-|devName|String|设备名称|选填| 
+|devName|String|设备名称|必填| 
 |devFamilyId|String|设备所属家庭Id|非必填，不填会分享设备到默认家庭，家庭由用户配置| 
 |permission|Permision|分享权限此处权限authType 必须为home|必填| 
 
