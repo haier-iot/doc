@@ -70,7 +70,6 @@ language: en
 timezone: +8
 Content-Encoding: utf-8
 Content-type: application/json
-privacyVersion: V1.0.0
 Content-Length: 385
 Host: 10.2.0.16:6353
 User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
