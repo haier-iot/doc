@@ -211,7 +211,7 @@ Body
 ```java
 {
 	"retCode": "00000",
-	"retInfo": "操作成功"
+	"retInfo": "操作成功",
 	"detailInfo": {
 		"reported": {
 			"targetHumidity": "0",
