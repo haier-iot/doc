@@ -39,7 +39,8 @@
 	* [实时控制](zh-cn/DevicesManage/real-time)  
 	* [预约控制](zh-cn/DevicesManage/reservation)  
 	* [数据查询](zh-cn/DevicesManage/dataquery)    
-    * [数据订阅](zh-cn/DevicesManage/datasubscription)   
+    * [数据订阅](zh-cn/DevicesManage/datasubscription)  
+    * [运营功能](zh-cn/DevicesManage/operating-functions) 
 	* [设备OTA升级](zh-cn/DevicesManage/deviceupgradeOTA) 
 
 * [场景中心](zh-cn/IFTTTManage/Introduce)
