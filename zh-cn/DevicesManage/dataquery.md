@@ -80,7 +80,7 @@
 |desired| Map<String, MetadataItem > |desired部分中每个属性的时间戳，因此，可以确定状态的更新时间，key是设备预期的操作名或设备预期状态的属性名 |只读（可为空，可以不含此项）|    
 |events| Map<String, MetadataItem > | events部分中每个属性的时间戳，因此，key确定状态的更新时间，可以是事件标示|只读（可为空，可以不含此项）|   
 
-
+<!--
 ### Shadow  
   
 | **名称** | 设备影子信息 |&emsp;| Shadow |   
@@ -93,6 +93,17 @@
 |desired|Map<String,String> | 设备的预期操作和预期状态，key是设备预期的操作名或设备预期状态的属性名，value是设备预期操作的json的字符串形式或设备预期状态的属性值 |只读（可为空，可以不含此项）|   
 |events| Map<String,String> | 设备上报的事件，key是事件标示，value是事件内容|只读（可为空，可以不含此项）|   
 |metadata|Metadata | metadata部分|只读（可为空，可以不含此项）|
+-->
+
+
+### ShadowBeanVO  
+  
+| **名称** | 设备影子信息 |&emsp;| ShadowBeanVO |   
+|:----------: |:----------:|:-----:|:--------:|
+|**字段名**|**类型**|**说明**|**备注**|  
+|reported| Map<String,String> |设备上报的状态，key是设备上报状态的属性名，value是上报的状态属性值 |只读（可为空，可以不含此项）|   
+|events| Map<String,String> | 设备上报的事件，key是事件标示，value是事件内容|只读（可为空，可以不含此项）|   
+
 
 ### ReportedModel  
   
@@ -149,7 +160,10 @@
 
 
 ### 设备影子查询
-> 按指定的设备id，查询该设备的云端影子信息，验证token合法性，验证token所属用户与待查询设备存在查看和操作权限  
+> 按指定的设备id，查询该设备的云端影子信息，验证token合法性，验证token所属用户与待查询设备存在查看和操作权限。  
+  若查询到的设备报警信息，不在报警有效期24小时内，则不返回报警状态。  
+  若查询到的设备状态信息，不在有效期5分钟之内，则先返回当前设备影子缓存状态信息，同时通过M2M向设备下发状态查询命令，将新查询到的状态信息更新到设备影子条目中，然后再手动调接口查询一次，则是最新设备状态信息。  
+ 
 
 ##### 1、接口定义
 ?> **接入地 址：**  `/shadow/v1/info `  
@@ -160,14 +174,12 @@
 | 类型   | 参数名   | 位置  | 必填|说明|  
 | :-----:|:------:|:-----:|:---:|:----:|   
 |  deviceId    | String | Body| 必填|设备id 长度范围：1~16 格式：大写字母和数字 不包含特殊字符|  
-|  part    | int | Body| 选填|过滤参数；查询结果一定返回shadowBaseInfo部分；</br>通过过滤参数控制返回其他部分；</br>等于1时，其他只返回reported部分；</br>等于2时，其他只返回desired部分；</br>等于0时，其他部分全部返回；默认值为0；|  
-
 
 **输出参数**  
 
 |   类型      |     参数名      | 位置  |必填 |说明|
 | :-------------:|:----------:|:-----:|:--------:|:---------:|
-| shadowInfo |  ShadowInfo  |   Body  |  必填  | 查询到的设备影子信息 |
+| detailInfo |  ShadowBeanVO   |   Body  |  必填  | 查询到的设备影子信息 |
 
 ##### 2、请求样例  
 
@@ -198,85 +210,38 @@ Body
 
 ```java
 {
-"retCode": "00000",
-"retInfo": "成功",
-"detailInfo": {
-	"shadowInfo": {
-		"shadowVersion": "20160101",
-		"reportedTimestamp": 123456,
-		"online": true
-	},
-	"deviceInfo": {
-		"typeid": "string2",
-		"deviceType": "string2",
-		"softVersion": "string2",
-		"hardVersion": "string2",
-		"connectType": "string2",
-		"timeVersion": "string2"
-	},
-	"preChangeReported": {
-		"attribute1": "string2",
-		"attribute2": "string1",
-		"attributeN": "string2"
-	},
-	"reported": {
-		"attribute1": "string2",
-		"attribute2": "string1",
-		"attributeN": "string2"
-	},
-	"desired": {
-		"attribute1": "string2",
-		"attribute2": "string2",
-		"optname1": "{\"attr1\":\"val1\",\"attr2\":\"val2\",\"attr3\":123}"
-	},
-	"events": {
-		"code1": "value1",
-		"code2": "value2"
-	},
-	"metadata": {
-		"preChangeReported": {
-			"attribute1": {
-				"timestamp": 123456
-			},
-			"attribute2": {
-				"timestamp": 123456
-			},
-			"attributeN": {
-				"timestamp": 123456
-			}
-		},
+	"retCode": "00000",
+	"retInfo": "操作成功",
+	"detailInfo": {
 		"reported": {
-			"attribute1": {
-				"timestamp": 123456
-			},
-			"attribute2": {
-				"timestamp": 123456
-			},
-			"attributeN": {
-				"timestamp": 123456
-			}
+			"targetHumidity": "0",
+			"airQuality": "0",
+			"outdoorTemperature": "18",
+			"healthMode": "false",
+			"echoStatus": "false",
+			"humidificationStatus": "false",
+			"windDirectionVertical": "0",
+			"indoorPM2p5Value": "0",
+			"indoorHumidity": "0",
+			"operationMode": "0",
+			"sleepCurveStatus": "false",
+			"lockStatus": "false",
+			"targetTemperature": "27",
+			"windDirectionHorizontal": "0",
+			"freshAirStatus": "false",
+			"indoorTemperature": "20",
+			"powerLB": "0",
+			"windSpeed": "5",
+			"humanSensingStatus": "0",
+			"electricHeatingStatus": "false",
+			"onOffStatus": "false",
+			"selfCleaningStatus": "false",
+			"powerHB": "0"
 		},
-		"desired": {
-			"attribute1": {
-				"timestamp": 123456
-			},
-			"attribute2": {
-				"timestamp": 123456
-			},
-			"attributeN": {
-				"timestamp": 123456
-			}
-		},
-		"events": {
-			"code1": {
-				"timestamp": 123456
-			},
-			"code2": {
-				"timestamp": 123456
-			}
+		"events":{
+			"outdoorModuleErr": "outdoorModuleErr"
 		}
 	}
-}
 }
 
 ```
