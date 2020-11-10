@@ -14,16 +14,23 @@
 * [用户中心](zh-cn/AccountManage)  
 	* [注册登录](zh-cn/AccountManage/signIn) 
 	* [信息管理](zh-cn/AccountManage/infoManage)    	
-	* [集团Oauth授权服务](zh-cn/AccountManage/oauth)   
+	* [集团Oauth授权服务](zh-cn/AccountManage/oauth)  
 	* [静默授权](zh-cn/AccountManage/silentAuth)  
-	* [企业账号](zh-cn/AccountManage/enterpriseAcc)
+	* [企业账号](zh-cn/AccountManage/enterpriseAcc) 
 	* [第三方云登录](zh-cn/AccountManage/thirdpartUserLogin) 
-	* [海极网Oauth授权服务<sup style="color:red">(new)<sup>](zh-cn/AccountManage/HJWOauth)  
-  
+	* [海极网Oauth授权服务<sup style="color:red">(new)<sup>](zh-cn/AccountManage/HJWOauth)     
+  	  
 
-* [家庭中心](zh-cn/FamilyManage)  
+* [家庭中心]()  
 	* [介绍](zh-cn/FamilyManage/Introduce)  
-	* [接口说明](zh-cn/FamilyManage) 
+	* [接口说明](#) 
+	    * [公共参数](zh-cn/FamilyManage/FamilyManageAPI) 
+		* [家庭管理](zh-cn/FamilyManage/FamilyManage)    
+		* [房间管理](zh-cn/FamilyManage/FamilyRoomManage)    
+		* [家庭成员管理](zh-cn/FamilyManage/FamilyMembersManage)  
+		* [家庭设备管理](zh-cn/FamilyManage/FamilyDeviceManage)  
+		* [家庭数据订阅](zh-cn/FamilyManage/FamilySubDataManage) 
+		* [个人用户关系](zh-cn/FamilyManage/UserRelationship)  
 	* [最佳实践](zh-cn/FamilyManage/BestPractices)  
 
 * [设备中心](zh-cn/DevicesManage)
@@ -32,21 +39,20 @@
 	* [实时控制](zh-cn/DevicesManage/real-time)  
 	* [预约控制](zh-cn/DevicesManage/reservation)  
 	* [数据查询](zh-cn/DevicesManage/dataquery)    
-    * [数据订阅](zh-cn/DevicesManage/datasubscription)  
-    * [设备OTA升级](zh-cn/DevicesManage/deviceupgradeOTA)  
+    * [数据订阅](zh-cn/DevicesManage/datasubscription)   
+	* [设备OTA升级](zh-cn/DevicesManage/deviceupgradeOTA) 
 
-
-* [场景中心](zh-cn/IFTTTManage)
+* [场景中心](zh-cn/IFTTTManage/Introduce)
 	* [介绍](zh-cn/IFTTTManage/Introduce)  
 	* [接口说明](zh-cn/IFTTTManage/IFTTT)  
-	* [最佳实践](zh-cn/IFTTTManag/BestPractices)  
-   
+	* [最佳实践](zh-cn/IFTTTManage/BestPractices)  
+		* [详情页场景](zh-cn/IFTTTManage/BestPractices/BestPractices)    
 
 
 * [消息中心](zh-cn/MessageManage)   
 	* [消息推送](zh-cn/MessageManage/MessagePush)   
-
-	  
+	 
+	 
 
 * [设备接入<sup style="color:red">(new)<sup>](zh-cn/Cloudgw)
 
@@ -77,21 +83,5 @@
 * [设备端SDK_Android 开发指南](zh-cn/USDK/SmartDeviceSDK)
 
 
-<div style='display: none'>
-* ChangeLog  
-
-	* [账户服务](zh-cn/ChangeLog/Account)
-	* [设备管理](zh-cn/ChangeLog/DevicesManage)
-	* [数据订阅](zh-cn/ChangeLog/DataSubscription) 
-	* [家庭模型](zh-cn/ChangeLog/Family)
-	* [场景引擎](zh-cn/ChangeLog/IFTTT)
-	* [预约定时](zh-cn/ChangeLog/Scheduler)
-	* [设备影子](zh-cn/ChangeLog/DevicesShadow)
-	* [消息推送](zh-cn/ChangeLog/MessagePush)
-	* [能力服务](zh-cn/ChangeLog/CapacityService_Weather)
-* [移动端SDK iOS](zh-cn/ChangeLog/CHL_uSDK_Phone_iOS)
-* [移动端SDK Android](zh-cn/ChangeLog/CHL_uSDK_Phone_Android)
-* [设备端SDK Android](zh-cn/ChangeLog/CHL_SmartDeviceSDK)
-</div>
 
 	
