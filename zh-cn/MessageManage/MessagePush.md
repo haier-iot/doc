@@ -2282,8 +2282,7 @@ result.desc|	String|	本次请求处理结果描述|	&ensp;
 
 ### 接入地址
 
-?>  使用REST接口的风格对外提供服务，仅支持HTTPS协议。</br>
-?>访问地址：https://internal.uws.haier.net/mcs/hermes
+?>  使用REST接口的风格对外提供服务，仅支持HTTPS协议。访问地址：https://internal.uws.haier.net/mcs/hermes
 
 ### 功能接口
 
