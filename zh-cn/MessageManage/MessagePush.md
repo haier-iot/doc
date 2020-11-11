@@ -2250,7 +2250,7 @@ registration|3rdId|采用第三方推送通道时，在第三方注册时、第�
 :-|:-:|:-|:-
 sn|String|业务方提供sn；操作序列号 |"sn": "sn3"
 fromPushId|String|推送消息的端，其拥有的pushId|"fromPushId":"pushId0"
-toUserId|String|消息接收端token|"fromPushId":"pushId0"
+toUserId|String|消息接收端token|"toUserId":"userid1"
 toDeviceId |String|消息接收端deviceId|"toDeviceId":"deviceId1"
 toTypeId|	String|	消息接收端TypeId	|"toTypeId":"typeId1"
 toAppId|String|消息接收端appId|"toAppId": "appId1"
@@ -2409,7 +2409,7 @@ Version:v4
 
 ##### 按模板向端推送消息
 > 1、判断消息发送端与接收端是否在消息中心注册成功，成功则通过相应的通道推送消息</br>
-> 2、消息发送端与接收端必须先在消息中心注册后方可使用消息中心的发送通道推送消息。</br>
+> 2、消息发送端与接收端必须先在消息中心注册后方可使用消息中心的发送通道推送消息</br>
 > 3、调用方需要提前调用注册接口在消息中心注册终端</br>
 
 ###### 1、接口定义
