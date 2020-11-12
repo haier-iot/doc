@@ -208,11 +208,17 @@ Content-Type|String|Header|是|本接口Payload内容仅支持UTF-8编码的Json
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-machineId|String|Body|是|要注册的设备的物理唯一标识，该标识在同一systemId下需唯一。字符串长度范围：1~32。对于WIFI类设备，建议使用MAC地址，格式为全大写无连接符十六进制字符串，例如CC1122334455。对于2G或NB类设备，建议使用IMEI地址，格式为全数据字符串，例如860123456789876。
+machineId|String|Body|是|要注册的设备的物理唯一标识，该标识在同一systemId下需唯一。
+字符串长度范围：1~32，（字符集可取值[0-9][A-Z] [a-z]）。
+对于WIFI类设备，建议使用MAC地址，格式为全大写无连接符十六进制字符串，例如CC1122334455。
+对于2G或NB类设备，建议使用IMEI地址，格式为全数据字符串，例如860123456789876。
 uPlusID|String|Body|是|U+产品编号，接入U+产品的唯一标识，由U+统一定义。字符串长度范围：64。
 devSign|String|Body|是|设备产品信息签名，用于设备身份认证，全小写十六进制字符串，字符串长度范围：64。例如：996a4a51cfc228f7d5044319767d6f792f106460e86a9050b79dcee0a6dd31d9 算法如下（+表示字符串拼接）：SHA256（machineId+uPlusID+deviceKey+ timestamp）其中：deviceKey为海极网创建uPlusID时分配；timestamp为HTTP Header中的时间戳字段；
 online|Boolean|Body|是|设备当前在线状态。true为在线；false为离线；    
-uPlusCodeT|String|Body|否|U+产品整机型号编码（即成品编码）。设备上报的型号编码必须是在海极网注册或录入的，否则设备注册会失败。设备上报型号信息后，会直接覆盖平台该设备现有型号信息。字符串长度范围：9~11。
+uPlusCodeT|String|Body|否|U+产品整机型号编码（即成品编码）。
+设备上报的型号编码必须是在海极网注册或录入的，否则设备注册会失败。
+如果该设备型号编码未被用户修改过，则设备上报型号信息后，会直接覆盖平台该设备现有型号信息。如果该设备型号编码当前已由用户修改，则本次注册时将不会覆盖原值，注册仍然返回成功。
+字符串长度范围：9~11。
  
 
 
@@ -222,7 +228,8 @@ uPlusCodeT|String|Body|否|U+产品整机型号编码（即成品编码）。设
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-retCode|String|Body|是|返回码，00000代表请求成功，其它值代表错误 见“错误码定义”章节。可返回错误：公共错误码、W10002、W10003
+retCode|String|Body|是|返回码，00000代表请求成功，其它值代表错误，见“错误码定义”章节。
+可返回错误：公共错误码、W10002、W10003、W10008
 retInfo|String|Body|是|错误描述信息，本描述信息仅是用于调试的返回信息，不支持国际化，不能直接显示在UI上。字符串长度范围：0~256。详细错误情况以retCode在本接口文档中对应描述为准。
 deviceId|String|Body|是|注册成功后Iot平台分配的设备ID。字符串长度范围：1~32。
 
@@ -476,6 +483,7 @@ Body：
 :-|:-:|:-:|:-:|:-
 callbackType|String|Body|是|回调类型，值固定为：`devInfoQuery`  
 deviceId|String|Body|是|设备ID。字符串长度范围：1~32。  
+token|String|Body|否|设备绑定的第三方用户token，字符串长度范围：1~32。如当前设备没有授权的第三方用户，则无此字段。
 machineId|String|Body|是|设备注册时使用的设备物理唯一标识。字符串长度范围：1~32。     
 rptProperty|Boolean|Body|是|是否立即上报属性状态。如果值为true，则第三方云服务在应答本接口后，应立即调用“设备属性状态上报”接口上报设备当前全部属性状态。如果值为false，则忽略。
 rptAlarm|Boolean|Body|是|是否立即上报报警状态。如果值为true，则第三方云服务在应答本接口后，应立即调用“设备报警状态上报”接口上报设备当前全部报警状态。如果值为false，则忽略。
@@ -488,8 +496,8 @@ rptAlarm|Boolean|Body|是|是否立即上报报警状态。如果值为true，�
 :-|:-:|:-:|:-:|:-
 retCode|String|Body|是|返回码，00000代表请求成功，其它值代表错误 见“错误码定义”章节。可返回错误：公共错误码、W20010  
 retInfo|String|Body|是|错误描述信息，本描述信息仅是用于调试的返回信息，不支持国际化，不能直接显示在UI上。字符串长度范围：0~256。详细错误情况以retCode在本接口文档中对应描述为准。
-uPlusID|String|Body|是|U+产品编号，接入U+产品的唯一标识，由U+统一定义。字符串长度范围：64。
-online|Boolean|Body|是|设备当前在线状态。true为在线；false为离线；
+uPlusID|String|Body|是|U+产品编号，接入U+产品的唯一标识，由U+统一定义。若第三方没返回该字段,则平台不处理。字符串长度范围：64。
+online|Boolean|Body|是|设备当前在线状态。true为在线；false为离线；若第三方没返回该字段,则平台不处理。
 
 
 
@@ -502,10 +510,12 @@ online|Boolean|Body|是|设备当前在线状态。true为在线；false为离�
 Body：
 {
     "callbackType" : "devInfoQuery",
-    "deviceId" : "***",
+"deviceId" : "***",
+"token" : "***",
     "rptProperty" : true | false,
     "rptAlarm" : true | false
 }
+
 
 ```
 **请求应答**
@@ -516,6 +526,7 @@ Body：
     "uPlusID" : "***",
     "online" : true | false
 }
+
 
 ```
 
