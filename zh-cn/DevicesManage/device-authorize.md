@@ -1,7 +1,7 @@
 
 !>  **更新时间**：{docsify-updated}  
 
-## 设备授权
+
 
 
 ### 授权服务接口
@@ -71,7 +71,7 @@ User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
 
 #### 会话刷新
 
-> accessToken过期后，可以使用对应的refreshToken获取新的accessToken
+> accessToken过期后，可以使用对应的refreshToken获取新的accessToken</br>
 > 前置条件：获取有效的授权，包括accessToken和refreshToken
 
 ###### 1、接口定义
@@ -138,7 +138,7 @@ User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
 ### 回调服务接口
 
 #### 接收授权码回调接口
-> 接收授权码回调接口，并从海极网添加设备授权时录入
+> 接收授权码回调接口，并从海极网添加设备授权时录入</br>
 > 前置条件：添加设备授权，并录入回调地址，海极网提供查询接口
 
 ##### 1、接口定义
