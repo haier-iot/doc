@@ -43,6 +43,7 @@
     * [运营功能](zh-cn/DevicesManage/operating-functions) 
     * [功能标签](zh-cn/DevicesManage/function-label) 
 	* [设备OTA升级](zh-cn/DevicesManage/deviceupgradeOTA) 
+	* [设备授权](zh-cn/DevicesManage/device-authorize) 
 
 * [场景中心](zh-cn/IFTTTManage/Introduce)
 	* [介绍](zh-cn/IFTTTManage/Introduce)  
