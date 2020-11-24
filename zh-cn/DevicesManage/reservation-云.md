@@ -44,9 +44,9 @@
 |字段名|	类型	|说明|	备注(数据字典描述，规范入参)|
 |taskId	|String	|任务id|	varchar(50)
 |taskName|	String	|任务名称|	varchar(50)
-|schedulerType|	int	|预约类型（1=设备），此版本仅支持设备预约；|	int(2)|
-|typeId|	String	|设备型号|	varchar(100)
-|deviceId|	String	|设备mac	|varchar(16) 格式：大写字母和数字 不包含特殊字符
+|schedulerType|	int	|预约类型 2=场景|	int(2)|
+|taskType|	int	|任务类型 1=单次任务 0,null=循环任务 |	int(2)
+|objId|	String	|场景Id，或者场景传来的其他Id，schedulerType=2时填写	|varchar(50)
 |appInfo|	appInfo[]	|应用信息 |	&emsp;|
 |createUserInfo|	UserInfo[]	|创建者|	&emsp;|
 |createTime|	dateTime	|创建时间: 日期时间类型的字符串|`yyyy-MM-dd hh:mm:ss`|
@@ -55,19 +55,19 @@
 |cron|	Cron[]|	cron对象	|&emsp;|
 |endTime|	dateTime|	任务终止时间: 日期时间类型的字符串|`yyyy-MM-dd hh:mm:ss`|
 |endTimeSource|	int	|endTime来源	|0: 系统默认，1:用户设置|
-|argsInfo|	ArgsInfo	|指令	|&emsp;|
+|taskContent|	String	|任务内容，schedulerType=2时填写	|&emsp;|
 |status|	int|	定时预约状态 0 启用；1 已完成； 2 暂停； |	int(2)|
 |taskDesc|	String|	任务描述	|varchar(100)
 |taskSeq|	int|	子任务序号id|	1：系统默认
 |taskAmount|	int|	子任务总数|	&emsp;|
-
+|systemId|	String|	云应用Id|	varchar(40)|
 
 ### UserInfo
 
 |名称	|用户信息|&emsp;|UserInfo|
 | ------------- |:-------------:|:-----:|:-------------:|
 |字段名|	类型	|说明|	备注(数据字典描述，规范入参)|
-|userId|	String|	用户id|	从uag获取|
+|userId|	String|	用户id|	场景任务，userId字段的值是appId|
 |phone|	String|	手机号	|中间四位加密|
 |userName|	String|	用户昵称	|选填(本期不实现，返回空)|
 |headImg|	String|	头像|	选填(本期不实现，返回空)|
@@ -83,7 +83,7 @@
 |appVersion|	String|	应用版本标识|	选填(本期不实现，返回空)|
 |appName|	String|	应用名称	|选填(本期不实现，返回空)|
 |appLogo|	String|	应用Logo	|选填(本期不实现，返回空)|
-
+|clientId|	String| 创建者clientId	|选填|
 
 
 ### Cron
@@ -101,11 +101,11 @@
 
 
 > 表达式举例：
- 0/5 * * * ?  ，表示每5分钟执行一次 ，
-0 0/1 * * ?  , 表示每小时执行一次，
-0 8 * * ? *   , 表示每天早上8点执行一次，
-0 8 3 * ?   , 表示每月3号早上八点执行一次，
-0 8 ? * MON，表示每周一早上八点执行一次，
+ 0/5 * * * ?  ，表示每5分钟执行一次 ，</br>
+0 0/1 * * ?  , 表示每小时执行一次，</br>
+0 8 * * ? *   , 表示每天早上8点执行一次，</br>
+0 8 3 * ?   , 表示每月3号早上八点执行一次，</br>
+0 8 ? * MON，表示每周一早上八点执行一次，</br>
 
 
 
@@ -299,98 +299,61 @@ Body
 
 | 参数名        | 类型          | 必填|说明|
 | ------------- |:-------------:|:-------------:|:-----:|
-|deviceId|	String varchar(50)|	必填	|设备id| 
-|schedulerType|	int|	必填	|预约类型（1=设备），此版本仅支持设备预约|
-|typeId	|String varchar(100)|	必填|	设备typeId|
+|schedulerType|	int|	必填	|预约类型 2=场景|
+|taskType	|Integer|	选填|	任务类型 1=单次任务 0,null=循环任务 如果填写了该值，则同一批提交的taskType值必须一样 |
+|objId	|String varchar(50) |	选填|场景Id，或者场景传来的其他Id，schedulerType=2时填写 |
 |status|int	|必填	|任务状态； 0 启用 ；2暂停|
-|argsInfo	|ArgsInfo|	必填	|多套指令集；当前版本只支持一套|
-|cron	|Cron[]|	选填|	任务执行表达式；cron和intervals必填其一|
-|intervals	|int|	选填|	任务执行距当前的间隔时间，以分钟为单位，限制一天以（0-1440），如为0需要立即执行；cron和intervals必填其一。|
-|endTime	|dateTime|	选填|	任务终止时间；不填默认值三个月有效期；如果有值，按照此值的有效期|
+|taskContent	|String|	必填	|任务内容，schedulerType=2时填写|
+|cron	|Cron[]|	选填|	任务执行表达式；cron和intervals必填其一；taskType=1,该值不需填写 |
+|intervals	|int|	选填|	taskType=0或 null 该属性选填，任务执行距当前的间隔时间，以分钟为单位，限制一天以内（0-1440），如为0需要立即执行；cron和intervals必填其一;</br>taskType=1 该属性必填，任务执行距当前的间隔时间，以秒为单位，限制一天以内（0-86400），如为0需要立即执行； intervals必填 |
+|endTime	|dateTime|	选填|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
 |taskName	|String varchar(50)|	选填|	任务名称|
 |taskDesc	|String varchar(100)|	选填	|任务描述|
-|taskId	|String varchar(50)	|选填|	任务id;在分次批量添加任务时，第二次此字段为必填，表示和上批次对应|
-|taskSeq|	int|	必填	|子任务序号id；每组中的此字段不能重复；从1开始的正整数；|
+|taskId		|String varchar(50) |	选填	|任务id;在分次批量添加任务时，第二次此字段为必填，表示和上批次对应|
+|taskSeq	|int	|必填|	子任务序号id；每组中的此字段不能重复；从1开始的正整数；|
+|systemId	|String	|选填|	云应用Id|
 
 ##### 2、请求样例  
 
 **用户请求**
 ```java  
-Header：
+Headers:
 Connection: keep-alive
-appId: MB-****-0000
-appVersion: ****.99990
-clientId: 123
+Content-Type: application/json;charset=UTF-8
+appId: MB-UZHSH-0000
+appVersion: 99.99.99.99990
+clientId: 123456
 sequenceId: 2014022801010
-accessToken: **************
-sign: bb2a5c1e432eac8bea8eecb89b408937382e7e95486ee0a60944a46504fa0015
-timestamp: 1491013448628 
+accessToken: TGT3MDL91S16FA8I23P4O5XQM9INB0
+timestamp: 1585704782863
 language: zh-cn
-timezone: +8
-appKey: ***********
+timezone: Asia/Shanghai
+appKey: 6bda204e2fa884c175fde09f185ec790
+sign: 181ba050148e40631da08f1d523c1b6ad51a48001171b435620dc4d3ecd7c473
 Content-Encoding: utf-8
-Content-type: application/json
+Content-Length: 491
+Host: 192.168.180.195:6150
+User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
 Body
 {
-  "taskInfos": [
-    {
-      "status": 0,
-      "deviceId": "DC330D003121",
-      "schedulerType": 1,
-      "typeId": "101c120024000810e20105400000440000000000000000000000000000000000",
-      "intervals": 60,
-      "endTime": "2019-07-31 16:00:00",
-      "argsInfo": {
-        "backUrl": "http://*********",
-        "cmdMsgList": [
-          {
-            "index": 0,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          },
-          {
-            "index": 1,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          }
-        ]
-      },
-      "taskName": "批量关机",
-      "taskDesc": "批量关机",
-      "taskSeq": "1"
-    },
-    {
-      "status": 0,
-      "deviceId": "DC330D003121",
-      "schedulerType": 1,
-      "typeId": "101c120024000810e20105400000440000000000000000000000000000000000",
-      "intervals": 60,
-      "endTime": "2019-07-31 13:00:00",
-      "argsInfo": {
-        "backUrl": "http://*********",
-        "cmdMsgList": [
-          {
-            "index": 0,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          },
-          {
-            "index": 1,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          }
-        ]
-      },
-      "taskName": "批量关机2",
-      "taskDesc": "批量关机2",
-      "taskSeq": "2"
-    }
-  ]
+	"taskInfos":[
+		{
+		  "taskId":"8b82818ce89b4be699ee019548a7dbce",
+		  "status": 0,
+		  "objId": "MOCKDEV_YUYUEDINGSHI",
+		  "schedulerType": 2,
+                "taskType": 0,
+		  "typeId": "111c120024000810040100318001600000000000000000000000000000000000",
+		   "intervals": 3,
+		   "endTime": "2029-12-20 10:29:07",
+		  "taskContent": "{ 'timerType':'CONDITION_TIMER'}",
+		  "taskName": "MOCKDEV_JIAYONGKE-虚拟设备",
+		  "taskDesc": "MOCKDEV_JIAYONGKE-虚拟设备",
+		  "taskSeq": 1
+		}
+	]
 }
+
 
 ```  
 
@@ -398,11 +361,11 @@ Body
 
 ```java
 {
-    "retCode": "00000",
-"retInfo": "预约定时创建成功",
-"detailInfo": {
-     “taskId”: “878442f1550c4c189c5307873ca9b1dd”
-}
+	"detailInfo": {
+		"taskId": "8b82818ce89b4be699ee019548a7dbce"
+	},
+	"retCode": "00000",
+	"retInfo": "操作成功"
 }
 
 ```
@@ -434,23 +397,27 @@ Body
 
 **用户请求**
 ```java 
-Header：
-appId: MB-****-0000
-appVersion: *****.99990
-clientId: 123
+Headers:
+Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+appId: MB-UZHSH-0000
+appVersion: 99.99.99.99990
+clientId: 123456
 sequenceId: 2014022801010
-accessToken: *******
-sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
-timestamp: 1491014596343 
+accessToken: TGT3MDL91S16FA8I23P4O5XQM9INB0
+timestamp: 1585706858311
 language: zh-cn
-timezone: +8
-appKey: ********
+timezone: Asia/Shanghai
+appKey: 6bda204e2fa884c175fde09f185ec790
+sign: b894d4d5aceca7f5bbccb0a72bb1d7ecc74d4078385e87d20dc5c682f0fd94e2
 Content-Encoding: utf-8
-Content-type: application/json
+Content-Length: 64
+Host: 192.168.180.195:6150
+User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
 Body:
 {
-  “taskId”: “878442f1550c4c189c5307873ca9b1dd”，
-   “taskSeq”:1
+"taskId":"8b82818ce89b4be699ee019548a7dbce",
+ "taskSeq":1
 }
 
 
@@ -461,7 +428,7 @@ Body:
 ```java
 {
 	"retCode": "00000",
-	"retInfo": "成功!"
+	"retInfo": "操作成功"
 }
 
 
@@ -598,8 +565,8 @@ Body:
 |endTime	|dateTime|	Body|	选填	|如果有值，按照此值的有效期|
 |cron	|cron[]|	Body	|选填	|任务执行表达式；|
 |intervals	|int|	Body	|选填	|任务执行距当前的间隔时间，以分钟为单位，限制一天以内（0-1440），如为0需要立即执行；|
-|argsInfo|	ArgsInfo|	Body|	选填|	多套指令集；当前版本只支持一套|
-
+|taskContent|	String|	Body|	选填|	任务内容，schedulerType=2时填写|
+|systemId|	String|	Body|	选填|	云应用Id|
 
 
 ##### 2、请求样例  
@@ -607,80 +574,38 @@ Body:
 **用户请求**
 ```java 
 Header：
-appId: MB-****-0000
-appVersion: *****.99990
-clientId: 123
+Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+appId: MB-UZHSH-0000
+appVersion: 99.99.99.99990
+clientId: 123456
 sequenceId: 2014022801010
-accessToken: **********
-sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
-timestamp: 1491014596343 
+accessToken: TGT3MDL91S16FA8I23P4O5XQM9INB0
+timestamp: 1585706857768
 language: zh-cn
-timezone: +8
-appKey: **********
+timezone: Asia/Shanghai
+appKey: 6bda204e2fa884c175fde09f185ec790
+sign: 684a369866806f9b6a86282d597973945be7720a7f0bddafd8e97b7dc14500c7
 Content-Encoding: utf-8
-Content-type: application/json
+Content-Length: 507
+Host: 192.168.180.195:6150
+User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
 Body:
 {
-  "taskInfos": [
-    {
-      "status": 2,
-      "deviceId": "DC330D003121",
-      "schedulerType": 1,
-      "typeId": "101c120024000810e20105400000440000000000000000000000000000000000",
-      "intervals": 60,
-      "endTime": "2019-07-30 14:00:00",
-      "argsInfo": {
-        "backUrl": "http://***********",
-        "cmdMsgList": [
-          {
-            "index": 0,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          },
-          {
-            "index": 1,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          }
-        ]
-      },
-      "taskName": "批量关机a111",
-      "taskDesc": "批量关机a111",
-      "taskId": "bad2adb0d756469b8ae0e292c81240ab",
-      "taskSeq": 1
-    },
-    {
-      "status": 2,
-      "deviceId": "DC330D003121",
-      "schedulerType": 1,
-      "typeId": "101c120024000810e20105400000440000000000000000000000000000000000",
-      "intervals": 60,
-      "endTime": "2019-07-30 15:00:00",
-      "argsInfo": {
-        "backUrl": "http://*******",
-        "cmdMsgList": [
-          {
-            "index": 0,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          },
-          {
-            "index": 1,
-            "delaySeconds": 0,
-            "name": "onOffStatus",
-            "value": "true"
-          }
-        ]
-      },
-      "taskName": "批量关机a112",
-      "taskDesc": "批量关机a112",
-      "taskId": "bad2adb0d756469b8ae0e292c81240ab",
-      "taskSeq": "2"
-    }
-  ]
+	"taskInfos":[
+		{
+		  "taskId":"8b82818ce89b4be699ee019548a7dbce",
+		  "status": 0,
+		  "schedulerType": 2,
+		  "typeId": "111c120024000810040100318001600000000000000000000000000000000000",
+		   "intervals": 3,
+		   "endTime": "2029-12-20 10:29:07",
+		  "taskContent": "{ 'timerType':'CONDITION_TIMERaaaaaaaaaaaaaaaaaaa'}",
+		  "taskName": "MOCKDEV_JIAYONGKE-虚拟设备",
+		  "taskDesc": "MOCKDEV_JIAYONGKE-虚拟设备",
+		  "taskSeq": 1
+		}
+	]
 }
 
 
