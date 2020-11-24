@@ -60,6 +60,7 @@
 |taskDesc|	String|	任务描述	|varchar(100)
 |taskSeq|	int|	子任务序号id|	1：系统默认
 |taskAmount|	int|	子任务总数|	&emsp;|
+|systemId|	String|	云应用Id|	varchar(40)|
 
 
 ### UserInfo
@@ -83,7 +84,7 @@
 |appVersion|	String|	应用版本标识|	选填(本期不实现，返回空)|
 |appName|	String|	应用名称	|选填(本期不实现，返回空)|
 |appLogo|	String|	应用Logo	|选填(本期不实现，返回空)|
-
+|clientId|	String|	创建者clientId	|选填|
 
 
 ### Cron
@@ -101,11 +102,11 @@
 
 
 > 表达式举例：
- 0/5 * * * ?  ，表示每5分钟执行一次 ，
-0 0/1 * * ?  , 表示每小时执行一次，
-0 8 * * ? *   , 表示每天早上8点执行一次，
-0 8 3 * ?   , 表示每月3号早上八点执行一次，
-0 8 ? * MON，表示每周一早上八点执行一次，
+ 0/5 * * * ?  ，表示每5分钟执行一次 ，</br>
+0 0/1 * * ?  , 表示每小时执行一次，</br>
+0 8 * * ? *   , 表示每天早上8点执行一次，</br>
+0 8 3 * ?   , 表示每月3号早上八点执行一次，</br>
+0 8 ? * MON，表示每周一早上八点执行一次，</br>
 
 
 
@@ -115,7 +116,7 @@
 | ------------- |:-------------:|:-----:|:-------------:|
 |字段名|	类型	|说明|	备注(数据字典描述，规范入参)|
 |cmdMsgList|	List<CmdItem>	|必填	|批量命令（详情见公共接口类）|
-|backUrl	|String|	非必填|	回调地址；将批量命令执行结果发送到这个地址，可以为空，为空则不回调|
+|backUrl	|String|	非必填|	回调地址；将批量命令执行结果发送到这个地址，可以为空，为空则不回调，目前该地址由预约中心统一做配置控制，相关调用端（如APP端）无需填写（填写也不会生效）|
 
 
 ### CmdItem
@@ -202,9 +203,11 @@
 |argsInfo	|ArgsInfo|	必填	|多套指令集；当前版本只支持一套|
 |cron	|Cron[]|	选填|	任务执行表达式；cron和intervals必填其一|
 |intervals	|int|	选填|	任务执行距当前的间隔时间，以分钟为单位，限制一天以（0-1440），如为0需要立即执行；cron和intervals必填其一。|
+|endTime	|dateTime|	选填|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
 |taskName	|String varchar(50)|	选填|	任务名称|
 |taskDesc	|String varchar(100)|	选填	|任务描述|
 |taskSeq	|int	|选填|	子任务序号id；默认值为1|
+|systemId	|String	|选填|	云应用Id|
 
 ##### 2、请求样例  
 
@@ -216,12 +219,12 @@ appId: MB-****-0000
 appVersion: ****.99990
 clientId: 123
 sequenceId: 2014022801010
-accessToken: *********
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
 sign: bb2a5c1e432eac8bea8eecb89b408937382e7e95486ee0a60944a46504fa0015
 timestamp: 1491013448628 
 language: zh-cn
-timezone: +8
-appKey: **********
+timezone: Asia/Shanghai
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
 Content-Encoding: utf-8
 Content-type: application/json
 Body
@@ -231,9 +234,9 @@ Body
   "schedulerType": 1,
   "typeId": "edd032ff-7113-4970-a780-392d44c423b3",
   "cron": [
-    {
-	  "seconds ": "*",
-      "minutes": "0 / 5",
+{
+      "seconds ": "30",
+      "minutes": " 5",
       "hours": "*",
       "day": " * ",
       "month": "*",
@@ -250,13 +253,14 @@ Body
         "name": "onOffStatus",
         "value": "true"
       }
-    ],
-    "backUrl": "http://*********"
+    ]
   },
   "taskName": "空调开机",
   "taskDesc": "空调开机",
-  "taskSeq": "1"
+  "taskSeq": "1",
+"systemId": "SV-YDDSYY111-0010"
 }
+
 
 
 ```  
@@ -306,11 +310,12 @@ Body
 |argsInfo	|ArgsInfo|	必填	|多套指令集；当前版本只支持一套|
 |cron	|Cron[]|	选填|	任务执行表达式；cron和intervals必填其一|
 |intervals	|int|	选填|	任务执行距当前的间隔时间，以分钟为单位，限制一天以（0-1440），如为0需要立即执行；cron和intervals必填其一。|
-|endTime	|dateTime|	选填|	任务终止时间；不填默认值三个月有效期；如果有值，按照此值的有效期|
+|endTime	|dateTime|	选填|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
 |taskName	|String varchar(50)|	选填|	任务名称|
 |taskDesc	|String varchar(100)|	选填	|任务描述|
 |taskId	|String varchar(50)	|选填|	任务id;在分次批量添加任务时，第二次此字段为必填，表示和上批次对应|
 |taskSeq|	int|	必填	|子任务序号id；每组中的此字段不能重复；从1开始的正整数；|
+|systemId|	String|	选填	|云应用Id|
 
 ##### 2、请求样例  
 
@@ -322,12 +327,12 @@ appId: MB-****-0000
 appVersion: ****.99990
 clientId: 123
 sequenceId: 2014022801010
-accessToken: **************
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
 sign: bb2a5c1e432eac8bea8eecb89b408937382e7e95486ee0a60944a46504fa0015
 timestamp: 1491013448628 
 language: zh-cn
-timezone: +8
-appKey: ***********
+timezone: Asia/Shanghai
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
 Content-Encoding: utf-8
 Content-type: application/json
 Body
@@ -341,8 +346,7 @@ Body
       "intervals": 60,
       "endTime": "2019-07-31 16:00:00",
       "argsInfo": {
-        "backUrl": "http://*********",
-        "cmdMsgList": [
+          "cmdMsgList": [
           {
             "index": 0,
             "delaySeconds": 0,
@@ -359,7 +363,8 @@ Body
       },
       "taskName": "批量关机",
       "taskDesc": "批量关机",
-      "taskSeq": "1"
+      "taskSeq": "1",
+"systemId": "SV-YDDSYY111-0010"
     },
     {
       "status": 0,
@@ -369,7 +374,6 @@ Body
       "intervals": 60,
       "endTime": "2019-07-31 13:00:00",
       "argsInfo": {
-        "backUrl": "http://*********",
         "cmdMsgList": [
           {
             "index": 0,
@@ -387,7 +391,8 @@ Body
       },
       "taskName": "批量关机2",
       "taskDesc": "批量关机2",
-      "taskSeq": "2"
+      "taskSeq": "2",
+"systemId": "SV-YDDSYY111-0010"
     }
   ]
 }
@@ -404,6 +409,7 @@ Body
      “taskId”: “878442f1550c4c189c5307873ca9b1dd”
 }
 }
+
 
 ```
 
@@ -497,11 +503,11 @@ Body:
 |taskName	|String varchar(50)	|Body|	选填	|任务名称|
 |taskDesc	|String varchar(100)	|Body|	选填	|任务描述|
 |status	|int|	Body|	选填	|定时预约状态 0 启用；2 暂停；|
-|endTime	|dateTime	|Body	|选填	|如果有值，按照此值的有效期|
+|endTime	|dateTime	|Body	|选填	|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
 |cron	|cron[]|	Body	|选填	|任务执行表达式；|
 |intervals	|int|	Body	|选填	|任务执行距当前的间隔时间，以分钟为单位，限制一天以内（0-1440），如为0需要立即执行；|
 |argsInfo	|ArgsInfo|	Body|	选填|	多套指令集；当前版本只支持一套|
-
+|systemId	|String|	Body|	选填|云应用Id
 
 
 
@@ -510,16 +516,16 @@ Body:
 **用户请求**
 ```java 
 Header：
-appId: MB-*****-0000
-appVersion: *****.99990
+appId: MB-****-0000
+appVersion: ****.99990
 clientId: 123
 sequenceId: 2014022801010
-accessToken: ***********
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
 sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
 timestamp: 1491014596343 
 language: zh-cn
-timezone: +8
-appKey: **************
+timezone: Asia/Shanghai
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
 Content-Encoding: utf-8
 Content-type: application/json
 Body:
@@ -530,8 +536,7 @@ Body:
   "intervals": 60,
   "endTime": "2019-07-31 13:00:00",
   "argsInfo": {
-    "backUrl": "http://******",
-    "cmdMsgList": [
+     "cmdMsgList": [
       {
         "index": 0,
         "delaySeconds": 0,
@@ -547,7 +552,8 @@ Body:
     ]
   },
   "taskName": "空调关机-修改",
-  "taskDesc": "空调开机-修改"
+  "taskDesc": "空调开机-修改",
+"systemId": "SV-YDDSYY111-0010"
 }
 
 
@@ -595,11 +601,11 @@ Body:
 |taskName|	String varchar(50)|	Body|	选填|	任务名称|
 |taskDesc|	String varchar(100)|	Body|	选填|	任务描述|
 |status|	Int|	Body|	选填	|定时预约状态 0 启用；2 暂停；|
-|endTime	|dateTime|	Body|	选填	|如果有值，按照此值的有效期|
+|endTime	|dateTime|	Body|	选填	|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
 |cron	|cron[]|	Body	|选填	|任务执行表达式；|
 |intervals	|int|	Body	|选填	|任务执行距当前的间隔时间，以分钟为单位，限制一天以内（0-1440），如为0需要立即执行；|
 |argsInfo|	ArgsInfo|	Body|	选填|	多套指令集；当前版本只支持一套|
-
+|systemId	|String|	Body|	选填|云应用Id|
 
 
 ##### 2、请求样例  
@@ -608,15 +614,15 @@ Body:
 ```java 
 Header：
 appId: MB-****-0000
-appVersion: *****.99990
+appVersion: ****.99990
 clientId: 123
 sequenceId: 2014022801010
-accessToken: **********
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
 sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
 timestamp: 1491014596343 
 language: zh-cn
-timezone: +8
-appKey: **********
+timezone: Asia/Shanghai
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
 Content-Encoding: utf-8
 Content-type: application/json
 Body:
@@ -630,8 +636,7 @@ Body:
       "intervals": 60,
       "endTime": "2019-07-30 14:00:00",
       "argsInfo": {
-        "backUrl": "http://***********",
-        "cmdMsgList": [
+          "cmdMsgList": [
           {
             "index": 0,
             "delaySeconds": 0,
@@ -649,7 +654,8 @@ Body:
       "taskName": "批量关机a111",
       "taskDesc": "批量关机a111",
       "taskId": "bad2adb0d756469b8ae0e292c81240ab",
-      "taskSeq": 1
+      "taskSeq": 1,
+"systemId": "SV-YDDSYY111-0010"
     },
     {
       "status": 2,
@@ -659,7 +665,6 @@ Body:
       "intervals": 60,
       "endTime": "2019-07-30 15:00:00",
       "argsInfo": {
-        "backUrl": "http://*******",
         "cmdMsgList": [
           {
             "index": 0,
@@ -678,7 +683,8 @@ Body:
       "taskName": "批量关机a112",
       "taskDesc": "批量关机a112",
       "taskId": "bad2adb0d756469b8ae0e292c81240ab",
-      "taskSeq": "2"
+      "taskSeq": "2",
+"systemId": "SV-YDDSYY111-0010"
     }
   ]
 }
@@ -731,12 +737,12 @@ appId: MB-****-0000
 appVersion: ****.99990
 clientId: 123
 sequenceId: 2014022801010
-accessToken: *******
+accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
 sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
 timestamp: 1491014596343 
 language: zh-cn
-timezone: +8
-appKey: ************
+timezone: Asia/Shanghai
+appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
 Content-Encoding: utf-8
 Content-type: application/json
 Body
@@ -745,7 +751,6 @@ Body
   “startNumber”:1,
 “length”:10
 }
-
 
 
 ```
@@ -772,7 +777,8 @@ Body
 			“appId”:”1111111”,
 			“appVersion”:””,
 			“appName”:””,
-			“appLogo”:””
+			“appLogo”:”” ,
+“clientId”:” 110001” 
 			}
 			]， 
 		“createUserInfo”: [
@@ -816,7 +822,8 @@ Body
 			]
 			}
 		],
-		“taskDesc”:”空调开机”
+		“taskDesc”:”空调开机”,
+"systemId": "SV-YDDSYY111-0010"
 		}
 	]
     }
@@ -857,22 +864,22 @@ Body
 ```java 
 Header：
 appId: MB-****-0000
-appVersion: 99.99.99.99990
+appVersion: ****.99990
 clientId: 123
 sequenceId: 2014022801010
 accessToken: TGT1ANW5WCQ2SXRD2DGIYRRAVLOMS0
 sign: e81bc61691c9c2e6f1b8590e93a6130fb3498b8fd2786592d9265bdfc506d830
 timestamp: 1491014596343 
 language: zh-cn
-timezone: +8
+timezone: Asia/Shanghai
 appKey: 6cdd4658b8e7dcedf287823b94eb6ff9
 Content-Encoding: utf-8
 Content-type: application/json
 Body
 {
-	"deviceId": "DC330D32C193",
- 	"startNumber":1,
-	"length":10
+  “deviceId”: “DC330D32C193”,
+  “startNumber”:1,
+“length”:10
 }
 
 
@@ -900,7 +907,8 @@ Body
 			“appId”:”1111111”,
 			“appVersion”:””,
 			“appName”:””,
-			“appLogo”:””
+			“appLogo”:””,
+“clientId”:” 110001”
 			}
 			]， 
 		“createUserInfo”: [
@@ -944,7 +952,8 @@ Body
 			]
 			}
 		],
-		“taskDesc”:”空调开机”
+		“taskDesc”:”空调开机” ,
+"systemId": "SV-YDDSYY111-0010"
 		}
 	]
     }
@@ -1025,7 +1034,8 @@ Body
 			“appId”:”1111111”,
 			“appVersion”:””,
 			“appName”:””,
-			“appLogo”:””
+			“appLogo”:”” ,
+“clientId”:” 110001”
 			}
 			]， 
 		“createUserInfo”: [
@@ -1069,7 +1079,8 @@ Body
 			]
 			}
 		],
-		“taskDesc”:”空调开机”
+		“taskDesc”:”空调开机” ,
+"systemId": "SV-YDDSYY111-0010"
 		}
 	]
     }
@@ -1102,7 +1113,7 @@ Body
 
 |   名称      |     类型      | 位置  |必填 |说明|
 | ----- |:----------:|:-----:|:--------:|:---------:|
-|detailInfo|	List<TaskRestLogDataInfo>|	Body|	必填	|返回详情；|
+|detailInfo|	List<BatchResultDto>|	Body|	必填	|查询到的结果|
 
 
 ##### 2、请求样例  
