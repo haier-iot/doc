@@ -203,7 +203,7 @@
 |argsInfo	|ArgsInfo|	必填	|多套指令集；当前版本只支持一套|
 |cron	|Cron[]|	选填|	任务执行表达式；cron和intervals必填其一|
 |intervals	|int|	选填|	任务执行距当前的间隔时间，以分钟为单位，限制一天以（0-1440），如为0需要立即执行；cron和intervals必填其一。|
-|endTime	|dateTime|	选填|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
+|endTime	|dateTime|	选填|任务终止时间；不填默认值2999-12-31 23 : 59 : 59；如果有值，按照此值的有效期|
 |taskName	|String varchar(50)|	选填|	任务名称|
 |taskDesc	|String varchar(100)|	选填	|任务描述|
 |taskSeq	|int	|选填|	子任务序号id；默认值为1|
@@ -503,7 +503,7 @@ Body:
 |taskName	|String varchar(50)	|Body|	选填	|任务名称|
 |taskDesc	|String varchar(100)	|Body|	选填	|任务描述|
 |status	|int|	Body|	选填	|定时预约状态 0 启用；2 暂停；|
-|endTime	|dateTime	|Body	|选填	|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
+|endTime	|dateTime	|Body	|选填	|任务终止时间；不填默认值2999-12-31 23 : 59 : 59；如果有值，按照此值的有效期|
 |cron	|cron[]|	Body	|选填	|任务执行表达式；|
 |intervals	|int|	Body	|选填	|任务执行距当前的间隔时间，以分钟为单位，限制一天以内（0-1440），如为0需要立即执行；|
 |argsInfo	|ArgsInfo|	Body|	选填|	多套指令集；当前版本只支持一套|
@@ -601,7 +601,7 @@ Body:
 |taskName|	String varchar(50)|	Body|	选填|	任务名称|
 |taskDesc|	String varchar(100)|	Body|	选填|	任务描述|
 |status|	Int|	Body|	选填	|定时预约状态 0 启用；2 暂停；|
-|endTime	|dateTime|	Body|	选填	|任务终止时间；不填默认值2999-12-31 23:59:59；如果有值，按照此值的有效期|
+|endTime	|dateTime|	Body|	选填	|任务终止时间；不填默认值2999-12-31 23 : 59 : 59；如果有值，按照此值的有效期|
 |cron	|cron[]|	Body	|选填	|任务执行表达式；|
 |intervals	|int|	Body	|选填	|任务执行距当前的间隔时间，以分钟为单位，限制一天以内（0-1440），如为0需要立即执行；|
 |argsInfo|	ArgsInfo|	Body|	选填|	多套指令集；当前版本只支持一套|
