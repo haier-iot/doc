@@ -215,3 +215,13 @@ connectionStatus|String|设备连接状态|online：在线；offline：离线
 :-|:-:|:-:|:-
 ProdcutCodeT|String|产品型号编码|
 ProcutNameT|String|产品型号名称|  
+
+## DeviceInfomation
+设备详细信息
+
+参数名|类型|说明|备注
+:-|:-:|:-:|:-
+productCode|String|成品编码|
+modelCode|String|型号名称|  
+productImg1|String|型号图片url|本图片为图片1
+typeId|String|typeId|  
