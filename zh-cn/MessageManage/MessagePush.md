@@ -590,8 +590,8 @@ channel|Integer|body|是|通道类型。</br>0代表极光，</br>1代表m2m通�
 pushId|String|body|否|终端的通道推动标识。</br>当channel为4时可以为空，其它情况不能为空，fcm通道时长度应该为152。
 devAlias|String|body|否|设备别名
 msgVersion|String|body|是|消息模型版本，对应消息模型中的version
-mfrsChan|Integer|body|否|制造商渠道
-mfrsRegId|String|body|否|制造商渠道注册ID
+mfrsChan|Integer|body|否|厂商通道标识 华为手机：0，华为FA：1，小米手机：2，Oppo手机：3，VIVO手机：4，苹果手机：5，FCM：6
+mfrsRegId|String|body|否|厂商通道注册时的pushtoken
 mfrsMsgOpen|Integer|body|否|厂商消息权限是否打开0：未打开1：打开
 
 
