@@ -234,7 +234,7 @@ typeId|String|typeId|
 :-|:-:|:-:|:-
 deviceId|String|设备身份标识|
 
-##ServiceDeviceBindStatusResultDto
+## ServiceDeviceBindStatusResultDto
 查询设备绑定信息结果
 
 参数名|类型|说明|备注
