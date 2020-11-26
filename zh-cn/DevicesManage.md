@@ -224,4 +224,20 @@ ProcutNameT|String|产品型号名称|
 productCode|String|成品编码|
 modelCode|String|型号名称|  
 productImg1|String|型号图片url|本图片为图片1
-typeId|String|typeId|  
+typeId|String|typeId|
+
+
+## ServiceDeviceBindStatusRequestDto  
+查询设备绑定信息请求
+
+参数名|类型|说明|备注
+:-|:-:|:-:|:-
+deviceId|String|设备身份标识|
+
+##ServiceDeviceBindStatusResultDto
+查询设备绑定信息结果
+
+参数名|类型|说明|备注
+:-|:-:|:-:|:-
+status|Boolean|绑定状态|true: 已经绑定 false: 未绑定
+bts|Long|时间戳|云端生成的绑定时间戳

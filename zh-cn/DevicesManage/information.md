@@ -1112,6 +1112,74 @@ User-Agent: Apache-HttpClient/4.5.2 (Java/1.8.0_211)
 ```
 
 
+#### 根据DeviceId查询设备绑定状态
+
+根据DeviceId和token查询设备绑定状态，如果用户和设备有绑定关系则返回绑定时间，反之返回错误码(1900001: 当前用户与该设备不匹配);
+
+
+##### 1、接口定义
+?> **接入地址：** `/dcs/device-service-2c/get/device/user/binding/status`</br>
+**HTTP Method：** POST
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+deviceId|String|Body|是|设备身份标识
+accessToken|String|Header|是|用户token信息
+
+**输出参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+retCode|String|Body|是|返回码
+retInfo|String|Body|是|用于调试的返回信息，不支持国际化，也不能直接显示在UI上
+payload|ServiceDeviceBindStatusResultDto|Body|是|1.用户与设备有绑定关系, 返回bts 2.用户与设备没有绑定关系，返回错误码1900001
+
+
+##### 2、请求示例
+
+**请求样例**
+```
+POST https://uws.haier.net/dcs/device-service-2c/get/device/user/binding/status
+data:
+{
+    "deviceId":"DC330D861B7C"
+}
+[no cookies]
+Request Headers:Connection:
+keep-alive
+appId: SV-SBZXFWFWPTQ656-0000
+apiVersion: v1
+clientId: test123456
+sequenceId: 20161020153428000015
+accessToken: TGT34DXO535N5UDV2IWPQGGJ6B2BV0
+sign: 314ad2d5b240dad28e69acc1f012c0d915fb9ecb00f41b745e949b1c2abdb2f4
+timestamp: 1590053835901
+language: zh-cn
+timezone: +8
+appKey: 7a95f33dfe67d76cf79534b8d02093a7
+Content-Encoding: utf-8
+Content-type: application/json
+Content-Length: 34
+Host: 10.159.59.16:8844
+User-Agent: Apache-HttpClient/4.5.2 (Java/1.8.0_211)
+
+
+```
+
+**请求应答**
+```
+{   
+    "retCode":"00000",   
+    "retInfo":"成功",   
+    "payload":{
+        "bts": 1604570483000
+    }
+}
+
+
+```
 
 
 
