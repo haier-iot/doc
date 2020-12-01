@@ -153,12 +153,20 @@
 | ------------- |:-------------:|:-----:|:-------------:|   
 |**字段名**|**类型**|**说明**|**备注**|    
 |deviceName|String|设备名称，等同于别名|&emsp;|  
-|deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符|  
+|deviceId|String|设备ID|&emsp; |  
+|bindTime|String|设备被绑定时间|格式“YYYY-MM-DD HH:mm:ss” |  
 |wifiType|String|设备wifitype|&emsp;|  
 |deviceType|String|设备类别|&emsp;| 
 |online|Boolean|是否在线|&emsp;|     
-|productName|String|设备型号名称|&emsp;|  
-|productCode|String|设备型号代码|&emsp;|  
+|productNameT|String|设备型号名称|&emsp;|  
+|productCodeT|String|设备型号代码|&emsp;|  
+|slaveDeviceIds|String[]|子设备ID列表|没有子设备不返回|  
+|parentsDeviceId|String|父设备ID|没有父设备不返回|  
+|deviceRole|String|设备角色|主设备/子设备/无主从关系，枚举值：设备角色：</br>1 普通设备;</br>2 网关设备;</br>3 附件设备;</br>4 子设备;</br>仅返回数字，角色信息不返回，没有角色信息不返回|  
+|deviceRoleType|String|设备角色类型|目前为附件设备，其他设备暂时未扩展 ，1，附件设备，目前改字段未使用，没有角色信息不返回|  
+|IsMeshDevice|Boolean|是否为mesh设备|&emsp;| 
+|meshGroupId|String|组设备ID|如果不是组设备，该值不存在| 
+|meshGroupType|String|组设备类型|组内设备groupInner，组设备group| 
 
 ## UserBriefInfo    
 Map<String,String> 用户属性值key/value  
@@ -216,7 +224,8 @@ permission|Permission|权限|
 字段名|类型|说明|备注
 :-:|:-:|:-:|:-
 deviceName|String|设备名称，等同于别名|
-deviceId|String|设备ID|长度范围：1~16 格式：大写字母和数字 不包含特殊字符
+deviceId|String|设备ID|
+shareTime|String|设备分享时间|
 wifiType|String|设备wifitype|
 deviceType|String|设备类别|
 room|String|设备房间位置信息|   
@@ -224,8 +233,13 @@ permission|Permission[]|权限信息|
 online|Boolean|是否在线|
 productNameT|String|设备型号名称| 
 productCodeT|String|设备型号代码|    
-
-
+slaveDeviceIds|String|子设备ID列表|
+parentsDeviceId|String|父设备ID|
+deviceRole|String|设备角色|主设备/子设备/无主从关系，枚举值：设备角色：</br>1 普通设备;</br>2 网关设备;</br>3 附件设备;</br>4 子设备;</br>仅返回数字，角色信息不返回
+deviceRoleType|String|设备角色类型|目前为附件设备，其他设备暂时未扩展 ，1，附件设备，目前改字段未使用
+IsMeshDevice|Boolean|是否为mesh设备|
+meshGroupId|String|组设备ID|如果不是组设备，该值不存在
+meshGroupType|String|组设备类型|组内设备groupInner，组设备group
 
 ## FamilyQRCodeInfo    
 
