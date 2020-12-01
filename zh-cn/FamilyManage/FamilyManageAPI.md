@@ -146,7 +146,7 @@
 |memberInfo|UserBriefInfo|用户简明信息||    
 |memberName|String|用户在家庭中的昵称||    
 |familyId|String|家庭id||    
-|joinTime|String|加入家庭时间|格式：`YYYY-MM-DD HH:mm:ss`|   
+|joinTime|String|加入家庭时间|格式：`YYYY-MM-DD HH : mm : ss`|   
 
 ## DeviceBriefInfo    
 | **名称** | 设备简明信息 | &emsp;|DeviceBriefInfo |
@@ -154,7 +154,7 @@
 |**字段名**|**类型**|**说明**|**备注**|    
 |deviceName|String|设备名称，等同于别名|&emsp;|  
 |deviceId|String|设备ID|&emsp; |  
-|bindTime|String|设备被绑定时间|格式“YYYY-MM-DD HH:mm:ss” |  
+|bindTime|String|设备被绑定时间|格式“YYYY-MM-DD HH : mm : ss” |  
 |wifiType|String|设备wifitype|&emsp;|  
 |deviceType|String|设备类别|&emsp;| 
 |online|Boolean|是否在线|&emsp;|     
