@@ -4,12 +4,246 @@
 
 ### 设备操作高级动能
 
+#### 批量命令操作（经过逻辑运算）
 
+> 领域模型接口使用Https协议，使用`https://uws.haier.net+接口地址`进行访问
+
+统一接收标准模型的命令，命令经过逻辑运算、转换、补偿后下发到设备
+
+
+##### 1、接口定义
+?> **接入地址：** `/stdudse/v1/sendbatchCmd/{sn}`</br>
+**HTTP Method：** POST
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+accessToken|String|上下文|必填|用户token  
+sn|String|url|必填|批量命令总sn
+cmdMsgList|List<CmdItem>|Body|必填|批量命令（详情见公共结构）
+backUrl|String|Body|非必填|操作应答回调地址，只支持http协议
+
+
+**输出参数**
+
+标准输出参数
+
+**公共结构**  
+
+
+| **名称** | 单个指令对象 |&emsp;| CmdItem |   
+| :----------: |:----------:|:-----:|:--------:|
+|**字段名**|**类型**|**说明**|**备注**|  
+|sn| String | 批量指令的总sn |用户必填|  
+|index| int | 在批量指令中的顺序号，从0开始，步长为1，不能重复、不能缺号；下发指令时将，按这个序号，逐个指令下发。（编号错误，将导致指令下发错误）|用户必填|  
+|delaySeconds| int | 执行这个指令前需要延时（等待）的秒数 |<font color="red">该参数已失效</font>|    
+|subSn| string | 本条指令的sn，发送到领域模型。组成为：总sn+“：”+指令序号 |由批量指令顺序执行控制器填写，在下发指令前填写完成|  
+|deviceId| string | 设备id|用户必填|  
+|name| string | 单个属性设置时，属性名 |用户可选name和value与cmdName和cmdArgs这两组由用户选择，必填其一| 
+|value| string | 单个属性设置时，属性值|用户可选name和value与cmdName和cmdArgs这两组由用户选择，必填其一|
+|cmdName| string | 组命令时，操作名|用户可选name和value与cmdName和cmdArgs这两组由用户选择，必填其一|
+|cmdArgs| Map<String,String> | 组命令时，属性集合|用户可选name和value与cmdName和cmdArgs这两组由用户选择，必填其一| 
+
+
+##### 2、请求示例
+
+**请求样例**
+
+
+```
+Header：
+Connection: keep-alive
+appId: MB-*****-0000
+appVersion: 10.01.11.00025
+clientId: lipeizhen
+sequenceId: 20150812102234777777
+accessToken: TGT36YE3RVND80GY1ZGCIHB6LR2MW
+sign: ab9cdf9c9e7e857677fce6fe2ff8624f162791653c8b21e2c1f4e2ce3aa3b4d8
+timestamp: 1604653214611
+language: cn
+timezone: +8
+Content-Type: application/json;charset=UTF-8
+appKey: f50c76fbc8271d361e1f6b5973f54585
+Content-Length: 207
+Host: 192.168.140.16:6320
+User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
+
+Body
+{
+	"sn": " lpz4130527016",
+	"backUrl": "https://uws.haier.net/scheduler/v2/device/callback",
+	"cmdMsgList": [{
+		"delaySeconds": 0,
+		"deviceId": "0007A8B7014E",
+		"index": 0,
+		"name": "onOffLight",
+		"sn": " lpz4130527016",
+		"subSn": " lpz4130527016:0",
+		"value": "true"
+	}]
+}
+
+
+```
+
+**请求应答**
+
+```
+{
+	"retCode": "00000",
+	"retInfo": "成功!"
+}
+
+```
+
+
+**操作应答(最终返回给调用方的应答)**
+
+```
+{
+	"cmdSn": "lpz4130527016",
+	"batchResult": false,
+	"batchResultInfo": "",
+	"detailInfo": [{
+		"execResultInfo": "设备执行命令错误",
+		"execStep": 2,
+		"execResult": false,
+		"invalidCode": "1"
+        "productCodeT": "ABCDEFG123"
+		"cmdSn": "lpz4130527016",
+		"execResultCode": "S00004",
+		"oid": 3959165,
+		"cmdSubSn": "lpz4130527016:_:000",
+		"deviceId": "0007A8B7014E",
+		"resultTime": 1588070070000
+	}]
+}
+
+```  
+
+备注：detailInfo参数定义请查看（查询批量命令执行结果明细接口）
+注意：在给调用方的应答异常【设备执行命令错误】和控制异常【未知异常】中会携带invalidCode，但并不是一定会携带invalidCode
+比如：设备应答12和13时也会返回【设备执行命令错误】，但不携带invalidCode,控制下发时若遇到别的异常也会返回【未知异常】，但不携带invalidCode
+
+##### 3、错误码
+
+> G03002、B00001、G20202、B00004、A00001、000001、A00006、A00005、A00007、A00008、A00009
+
+
+
+#### 查询批量命令执行结果明细
+
+> 查询批量命令执行结果明细
+
+
+##### 1、接口定义
+?> **接入地址：** `/stdudse/v1/queryResult/{sn}`</br>
+**HTTP Method：** GET
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+accessToken|String|上下文|必填|用户token  
+sn|String|url|必填|批量命令总sn
+
+
+
+**输出参数**  
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+detailInfo|List<BatchResultDto>|body|必填|查询到的结果  
+
+
+**公共结构**  
+
+
+| **名称** | 批量命令执行结果明细 |&emsp;| BatchResultDto |   
+| :----------: |:----------:|:-----:|:--------:|
+|**字段名**|**类型**|**说明**|**备注**|  
+|oid| long | 数据代理主键 |只读|  
+|cmdSn| string |批量指令的总sn|只读|  
+|cmdSubSn| string | 本条指令的sn，发送到领域模型。组成为：总sn+“：”+指令序号 |只读|    
+|deviceId| string | 设备id|只读|  
+|execStep| int | 本条指令的执行步骤 |只读| 
+|execResult| boolean |本条指令本步骤的执行结果；true为成功、false为失败：如超时、异常等|只读|
+|execResultCode| string | 本条指令本步骤的执行结果说明，错误码|只读|
+|execResultInfo| string | 本条指令本步骤的执行结果说明，错误信息|只读| 
+|invalidCode| string | 本条指令设备应答或控制下发的无效命令编码（十进制整数）|只读| 
+|productCodeT| string | 产品型号编码|只读| 
+|resultTime| long | 本条指令本步骤的反馈时间|只读| 
+
+
+##### 2、请求示例
+
+**请求样例**
+
+
+```
+Headers:
+Connection: keep-alive
+appId: MB-*****-0000
+appVersion: XX.XX.XX.XXXXX
+clientId: 1234
+sequenceId: sdfsadf
+sign: d5f5f22caf9809990b5854fe4077834fa34ebf1274bda0ebdbd15821b0a9bee4
+timestamp: 1604653710256
+language: zh-cn
+timezone: +8
+appKey: f50c76fbc8271d361e1f6b5973f54585
+Content-Encoding: utf-8
+Content-type: application/json
+accessToken: TGT3S0MI00DBFHGD1ZWV12Z5JEQ680
+Host: 192.168.140.16:6320
+User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
+
+
+```
+
+**请求应答**
+
+```
+{
+	"batchResult": true,
+	"cmdSn": "181206135609768fa163e26700a3593",
+	"detailInfo": [{
+		"cmdSn": "181206135609768fa163e26700a3593",
+		"cmdSubSn": "181206135609768fa163e26700a3593:_:000",
+		"deviceId": "DC330D861BB6",
+		"execResult": true,
+		"execResultCode": "00000",
+		"execResultInfo": "成功",
+		"execStep": 2,
+		"oid": 14839,
+		"resultTime": 1544075772000
+	}],
+	"retCode": "00000",
+	"retInfo": "成功"
+}
+
+
+```
+
+
+
+##### 3、错误码
+
+> G03002、B00001、G20202、B00004、A00001、000001、A00006、A00005、A00007、A00008、A00009
+
+
+
+
+
+
+<!--   注释掉了toC领域模型单控接口  推荐使用toC领域模型批控接口
 #### 设备指令执行操作接口（经过逻辑运算）
 
 > 领域模型接口使用Https协议，使用`https://uws.haier.net+接口地址`进行访问
 
 统一接收标准模型的命令，命令经过逻辑运算、转换、补偿后下发到设备
+
 
 
 ##### 1、接口定义
@@ -90,6 +324,7 @@ Body
 
 > G03002、B00001、G20202、B00004、A00001、000001、A00006、A00005、A00007、A00008、A00009
 
+-->
 
 ### 设备控制类接口
 
