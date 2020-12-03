@@ -617,16 +617,16 @@ Request Headers:
 Connection: keep-alive
 appId: MB-****-0000
 sequenceId: 20161020153428000015
-sign: 234297626c79198546d965cedaef915264f47eaca7a21e1a508301ee1b81db9b
+sign: ************************
 timestamp: 1545817794954 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 appVersion: 99.99.99.99990
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 123456
-accessToken: TGT28NIRF26AOAB72CU1ZR8BDL4AR0
+accessToken: ************************
 
 ```
 
@@ -666,16 +666,16 @@ Request Headers:
 Connection: keep-alive
 appId: MB-****-0000
 sequenceId: 20161020153428000015
-sign: a9f87157f94c1c2848aa221d19016a768d936070f2642c5819183256953310d2
+sign: ************************
 timestamp: 1545817872035 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 appVersion: 99.99.99.99990
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 123456
-accessToken: TGT28NIRF26AOAB72CU1ZR8BDL4AR0
+accessToken: ************************
 Content-Length: 0
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -722,18 +722,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0000
+appId: MB-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: 74c923c293d74b34cde07ffb6f7170658a825aa00df60b4e2a58539afbb5f445
+sign: ************************
 timestamp: 1566542876463 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 1234
-accessToken: TGT3SQ2F51WY75QQ2864766QZMJA00
+accessToken: ************************
 Content-Length: 0
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
@@ -743,7 +743,7 @@ User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
 **输出参数**
 
 ```
-{"retCode":"00000","retInfo":"success","retData":[{"userId":"4340515081329747","clientId":"1234","devAlias":"BLA-AL00-YY","appId":"MB-UZHSH-0000"}]}
+{"retCode":"00000","retInfo":"success","retData":[{"userId":"4340515081329747","clientId":"1234","devAlias":"BLA-AL00-YY","appId":"MB-****-0000"}]}
 ```
 
 
@@ -794,18 +794,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0000
+appId: MB-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: ba471cc9c1029c539c4a1ff92b40d5ee9edbfa3ab381ac85a8b6af8999d7e3ad
+sign: ************************
 timestamp: 1566443152916 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 1234
-accessToken: TGT19N1WNFHPFFMN24PBAIROXQWBV0
+accessToken: ************************
 Content-Length: 68
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.2.6 (java 1.5)
@@ -868,18 +868,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: 084df7eea6133253d9ab8f5ddc237893c24a696ec8c41ec2f95367881e5ea7e4
+sign: ************************
 timestamp: 1555292586708 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 69
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -934,18 +934,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: cb4665204d7b9e4fd213de039c5964f9c880b6383e7143a1ad5545d84cfe6969
+sign: ************************
 timestamp: 1555292708273 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 47
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -995,18 +995,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: 8d9cca8acc4af3950eeda94593e465e7d13e8172a2706d71998f239077bbd9fd
+sign: ************************
 timestamp: 1555292642458 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: ************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 0
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1062,7 +1062,7 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
 sign: fa4de4b47448c32e151f6228575027d58a8b0774d92e788e229498aba5c3af1a
@@ -1156,18 +1156,18 @@ POST data: {
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0000
+appId: MB-****-0000
 sequenceId: 20161020153428000015
-sign: 0ce87f502a6f020d17466f0971eeedd6e3a1ce81d7ca2d8074c87c5fb4c5cfc7
+sign: ************************
 timestamp: 1546854308557 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 appVersion: 99.99.99.99990
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 123456
-accessToken: TGT28NIRF26AOAB72CU1ZR8BDL4AR0   //accessToken（header）必传
+accessToken: ************************   //accessToken（header）必传
 Content-Length: 36
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1214,18 +1214,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0000
+appId: MB-****-0000
 sequenceId: 20161020153428000015
-sign: 0ce87f502a6f020d17466f0971eeedd6e3a1ce81d7ca2d8074c87c5fb4c5cfc7
+sign: ************************
 timestamp: 1546854308557 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 appVersion: 99.99.99.99990
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 123456
-accessToken: TGT28NIRF26AOAB72CU1ZR8BDL4AR0
+accessToken: ************************
 Content-Length: 36
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1276,18 +1276,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: a0edf1ef86df31702ae6322535722c0a0d0e98a2a719f651956dede10b243bbb
+sign: ************************
 timestamp: 1555292892282 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 50
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1338,18 +1338,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: 80ede8320605c83b2574c7088e13d504c3287599cfb30c90746a6d3ade63dee4
+sign: ************************
 timestamp: 1555293031670 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 18
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1400,18 +1400,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: 39fd2951a99ddabe98d3fbce3ba9e78be21f39526f8dece9989db40e78b31d86
+sign: ************************
 timestamp: 1555293070703 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 2
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1473,18 +1473,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: 369c2087f40325fb2b9ca312e9c5ee54022eb5a783ea890a1e2bc2fe376341c0
+sign: ************************
 timestamp: 1555293778307 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 79
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1532,18 +1532,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0001
+appId: MB-****-0001
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: 6ca7169fdb21adc5a746574e7cdbcf12aa13b486c505a4ddc4b0cb505e866194
+sign: ************************
 timestamp: 1555293756682 
-appKey: 5dfca8714eb26e3a776e58a8273c8752
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 9c510d7c64f7a570874884e0a94f6a9e
-accessToken: TGT1EL9DID5TSSV92RHSFKSJ3G47H0
+accessToken: ************************
 Content-Length: 50
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1629,7 +1629,7 @@ POST data:
 { 	"taskId":"TK123456789123456789",
    "boId":"1234567",
  "userId":"1234566",
-   "appId":"MB-UZHSH-0000",
+   "appId":"MB-****-0000",
    "clientId":"1234",
    "boStatus":"0"
  }
@@ -1638,18 +1638,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0000
+appId: MB-****-0000
 sequenceId: 20161020153428000015
-sign: 0ce87f502a6f020d17466f0971eeedd6e3a1ce81d7ca2d8074c87c5fb4c5cfc7
+sign: ************************
 timestamp: 1546854308557 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 appVersion: 99.99.99.99990
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 123456
-accessToken: TGT28NIRF26AOAB72CU1ZR8BDL4AR0
+accessToken: ************************
 Content-Length: 36
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -1728,19 +1728,19 @@ retData|String|body|是|本次发送的任务标识
 POST https://uws.haier.net/umse/v3/msg/pushByUsers
 
 POST data:
-{"toApps":["MB-UZHSH-0000","MB-UZHSH-0001"],"toUsers":["100013957366168858","100013957366169184"],"message":{"notification":{"title":"test message","body":"ums : hello world "},"options":{"msgName":"","businessType":0,"expires":60,"priority":1,"jiguangOptions":{"apnsProduction":true}},"android":{"jpush":{"collapseKey":"test message","priority":0,"ttl":86400,"restrictedPackageName":"0"},"fcm":{"title":"test message","body":"This is a test message ","notification ":{"sound":"default"}}},"ios":null,"data":{"body":{"view":{"showType":21,"title":"test message","content":"ums : hello world"},"extData":{"isMsgCenter":1}}},"version":"v3"}}
+{"toApps":["MB-****-0000","MB-****-0001"],"toUsers":["100013957366168858","100013957366169184"],"message":{"notification":{"title":"test message","body":"ums : hello world "},"options":{"msgName":"","businessType":0,"expires":60,"priority":1,"jiguangOptions":{"apnsProduction":true}},"android":{"jpush":{"collapseKey":"test message","priority":0,"ttl":86400,"restrictedPackageName":"0"},"fcm":{"title":"test message","body":"This is a test message ","notification ":{"sound":"default"}}},"ios":null,"data":{"body":{"view":{"showType":21,"title":"test message","content":"ums : hello world"},"extData":{"isMsgCenter":1}}},"version":"v3"}}
 
 [no cookies]
 
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: fa4de4b47448c32e151f6228575027d58a8b0774d92e788e229498aba5c3af1a
+sign: ************************
 timestamp: 1546850546246 
 language: zh-cn
-appKey: 2ba149e67de2e4dfae30a82abec26a3a
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 Content-Length: 639
@@ -1790,19 +1790,19 @@ taskId|String|body|是|本次发送的任务标识
 POST https://uws.haier.net/umse/v3/msg/pushByApps
 
 POST data:
-{"toApps":["MB-UZHSH-0000","MB-UZHSH-0001"],"message":{"notification":{"title":"test message","body":"ums : hello world "},"options":{"msgName":"","businessType":0,"expires":60,"priority":1,"jiguangOptions":{"apnsProduction":true}},"android":{"jpush":{"collapseKey":"test message","priority":0,"ttl":86400,"restrictedPackageName":"0"},"fcm":{"title":"test message","body":"This is a test message ","notification ":{"sound":"default"}}},"ios":null,"data":{"body":{"view":{"showType":21,"title":"test message","content":"ums : hello world"},"extData":{"isMsgCenter":1}}},"version":"v3"}}
+{"toApps":["MB-****-0000","MB-****-0001"],"message":{"notification":{"title":"test message","body":"ums : hello world "},"options":{"msgName":"","businessType":0,"expires":60,"priority":1,"jiguangOptions":{"apnsProduction":true}},"android":{"jpush":{"collapseKey":"test message","priority":0,"ttl":86400,"restrictedPackageName":"0"},"fcm":{"title":"test message","body":"This is a test message ","notification ":{"sound":"default"}}},"ios":null,"data":{"body":{"view":{"showType":21,"title":"test message","content":"ums : hello world"},"extData":{"isMsgCenter":1}}},"version":"v3"}}
 
 [no cookies]
 
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: fa4de4b47448c32e151f6228575027d58a8b0774d92e788e229498aba5c3af1a
+sign: ************************
 timestamp: 1546850546246 
 language: zh-cn
-appKey: 2ba149e67de2e4dfae30a82abec26a3a
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 Content-Length: 639
@@ -1941,11 +1941,11 @@ POST /umse/v3/msg/getMsgHistory
 
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 01.00.00.00000
 clientId: ufmtest123
 sequenceId: 20161020153428000015
-sign: 1ca44240e53ac7f69f732a721c29c8906827feb873e5ac0a29010ba545f1cec4
+sign: ************************
 timestamp: 1553703080084 
 language: zh-cn
 timezone: Asia/Shanghai
@@ -2024,8 +2024,8 @@ POST https://uws.haier.net/umse/v3/msg/ pushByFamilies
 POST data:
 {
     "toApps":[
-        "MB-UZHSH-0000",
-        "MB-UZHSH-0001"],
+        "MB-****-0000",
+        "MB-****-0001"],
     "toFamilies":[
         "1111",
         "2222"],
@@ -2070,13 +2070,13 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: fa4de4b47448c32e151f6228575027d58a8b0774d92e788e229498aba5c3af1a
+sign: ************************
 timestamp: 1546850546246 
 language: zh-cn
-appKey: 2ba149e67de2e4dfae30a82abec26a3a
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 Content-Length: 639
@@ -2149,13 +2149,13 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: fa4de4b47448c32e151f6228575027d58a8b0774d92e788e229498aba5c3af1a
+sign: ************************
 timestamp: 1546850546246 
 language: zh-cn
-appKey: 2ba149e67de2e4dfae30a82abec26a3a
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 Content-Length: 639
@@ -2364,18 +2364,18 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0000
+appId: MB-****-0000
 sequenceId: 20161020153428000015
-sign: 234297626c79198546d965cedaef915264f47eaca7a21e1a508301ee1b81db9b
+sign: ************************
 timestamp: 1545817794954 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 appVersion: 99.99.99.99990
 timezone: Asia/Shanghai
 language: zh-cn
 clientId: 123456
-accessToken: TGT28NIRF26AOAB72CU1ZR8BDL4AR0
+accessToken: ************************
 Content-Length: 121
 Host: uws.haier.net
 User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_192)
@@ -2464,13 +2464,13 @@ POST data:
 
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: fa4de4b47448c32e151f6228575027d58a8b0774d92e788e229498aba5c3af1a
+sign: ************************
 timestamp: 1546850546246 
 language: zh-cn
-appKey: 2ba149e67de2e4dfae30a82abec26a3a
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 Content-Length: 639
@@ -2513,11 +2513,11 @@ POST https://uws.haier.net/mcs/hermes/client-request
 Header:
 Request Headers:
 Connection: keep-alive
-appId: MB-UZHSH-0000
+appId: MB-*****-0000
 sequenceId: 20161020153428000015
-sign: 234297626c79198546d965cedaef915264f47eaca7a21e1a508301ee1b81db9b
+sign: ************************
 timestamp: 1545817794954 
-appKey: f50c76fbc8271d361e1f6b5973f54585
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 appVersion: 99.99.99.99990
@@ -2585,13 +2585,13 @@ POST https://uws.haier.net/mcs/hermes/push-msg
 Header:
 Request Headers:
 Connection: keep-alive
-appId: SV-UZHSH-0000
+appId: SV-****-0000
 appVersion: 99.99.99.99990
 sequenceId: 20161020153428000015
-sign: fa4de4b47448c32e151f6228575027d58a8b0774d92e788e229498aba5c3af1a
+sign: ************************
 timestamp: 1546850546246 
 language: zh-cn
-appKey: 2ba149e67de2e4dfae30a82abec26a3a
+appKey: *************************
 Content-Encoding: utf-8
 Content-type: application/json
 Content-Length: 639
