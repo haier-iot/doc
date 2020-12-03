@@ -2285,7 +2285,7 @@ result.desc|	String|	本次请求处理结果描述|	&ensp;
 
 ### 接入地址
 
-?>  使用REST接口的风格对外提供服务，仅支持HTTPS协议。访问地址：https://internal.uws.haier.net/mcs/hermes
+?>  使用REST接口的风格对外提供服务，仅支持HTTPS协议。访问地址：https://uws.haier.net/mcs/hermes
 
 ### 功能接口
 
@@ -2320,7 +2320,7 @@ retData|JSON String|body|是|本次请求状态具体信息
 
 **输入参数**
 ```
-POST https:// internal.uws.haier.net/mcs/ hermes/client-request
+POST https://uws.haier.net/mcs/hermes/client-request
 
 POST data:
 {
@@ -2441,7 +2441,7 @@ retData|JSON String|body|是|本次请求状态具体信息
 
 **输入参数**
 ```
-POST https:// internal.uws.haier.net/mcs/ hermes/push-msg
+POST https://uws.haier.net/mcs/hermes/push-msg
 
 POST data:
 {
@@ -2509,7 +2509,7 @@ Version:v4
 
 **输入参数**
 ```
-POST https:// internal.uws.haier.net/mcs/ hermes/client-request
+POST https://uws.haier.net/mcs/hermes/client-request
 Header:
 Request Headers:
 Connection: keep-alive
@@ -2581,7 +2581,7 @@ POST data:
 
 **输入参数**
 ```
-POST https:// internal.uws.haier.net/mcs/ hermes/push-msg
+POST https://uws.haier.net/mcs/hermes/push-msg
 Header:
 Request Headers:
 Connection: keep-alive
