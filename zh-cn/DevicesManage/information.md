@@ -1054,6 +1054,8 @@ Body：
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
+apiVersion|String|Header|是|接口版本，此版本为v1.
+language|String|Header|是|国际化标识，代表客户端使用的语言。具体标识代码见附录。默认请传 “zh-cn“，代表中文</br>（此条只是为了日后接入国际化标识做准备，当传入的code不支持时一律认为是中文，不传也默认中文）
 productCode|String|Body|是|成品编码
 
 **输出参数**
