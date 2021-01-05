@@ -45,7 +45,7 @@
 	* [设备OTA升级](zh-cn/DevicesManage/deviceupgradeOTA) 
 	* [设备授权](zh-cn/DevicesManage/device-authorize) 
 
-* [场景中心](zh-cn/IFTTTManage/Introduce)
+* [场景中心](zh-cn/IFTTTManage)
 	* [介绍](zh-cn/IFTTTManage/Introduce)  
 	* [接口说明](zh-cn/IFTTTManage/IFTTT)  
 	* [最佳实践](zh-cn/IFTTTManage/BestPractices)  
