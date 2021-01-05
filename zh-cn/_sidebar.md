@@ -49,7 +49,7 @@
 	* [介绍](zh-cn/IFTTTManage/Introduce)  
 	* [接口说明](zh-cn/IFTTTManage/IFTTT)  
 	* [最佳实践](zh-cn/IFTTTManage/BestPractices)  
-		* [详情页场景](zh-cn/IFTTTManage/BestPractices/BestPractices)    
+	* [详情页场景](zh-cn/IFTTTManage/BestPractices/BestPractices)    
 
 
 * [消息中心](zh-cn/MessageManage)   
