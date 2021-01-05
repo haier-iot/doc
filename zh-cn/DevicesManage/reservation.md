@@ -125,7 +125,6 @@
 | ------------- |:-------------:|:-----:|:-------------:|
 |字段名|	类型	|说明|	备注(数据字典描述，规范入参)|
 |index	|int|	在批量指令中的顺序号，从0开始，步长为1，不能重复、不能缺号；下发指令时将，按这个序号，逐个指令下发。（编号错误，将导致指令下发错误）|	用户必填|
-|delaySeconds	|int|	执行这个指令前需要延时（等待）的秒数|	用户必填|
 |name	|String|	单个属性设置时，属性名|用户可选name和value与cmdName和cmdArgs这两组由用户选择，必填其一|
 |value	|String|	单个属性设置时，属性值|用户可选name和value与cmdName和cmdArgs这两组由用户选择，必填其一|
 |cmdName|String|	组命令时，操作名|	用户可选name和value与cmdName和cmdArgs这两组由用户选择，必填其一|
@@ -249,7 +248,6 @@ Body
     "cmdMsgList": [
       {
         "index": 0,
-        "delaySeconds": 0,
         "name": "onOffStatus",
         "value": "true"
       }
@@ -349,13 +347,11 @@ Body
           "cmdMsgList": [
           {
             "index": 0,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           },
           {
             "index": 1,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           }
@@ -377,13 +373,11 @@ Body
         "cmdMsgList": [
           {
             "index": 0,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           },
           {
             "index": 1,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           }
@@ -539,13 +533,11 @@ Body:
      "cmdMsgList": [
       {
         "index": 0,
-        "delaySeconds": 0,
         "name": "onOffStatus",
         "value": "true"
       },
       {
         "index": 1,
-        "delaySeconds": 0,
         "name": "onOffStatus",
         "value": "true"
       }
@@ -639,13 +631,11 @@ Body:
           "cmdMsgList": [
           {
             "index": 0,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           },
           {
             "index": 1,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           }
@@ -668,13 +658,11 @@ Body:
         "cmdMsgList": [
           {
             "index": 0,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           },
           {
             "index": 1,
-            "delaySeconds": 0,
             "name": "onOffStatus",
             "value": "true"
           }
