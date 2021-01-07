@@ -23,8 +23,10 @@
 |**名称**	|描述房间信息 |&emsp;|RoomInfo|
 | ------------- |:-------------:|:-----:|:-------------:|  
 |**字段名**|**类型**|**说明**|**备注**|    
-|roomName|String|房间名称|必填|  
+|roomName|String|房间名称|必填，ufmVersion如果小于v2，则本字段为楼层floorName·roomName|  
 |familyId|String|房间所属家庭ID|必填|  
+|floorId|String|房间所属楼层ID|非必填，默认一层|  
+|floorOrderId|String|房间所属楼层|非必填，和floor二选一，floorId不填默认一层|  
 |roomClass|String|房间类型|非必填|  
 |roomLabel|String|房间标签|非必填| 
 |roomLogo|String|房间logo url|非必填| 
@@ -110,7 +112,6 @@ Body:
 |roomName|String|房间名称|非必填|  
 |roomId|String|房间ID|必填|  
 |familyId|String|房间所属家庭ID|必填|  
-|roomClass|String|房间类型|非必填|  
 |roomLabel|String|房间标签|非必填| 
 |roomLogo|String|房间logo url|非必填| 
 |roomPicture|String|房间图片 url|非必填| 
