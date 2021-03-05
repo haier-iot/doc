@@ -1449,7 +1449,7 @@ businessType|Integer|body|否|消息业务类型
 tag|String|body|否|自定义标签
 msgTime|String|body|是|查询消息的起始时间,格式为：`yyyy-MM-dd HH:mm:ss.SSS`
 queryTag|Integer|body|是|标识查询起始时间之前、还是之后的消息。1代表之前，0代表之后
-querySize|Integer|body||每次查询消息的数量
+querySize|Integer|body|是|每次查询消息的数量
 
 
 **输出参数：** 
@@ -2249,22 +2249,22 @@ registration|3rdId|采用第三方推送通道时，在第三方注册时、第�
 
 #### templateArgs 
 
-字段名|类型|说明|备注
-:-|:-:|:-|:-
-sn|String|业务方提供sn；操作序列号 |"sn": "sn3"
-fromPushId|String|推送消息的端，其拥有的pushId|"fromPushId":"pushId0"
-toUserId|String|消息接收端token|"toUserId":"userid1"
-toDeviceId |String|消息接收端deviceId|"toDeviceId":"deviceId1"
-toTypeId|	String|	消息接收端TypeId	|"toTypeId":"typeId1"
-toAppId|String|消息接收端appId|"toAppId": "appId1"
-toFamilyId|String|消息接收端familyId|"toFamilyId": 123
-toFamilyBy|String|消息推送终端ID通过用户或设备维度进行|toFamilyBy: "user"</br>toFamilyBy: "device"
-toUserId|String|消息接收端userId|"toUserId":1234567
-msgTitle|Object[]|推送消息标题|"msgTitle":[{"value"，"title1","lang":"zh-cn"}]
-msgBody|Object[]|推送消息主体|"msgBody":[{"value"，" body1","lang":"zh-cn"}]
-audioUrl|String|推送语音消息url|"audioUrl":"url1"
-audioLength|String|推送语音消息长度|"audioLength":30
-audioSize|String|推送语音消息语音大小|"audioSize":10200
+字段名|类型|是否必填|说明|备注
+:-|:-:|:-|:-|:-
+sn			|String|是|业务方提供sn；操作序列号 |"sn": "sn3" 最多32位
+fromPushId	|String|是|推送消息的端，其拥有的pushId|"fromPushId":"pushId0"
+toToken		|String|否|消息接收端token|"toToken":"token1"
+toDeviceId	|String|否|消息接收端deviceId|"toDeviceId":"deviceId1"
+toTypeId	|String|否|	消息接收端TypeId	|"toTypeId":"typeId1"
+toAppId		|String|否|消息接收端appId|"toAppId": "appId1"
+toFamilyId	|String|否|消息接收端familyId|"toFamilyId": 123
+toFamilyBy	|String|否|消息推送终端ID通过用户或设备维度进行|toFamilyBy: "user"</br>toFamilyBy: "device"
+toUserId	|String|否|消息接收端userId|"toUserId":1234567
+msgTitle	|Object[]|否|推送消息标题|"msgTitle":[{"value"，"title1","lang":"zh-cn"}]
+msgBody		|Object[]|否|推送消息主体|"msgBody":[{"value"，" body1","lang":"zh-cn"}]
+audioUrl	|String|否|推送语音消息url|"audioUrl":"url1"
+audioLength	|String|否|推送语音消息长度|"audioLength":30
+audioSize	|String|否|推送语音消息语音大小|"audioSize":10200
 
 
 #### retData

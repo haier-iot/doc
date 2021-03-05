@@ -1056,13 +1056,13 @@ Body：
 :-|:-:|:-:|:-:|:-
 apiVersion|String|Header|是|接口版本，此版本为v1.
 language|String|Header|是|国际化标识，代表客户端使用的语言。具体标识代码见附录。默认请传 “zh-cn“，代表中文</br>（此条只是为了日后接入国际化标识做准备，当传入的code不支持时一律认为是中文，不传也默认中文）
-productCode|String|Body|是|成品编码
+productCodes|String[]|Body|是|成品编码
 
 **输出参数**
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-payload|DeviceInfomation|Body|是|返回数据
+payload|List<ServiceDeviceInfoResultDto>|Body|是|返回数据
 
 ##### 2、请求示例
 
@@ -1070,23 +1070,23 @@ payload|DeviceInfomation|Body|是|返回数据
 ```
 POST https://uws.haier.net/dcs/device-service-2c/get/netDevice/info
 POST
-
+ 
 data:
 {
-	"productCode":"21389ade1231"
+    "productCodes":["21389***1231"]
 }
 [no cookies]
-Request Headers:Connection: 
-keep-aliveappId: SV-SBZXFWFWPTQ656-0000
+Request Headers:Connection:
+keep-aliveappId: SV-SBZ*****Q656-0000
 appVersion: v1
 clientId: test123456
 sequenceId: 20161020153428000015
-accessToken: TGT34DXO535N5UDV2IWPQGGJ6B2BV0
-sign: 314ad2d5b240dad28e69acc1f012c0d915fb9ecb00f41b745e949b1c2abdb2f4
+accessToken: TGT34DXO********WPQGGJ6B2BV0
+sign: 314ad2d5b240da***************41b745e949b1c2abdb2f4
 timestamp: 1590053835901
 language: zh-cn
 timezone: +8
-appKey: 7a95f33dfe67d76cf79534b8d02093a7
+appKey: 7a95f33df*********8d02093a7
 Content-Encoding: utf-8
 Content-type: application/json
 identification: tuya
@@ -1094,22 +1094,31 @@ Content-Length: 34
 Host: 10.159.59.16:8844
 User-Agent: Apache-HttpClient/4.5.2 (Java/1.8.0_211)
 
-
 ```
 
 **请求应答**
 ```
-{    
-	"retCode":"00000",    
-	"retInfo":"成功",    
-	"payload":{
-		"productCode": "21389ade1231",   
-		"modelCode": "xxx", 
-		"typeId": "xxx",
-		"productImg1": "https://pic/test/1.png",
-		"brandCode":"B01"
-}
 
+{   
+    "retCode":"00000",   
+    "retInfo":"成功",   
+    "payload":{
+        "deviceInfos":[
+            {
+                "productCode": "21389ade1231",   
+                "modelCode": "xxx",
+                "typeId": "xxx",
+                "productImg1": "https://pic/test/1.png",
+                "brandCode":"B01",
+                "bigCode":"02",
+                "midCode":"02012",
+                "appTypeName":"测试003",
+                "appTypeCode":"Test003",
+                "brandName":"海尔6666",
+                "videoFlag":1
+            }
+        ],...
+}
 
 ```
 

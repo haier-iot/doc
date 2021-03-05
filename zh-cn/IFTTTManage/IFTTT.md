@@ -218,7 +218,22 @@
 |groupTag    | String              |分组标识  | 选填； |
 |prodNoList    | List<String>      |产品编码列表  | 支持模板的设备产品编码列表 |
 |prodNoAuthList    |List<Map<String,String>>    |产品编码授权列表  | 支持模板的设备产品编码授权列表，map中有两个key：productCode、ifNeedAuth |
-|prodMacMap    | Map<String,DeviceInfoDto >   |设备Mac与标签取值范围对应关系  | 通过RuleWhenCondition中的 key的ifLabel字段判断是否支持标签功能，该字段代表每一个设备mac对应标签系统中的标签取值范围 |
+|prodMacMap    | Map<String,DeviceInfoDto >   |设备Mac与标签取值范围对应关系  | 选填，若条件类型为事件时，无该字段通过RuleWhenCondition中的 key的ifLabel字段判断是否支持标签功能，该字段代表每一个设备mac对应标签系统中的标签取值范围|
+|params    | RuleConditionParams[]  |事件参数  | 选填，当条件类型为事件且带有参数时，该字段必须。|
+
+### RuleConditionParams  
+规则触发动作  
+  
+| **名称** | 条件对象 |&emsp;| RuleConditionParams |   
+| ------------- |:----------:|:-----:|:--------:|
+|**字段名**|**类型**|**说明**|**备注**|  
+|id		 |String	|参数ID    		  |UUID |
+|desc    |String    |参数逻辑表达式描述  |目前是程序组装，只有叶子节点条件才会组装，上层结构不会。用户自建场景忽略 |
+|key    |StatusDesc    |标准模型name；OS需要录入StatusDesc的ID；标识某个组件的属性ID；OS查询条件返回组件属性的描述（值和描述，还有组件属性的ID）  |选填；|
+|operationSign    |OperationSign    |关系运算符（枚举类型）  |选填；取值如下：greaterThan(">"), greaterThanEqual(">="), equal("=="),lessThan("<"), lessThanEqual（"<="),unequal(“!=) |
+|value    |StatusDesc    |标准模型值  |选填； |
+|prodMacMap    |Map<String, List<RangeDto>>    |设备Mac与标签取值范围对应关系  |参数支持标签时ifLabel判断，该字段代表每一个设备mac对应标签系统中的标签取值范围 |
+|prodNoList    |List<String>    |产品编码列表  |支持该参数的设备产品编码列表|
 
 
 ### RuleThenDto  
@@ -507,7 +522,7 @@ app用系统属性
 |required|Boolean |属性是否必填|如果为true表示app实例化需要填写此参数|
 |room|String |所属房间|只读：设备类所属房间信息|
 |ifLabel|String |是否之前标签|0代表不支持，1代表支持|
-
+|type|String |属性类型|默认为空为properties（属性）、message（事件消息）、alarm（告警）、fault（故障）|
 
 ### Pagination
 分页对象  
@@ -1650,6 +1665,32 @@ Body
 |  data  |SceneTemplateDto| Body  |必填|&emsp;|
 
 
+#### 统计场景使用
+>根据家庭id、用户ID查询场景使用信息
+统计规则：filter参数为查询的条件，dimL1和dimL2为需要统计的维度。
+
+##### 1、接口定义
+
+?> **接入地 址：**  `/iftttscene/scene/find/user-data`  
+ **HTTP Method：** POST
+
+**输入参数**  
+
+| 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
+| ------- |:------:|:-----:|:----:|:----:|:----:|         
+| filter| List<Map> |N/A| Body| 必填|[{"name": "familyId","value": "123"	},{	"name": "userId","value": "234"	}] | 
+| dimL1| List<String> |N/A| Body| 必填|[“paltform”,”manually”] | 
+| dimL2| List<String> |N/A| Body| 选填|[“open”,”close”] | 
+
+**输出参数**  
+
+|   名称      |     类型      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+|  retCode  |String| Body  |必填| &emsp;|
+|  retInfo  |String| Body  |必填| &emsp;|
+|  data  |SceneTemplateDto| Body  |必填|&emsp;|
+
+
 ### 家庭配置类
 
 
@@ -2519,6 +2560,32 @@ Body
 |   名称      |     类型      | 位置  |必填 |说明|
 | ------------- |:----------:|:-----:|:--------:|:---------:|
 |  data  | Object| Body  |必填|显示为：null|
+
+
+#### 手动执行用户场景带返回值
+
+>手动执行用户场景，返回sn，执行请求唯一标识。
+
+
+##### 1、接口定义
+
+?> **接入地 址：**  `/iftttscene/scene/v2/triggerUserScene `  
+ **HTTP Method：** POST
+
+**输入参数**  
+
+| 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
+| ------- |:------:|:-----:|:----:|:----:|:----:|         
+| familyId| String |32| Body| 必填|&emsp; | 
+| sceneId| String |32| Body| 必填|&emsp; | 
+
+     
+
+**输出参数**  
+
+|   名称      |     类型      | 位置  |必填 |说明|
+| ------------- |:----------:|:-----:|:--------:|:---------:|
+|  data  | Object| Body  |必填|返回场景执行唯一标识sn|
 
 
 
