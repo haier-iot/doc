@@ -1041,6 +1041,84 @@ Body：
 
 
 
+#### 根据typeId、应用分类、大中类获取符合条件的成品编码列表（所有）
+
+根据typeId、应用分类、大中类获取型号信息，获取完整的型号信息数据
+
+
+##### 1、接口定义
+?> **接入地址：** `/dcs/device-service-2c/get/netDevice/productCodes`</br>
+**HTTP Method：** POST
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+apiVersion|String|Header|是|接口版本，此版本为v1.
+language|String|Header|是|国际化标识，代表客户端使用的语言。具体标识代码见附录。默认请传 “zh-cn“，代表中文</br>（此条只是为了日后接入国际化标识做准备，当传入的code不支持时一律认为是中文，不传也默认中文）
+appTypeCode|String[]|Body|否|成品编码
+midCode|String[]|Body|否|中类编码
+bigCode|String[]|Body|否|大类编码
+typeId|String[]|Body|否|typeId
+
+**输出参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+payload|String[]|Body|是|返回数据
+
+##### 2、请求示例
+
+**请求样例**
+```
+POST https://uws.haier.net/dcs/device-service-2c/get/netDevice/productCodes
+POST
+ 
+data:
+{
+    "midCode":"02012"
+}
+[no cookies]
+Request Headers:Connection:
+keep-alive
+appId: ************
+appVersion: v1
+clientId: test123456
+sequenceId: ************
+accessToken: ************
+sign: ************
+timestamp: 1590053835901
+language: zh-cn
+timezone: +8
+Content-Encoding: utf-8
+Content-type: application/json
+
+
+```
+
+**请求应答**
+```
+
+{
+    "retCode":"00000",
+    "retInfo":"成功",
+    "payload":[
+        "AA9C3Y015",
+        "AA9C3Y115",
+        "yn",
+        "TEST0335",
+        "TEST9999",
+        "TEST9998",
+        "Ytest22",
+        "Ytest11中文",
+         ...
+        "u3x9Haxii"
+    ]
+}
+```
+
+
+
 #### 根据成品编码获取型号信息
 
 根据成品编码，获取完整的型号信息数据
@@ -1062,7 +1140,7 @@ productCodes|String[]|Body|是|成品编码
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-payload|List<ServiceDeviceInfoResultDto>|Body|是|返回数据
+payload|`List<ServiceDeviceInfoResultDto>`|Body|是|返回数据
 
 ##### 2、请求示例
 
@@ -1077,22 +1155,19 @@ data:
 }
 [no cookies]
 Request Headers:Connection:
-keep-aliveappId: SV-SBZ*****Q656-0000
+keep-alive
+appId: *************
 appVersion: v1
 clientId: test123456
 sequenceId: 20161020153428000015
-accessToken: TGT34DXO********WPQGGJ6B2BV0
-sign: 314ad2d5b240da***************41b745e949b1c2abdb2f4
+accessToken: **************
+sign: 3**************
 timestamp: 1590053835901
 language: zh-cn
 timezone: +8
-appKey: 7a95f33df*********8d02093a7
 Content-Encoding: utf-8
 Content-type: application/json
-identification: tuya
-Content-Length: 34
-Host: 10.159.59.16:8844
-User-Agent: Apache-HttpClient/4.5.2 (Java/1.8.0_211)
+
 
 ```
 
@@ -1121,6 +1196,152 @@ User-Agent: Apache-HttpClient/4.5.2 (Java/1.8.0_211)
 }
 
 ```
+
+
+#### 配网信息查询
+
+根据自发现信息或mac查询设备的型号、图标、配置引导信息
+
+
+##### 1、接口定义
+?> **接入地址：** `/dcs/netdeviceinfo/find/deviceInfomation`</br>
+**HTTP Method：** POST
+
+**输入参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+productCode|String|Body|非必填|产品编码
+selfDiscoveryInformationCode|String|Body|非必填|1~14位字符串，海极网按型号配置的热点自发现信息</br>（是热点中的NNN那一段，不是完整热点）
+mac|String|Body|非必填|设备的mac（不是deviceId，此时设备还未注册）
+
+**输出参数**
+
+参数名|类型|位置|必填|说明
+:-|:-:|:-:|:-:|:-
+payload|`DeviceInfomation`|Body|是|返回数据
+
+
+
+
+
+##### 2、请求示例
+
+**请求样例**
+```
+POST data:
+
+[no cookies]
+
+Request Headers:
+
+Connection: keep-alive
+
+appId: ********************
+
+appVersion: 01.00.00.00000
+
+clientId: ********************
+
+accessToken: ********************
+
+sign: ********************
+
+timestamp: 1585577435707
+
+Content-Encoding: utf-8
+
+Content-type: application/json
+
+Post：
+
+{
+
+  "mac": "string",
+
+  "selfDiscoveryInformationCode": "string",
+
+  "productCode":"String"
+
+}
+
+```
+
+**请求应答**
+```
+
+{
+
+  "payload": {
+
+    "apptypeCode": "string",
+
+    "apptypeName": "string",
+
+    "bindFailed": "string",
+
+    "bindFailedImg": "string",
+
+    "bindSuccess": "string",
+
+    "bindSuccessImg": "string",
+
+    "brandCode": "string",
+
+    "configMode": "string",
+
+    "deviceRole": "string",
+
+    "hotspotName": "string",
+
+    "modelCode": "string",
+
+    "productCode": "string",
+
+    "productDesc": "string",
+
+    "productImg1": "string",
+
+    "productImg2": "string",
+
+    "customHotspotCode ": "string",
+
+"customHotspotName": "string",
+
+"state": "string",
+
+    "step1": "string",
+
+    "step1Img": "string",
+
+    "step2": "string",
+
+    "step2Img": "string",
+
+    "step3": "string",
+
+    "step3Img": "string",
+
+    "step4": "string",
+
+    "step4Img": "string",
+
+    "step5": "string",
+
+    "step5Img": "string",
+
+    "typeId": "string"
+
+  },
+
+  "retCode": "string",
+
+  "retInfo": "string"
+
+}
+
+```
+
 
 
 #### 根据DeviceId查询设备绑定状态
