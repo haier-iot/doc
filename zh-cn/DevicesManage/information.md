@@ -1544,8 +1544,7 @@ apiVersion|String|Header|是|接口版本，此版本为v1.
 :-|:-:|:-:|:-:|:-
 retCode|String|Body|是|返回码
 retInfo|String|Body|是|用于调试的返回信息，不支持国际化，也不能直接显示在UI上
-payload|Map<String,List<ServiceDeviceTopologicalResultDto>|Body|是|用户对该设备没有权限，返回错误码1200001<br/>查询的设备不在线，返回错误码1200002<br/>查询到的拓扑关系列表中，(1)如果设备离线则该条记录不返回; (2)如果用户对设备无操作权限，只返回desc,其中desc值为"未知设备",其他字段不返回。
-具体返回结构见5.1 请求示例返回返回结构中，key:  father 表示该设备的父设备  child表示该设备的子设备
+payload|Map<String,List<ServiceDeviceTopologicalResultDto>|Body|是|用户对该设备没有权限，返回错误码1200001<br/>查询的设备不在线，返回错误码1200002<br/>查询到的拓扑关系列表中，(1)如果设备离线则该条记录不返回; (2)如果用户对设备无操作权限，只返回desc,其中desc值为"未知设备",其他字段不返回。<br/>具体返回结构见5.1 请求示例返回返回结构中，key:  father 表示该设备的父设备  child表示该设备的子设备
 
 
 ##### 2、请求示例
