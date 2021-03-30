@@ -41,19 +41,26 @@
 
 ## 4.接入流程的开发
 
-### 4.1授权请求地址
+### 4.1海尔授权登录H5页链接
+
+第三方App通过发现技能或者绑定第三方账号的方式打开海尔账号Oauth授权登录H5页，此时第三方 App 要生成 授权 URL（标准的OAuth 授权码模式的认证的URI）。 用户 进入 授权 URL， 登录并完成 对 应用 的 授权，用户中心将重定向 用户 至第三方App回跳页，并带上code和是state。
+
 
 ```
-http://resource.haigeek.com/download/resource/selfService/haigeek/mobile-page/Oauth/login.html?client_id={systemId}&state={state}&response_type=code&redirect_url={redirect_url}
+ 测试环境 ：https://taccount.haier.com/oauth/authorize? client_id=rptest&amp;response_type=code&amp;state=xyz&amp;redirect_uri=https://r p.com/login_callback  
+
+ 生产环境：https://account.haier.com/oauth/authorize? client_id=rptest&amp;response_type=code&amp;state=xyz&amp;redirect_uri=https://r p.com/login_callbac
 
 ```
-| 参数名称      | 必填         | 说明         |
+
+|Parameter | Desc| Require| 
 | ------------- |:-------------:|:-------------:|
-|response_type| 是 |授权码模式 response_type=code |
-|client_id| 是 |云应用systemId |
-|redirect_uri| 是 |授权回调地址，务必和授权表单里填写的一致|
-|scope| 否 |权限范围，用于对客户端的权限进行控制，如果客户没有传递该参数，那么服务器则以该应用的所有权限代替 |
-|state| 否 |用于维持请求和回调过程中的状态，防止CSRF攻击，服务器不对该参数做任何处理，如果客户端携带了该参数，则服务器在响应时原封不动的返回 |
+|client_id |为海极网分配的systemid, 我们使用例子中的 rptest| Y|
+|response_type| 为授权方式, 这里固定为 code| Y|
+|redirect_uri |指定回跳地址, 这里为 https://rp.com/login_callback| Y|
+|state|为 应用 生成的随机字符, 在 用户 授权 回调时会原样返回给 应 用, 藉此可以判断来自 本平台 的回跳是否被伪造; 此参数非必传, 但推荐传送以增强安全性|N|
+|display|告知 本平台 以何种登录界面展示给 用户, 如设定为 qr 时, 本平 台 仅展示只有二维码的页面(意在让 用户 扫码登录), 同时此页面 可作为 iframe 嵌入 应用 当前页面; 若未指定, 则默认展示登录界 面|N|
+
 
 
 输入上面的授权请求地址后，出现如下界面：
@@ -78,173 +85,123 @@ Location: {redirect_uri}?code=SplxlOBeZQQYbYS6WxSbIA&state={state}
 				
 ### 4.3	获取授权token 
 
-?> **请求地址：** `https://uws.haier.net/oauth2/v1/token`</br>
+>  通过oauth登录获取的token获取海尔token 
+
+?> **请求地址：** `https://uws.haier.net/ucs/uia/get/token-code `</br>
 **HTTP Method：** POST </br>
-**Content-Type：** application/x-www-form-urlencoded
+
 
 
 **输入参数**
 
-参数名|类型|位置|必填|说明
+参数名|类型|位置|是否必填|说明
 :-|:-:|:-:|:-:|:-
-client_id|String|Param|是|开发者在海极网申请的云应用systemId
-client_secret|String|Param|是|开发者在海极网申请的云应用systemKey
-redirect_uri|String|Param|否|回调地址, 必须和申请应用是填写的一致(参数部分可不一致)
-grant_type|String|Param|是|务必为authorization_code
-code|String|Param|否|如grant_type为authorization_code时必须传入code字段，使用授权码换取token，code有效期为 10 分钟，只能使用1次
-refresh_token|String|Param|否|如grant_type为refresh_token时必须传入refresh_token字段，用于刷新token
+code|String|body|是|Oauth登录返回的code ，使用授权码换取token，code有效期为 10 分钟，只能使用1次
+redirectUrl |String|body|是|和调用登录h5 时使用的回调地址一致 
+systemId|String|Header|是|海极网申请的systemId 
+sequenceId |String|Header |否|报文流水(客户端唯一)客户端交易流水号。6-32 位。由客户端自行定义，自行生成。建议使用日期+顺序编号的方式。 
+apiVersion |String|Header |是|此处默认填v1 
+sign |String|Header |是|签名 
+timestamp |long |Header |是|Unix时间戳，精确到毫秒。 
+Content-Type  |String |Header |是|application/json;charset=UTF-8  
 
 **输出参数**
 
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-access_token|String|json|是|访问令牌
-refresh_token|String|json|是|访问令牌生命周期（单位：秒）
-expires_in|String|json|是|刷新令牌
-scope|String|json|是|访问令牌实际权限范围
+参数名|类型|位置|说明
+:-|:-:|:-:|:-
+retCode| String| body| 错诨码 
+retInfo |String| body |错诨详细信息 
+payload |Object  |Body|  
+accessToken|String| payload| 授权凭证 
+refreshToken |String |payload |刷新凭证 
+uhomeClientId| String| payload| 访问Iot设备中心绑定控制设备接口，头信息必填参数（注明：设备中心接口参数定义为 clientId） 
+source |String| payload| 来源 
+scope |String |payload| 权限范围 
+expiresIn |Long| payload| accessToken的有效时间（以秒为单位） 
 
+
+用户请求 
 
 ```
-POST /token HTTP/1.1
-/oauth/v1/token?
-	grant_type=authorization_code&
-	code=ANXxSNjwQDugOnqeikRMu2bKaXCdlLxn&
-	client_id=SV-CLOUDAPP-0000&
-	client_secret=0rDSjzQ20XUj5itV7WRtznPQSzr5pVw2&
-	redirect_uri=http%3A%2F%2Fwww.example.com%2Foauth_redirect
+POST data: 
+{ 
+ "code": "abcopdfoiekdsm", 
+ "redirectUrl": "https://www.haigeek.com" 
+} 
+```
 
+请求应答
+
+```
+{ 
+ "retCode": "0000", 
+ "retInfo": "成功", 
+ "payload": { 
+  "accessToken": "wfhwdh", 
+  "expiresIn": 300, 
+  "refreshToken": "wfwidoijwdmpocop", 
+  "scope": "write,read", 
+  "source": "haier" 
+ } 
+} 
 ```
 
 ### 4.4	刷新授权token 
 
 
-?> **请求地址：** `https://uws.haier.net/oauth2/v1/token`</br>
+?> **请求地址：** `https://uws.haier.net/ucs/uia/refresh/token `</br>
 **HTTP Method：** POST </br>
-**Content-Type：** application/x-www-form-urlencoded
 
 
 **输入参数**
 
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
-client_id|String|Param|是|开发者在海极网申请的云应用systemId
-client_secret|String|Param|是|开发者在海极网申请的云应用systemKey
-redirect_uri|String|Param|否|回调地址, 必须和申请应用是填写的一致(参数部分可不一致)
-grant_type|String|Param|是|务必为refresh_token
-refresh_token|String|Param|否|如grant_type为refresh_token时必须传入refresh_token字段，用于刷新token
+refreshToken  |String|body|是|刷新凭证 
+systemId|String|Header|是|海极网申请的systemId 
+sequenceId |String|Header |否|报文流水(客户端唯一)客户端交易流水号。6-32 位。由客户端自行定义，自行生成。建议使用日期+顺序编号的方式。 
+apiVersion |String|Header |是|此处默认填v1 
+sign |String|Header |是|签名 
+timestamp |long |Header |是|Unix时间戳，精确到毫秒。 
+Content-Type  |String |Header |是|application/json;charset=UTF-8  
 
 **输出参数**
 
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-access_token|String|json|是|访问令牌
-refresh_token|String|json|是|访问令牌生命周期（单位：秒）
-expires_in|String|json|是|刷新令牌
-scope|String|json|是|访问令牌实际权限范围
+参数名|类型|位置|说明
+:-|:-:|:-:|:-
+retCode| String| body| 错诨码 
+retInfo |String| body |错诨详细信息 
+payload |Object  |Body|  
+accessToken|String| payload| 授权凭证 
+refreshToken |String |payload |刷新凭证 
+uhomeClientId| String| payload| 访问Iot设备中心绑定控制设备接口，头信息必填参数（注明：设备中心接口参数定义为 clientId） 
+source |String| payload| 来源 
+scope |String |payload| 权限范围 
+expiresIn |Long| payload| accessToken的有效时间（以秒为单位） 
 
+
+用户请求 
 
 ```
-/v1/token?
-    grant_type=refresh_token&
-    refresh_token=TGT8U7349535U3453475983453U37&
-    client_id= SV-CLOUDAPP-0000&
-    client_secret= 0rDSjzQ20XUj5itV7WRtznPQSzr5pVw2&
-    scope=mobile
-
-
+{ 
+ "refreshToken": "refreshToken" 
+} 
 ```
 
-
-## 5.解除授权
-
-### 5.1	用户在智家app中取消授权
-
-1、下载智家app，我的->第三方平台授权->取消授权
-
-![授权][pic6]
-
-2、第三方开发者提供取消授权回调地址，用户在智家app端主动取消授权时，第三方可通过回调地址同步删除缓存在本地的授权token。如下图所示，第三方开发者需在海极网填写取消授权回调地址。
-
-![取消授权][pic7]
-
-3、回调地址的定义
-
-?> **接口名称：**  第三方提供取消授权回调地址 </br>
-**请求地址：** `第三方自定义，例：https://www.abc.com/oauth/cancel/callback?token=xyz`</br>
-**HTTP Method：** GET
-
-
-**输入参数**
-
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-token|String|Param|是|授权token
-
-**输出参数**
-
-由第三方自定义
-
-### 5.2	第三方应用端实现取消授权
-
-#### 5.2.1取消授权接口
-
-
-?> **接口名称：** 在第三方应用端取消授权</br>
-**请求地址：** `https://uws.haier.net/uaccount/v1/oauth/thirdpart/cancel`</br>
-**HTTP Method：** POST
-
-
-**输入参数**
-
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-systemId|String|Header|是|云应用ID；
-clientId|String|Header|是|云应用授权时的终端ID；用于标识授权终端
-accessToken|String|Header|是|授权token
-sign|String|Header|是|对请求进行签名运算产生的签名，sha256算法签名；见签名算法章节
-timestamp|String|Header|是|Unix时间戳，精确到毫秒。
-Content-Type|String|Header|是|application/json;charset=UTF-8。
-systemId|String|Body|是|云应用ID
-clientId|String|Body|是|云应用授权时的终端ID；用于标识授权终端
-
-**输出参数**
-
-标准输入，成功返回00000
-
-
-
-
-#### 5.2.2 获取云应用授权时的终端ID
-
-
-?> **接口名称：** 获取云应用授权时的终端ID </br>
-**请求地址：** `https://uws.haier.net/oauth/2.0/tokeninfo`</br>
-**HTTP Method：** POST
-
-
-**输入参数**
-
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-access_token|String|Param|是|授权token；
-
-**输出参数**
-
-参数名|类型|位置|必填|说明
-:-|:-:|:-:|:-:|:-
-user_id|String|Body|是|海尔账号ID
-iss|String|Body|是|授权颁发者的字符串
-exp|String|Body|是|有效期 单位秒
-app_id|String|Body|是|云应用ID
-iat|String|Body|是|创建时间，时间戳
-client_id|String|Body|是|云应用授权时的终端ID
-error_description|String|Body|否|授权token无效
-error|String|Body|否|授权token失效时返回D00006错误码
-
-
-
-
-
+请求应答
+```
+{ 
+ "retCode": "0000", 
+ "retInfo": "成功", 
+ "payload": { 
+  "accessToken": "wfhwdh", 
+  "expiresIn": 300, 
+  "refreshToken": "wfwidoijwdmpocop", 
+  "scope": "write,read", 
+  "source": "haier" 
+ }
+} 
+```
 
 
 
