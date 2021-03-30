@@ -26,10 +26,7 @@
 由登录等动作接口返回。受保护的接口在被调用时，调用方需要在HTTP请求的Header中新增Authorization,
 值为Bearer[access_token]，后面接口将直接备注受应用级还是设备级保护，请调用方自行甄别。<br/>
 
-4.关于透传的uhome三个参数，uhome_app_id、uhome_client_id、uhome_sign，做出以下说明：uhome_app_id是由U+云平台(海极网)颁发的应用ID，40位以内字符，Haier U+云平台全局唯一;uhome_client_id是客户端ID，主要用途为唯一标识客户端(例如,手机)。可调用U+云平台usdk得到客户端ID的值。<br/>
-uhome_sign是U+云平台要求的安全验证签名，需要加密的字段只需要Uhome的appId+appKey+clientid(顺序不可变化)，不用加密原来文档里的url和body字符串等，具体请参考U+云平台的签名认证章节。<br/>
-
-5.以下所有接口的正常Response下的HTTP Status Code为200，后无特殊情况不再说明。
+4.以下所有接口的正常Response下的HTTP Status Code为200，后无特殊情况不再说明。
 
 
 ## 接口列表
