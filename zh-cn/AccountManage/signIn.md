@@ -26,15 +26,7 @@
 由登录等动作接口返回。受保护的接口在被调用时，调用方需要在HTTP请求的Header中新增Authorization,
 值为Bearer[access_token]，后面接口将直接备注受应用级还是设备级保护，请调用方自行甄别。<br/>
 
-4.本接口的鉴权文档，需要透传Uhome参数，注意，接口中提到的client_id为用户中心下发的应用标识，uhome_client_id为Uhome要求的客户端标识，请注意区分，不要混淆。<br/>
-
-5.鉴权通过后，接口返回的access_token字段为用户中心下发的用户访问令牌，uhome_access_token
-为U+云平台下发的设备访问令牌，请注意区分，不要混淆。<br/>
-
-6.关于透传的uhome三个参数，uhome_app_id、uhome_client_id、uhome_sign，做出以下说明：uhome_app_id是由U+云平台(海极网)颁发的应用ID，40位以内字符，Haier U+云平台全局唯一;uhome_client_id是客户端ID，主要用途为唯一标识客户端(例如,手机)。可调用U+云平台usdk得到客户端ID的值。<br/>
-uhome_sign是U+云平台要求的安全验证签名，需要加密的字段只需要Uhome的appId+appKey+clientid(顺序不可变化)，不用加密原来文档里的url和body字符串等，具体请参考U+云平台的签名认证章节。<br/>
-
-7.以下所有接口的正常Response下的HTTP Status Code为200，后无特殊情况不再说明。
+4.以下所有接口的正常Response下的HTTP Status Code为200，后无特殊情况不再说明。
 
 
 ## 接口列表
@@ -221,7 +213,9 @@ Error:
 |invalid_phone_number| 400 |手机号格式非法|
 |phone_number_occupied| 400|手机号被占用|
 |captcha_required| 400|失败次数过多，须输入验证码|
-|too_often |400|发送过于频繁，同时会增加delay字段指示需要等待的剩余秒数|    
+|too_often |400|发送过于频繁，同时会增加delay字段指示需要等待的剩余秒数|
+|sms_limit_send_today |400|单天单人请求短信次数超限|    
+|mobile_temporarily_locked |400|手机号被暂时锁定|        
 
 ### 注册接口    
 
@@ -304,11 +298,11 @@ Error:
 Request:  
 
 ```
-POST /oauth/token HTTP/1.1    
+POST /oauth/token HTTP/1.1
 Host: https://taccount.haier.com [海尔品牌测试环境]
-https://account-api.haier.net [海尔品牌正式环境]
-Content-Type: application/x-www-form-urlencoded  
-client_id=wodeyingyong&client_secret=secret&grant_type=password&connection=sms&username=18888888888&password=553412&type_uhome=type_uhome_common_token&uhome_client_id=123456&uhome_app_id=MB-RSQCSAPP-0000&uhome_sign=76dfe3686b3251a223e458db5445711447edbee21943
+      https://account-api.haier.net [海尔品牌正式环境] 
+Content-Type: application/x-www-form-urlencoded
+client_id=wodeyingyong&client_secret=secret&grant_type=password&connection=sms&username=18888888888&password=553412
 
 ```  
 
@@ -320,22 +314,21 @@ client_id=wodeyingyong&client_secret=secret&grant_type=password&connection=sms&u
 |connection |固定 sms |Y|  
 |username |手机号 |Y|  
 |password |短信验证码 |Y|  
-|type_uhome |固定 type_uhome_common_token |Y|  
-|uhome_client_id |参考前提，透传UHome参数 |Y|  
-|uhome_app_id |参考前提，透传UHome参数  |Y|  
-|uhome_sign |参考前提，透传UHome参数 |Y|  
+|client_ip |用户真实IP |N|  
+|longitude |经度 |N|  
+|latitude |纬度  |N|  
+|multiportflag |端的唯一标识 |N|  
 
 Response:
 ```
 {
-"access_token":"2YotnFZFEjr1zCsicMWpAA", //即为所需的访问令牌,
-"expires_in":3600, //access_token过期时间(单位秒，默认有效期10天)
-"scope": "openid profile email", //默认授权范围，可忽略
-"token_type":"bearer", //access_token类型，受个人保护接口可使用
-"refresh_token":"2YotnFZFEjr1zCsicMWpAA", //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
-"uhome_access_token": "TGT91JFPNKDSYT22QTGFGOMZ85U900", //即为所需的 uhome设备令牌
-"uhome_user_id"：13123123 //透传回UHome返回的uhome userid
+  "access_token":"2YotnFZFEjr1zCsicMWpAA",   //即为所需的 访问令牌,
+  "expires_in":3600,                       //access_token过期时间(单位秒，默认有效期10天)
+  "scope": "openid profile email",           //默认授权范围，可忽略
+  "token_type":"bearer",                     //access_token类型，受个人保护接口可使用
+  "refresh_token":"2YotnFZFEjr1zCsicMWpAA"   //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
 }
+
 ```  
 
 Error:  
@@ -368,26 +361,26 @@ Error:
 |not_verified| 403 |手机/邮箱未激活|
 |account_locked| 403|账户被冻结|  
 |bad_credentials| 400|密码或短信验证码不正确|
-|uhome_token_request_error |400|获取Uhome设备令牌失败|  
+
 
 ### 账号密码登录      
 
 注: 此接口不受个人或者应用token保护，由特殊参数保护。    
 
-本接口为了防止CC攻击或是DDos撞库，当接口调用验证账号密码错误超过3次以后，将在返回值返回图形验证码信息，第4次需要强制输入图形验证码信息，此后的图形验证码由获取图形验证码接口刷新后传入任然有效。  
+本接口为了防止CC攻击或者DDos撞库，当接口调用验证账号密码错误超过5次以后，5分钟内将在返回值返回图形验证码信息，第6次需要强制输入图形验证码信息，此后的图形验证码由接口2刷新后传入仍然有效。
 
-当密码错误超过5次后，用户中心将锁定账号，24小时后自动解锁。
+当密码错误超过10次后，用户中心将锁定账号，1小时后自动解锁。
 
 本接口为POST请求，`Content-Type为application/x-www-form-urlencoded`，不是`application/json`，参数也不是json形式，请接入方注意。  
 
 
 Request:
 ```
-POST /oauth/token HTTP/1.1    
+POST /oauth/token HTTP/1.1
 Host: https://taccount.haier.com [海尔品牌测试环境]
-https://account-api.haier.net [海尔品牌正式环境]
-Content-Type: application/x-www-form-urlencoded  
-client_id=wodeyingyong&client_secret=secret&grant_type=password&connection=sms&username=18888888888&password=553412&type_uhome=type_uhome_common_token&uhome_client_id=123456&uhome_app_id=MB-RSQCSAPP-0000&uhome_sign=76dfe3686b3251a223e458db5445711447edbee21943
+      https://account-api.haier.net [海尔品牌正式环境] 
+Content-Type: application/x-www-form-urlencoded
+client_id=wodeyingyong&client_secret=secret&grant_type=password&connection=basic_password&username=admin&password=123456
 
 ```  
 
@@ -399,24 +392,23 @@ client_id=wodeyingyong&client_secret=secret&grant_type=password&connection=sms&u
 |connection |固定值传 basic_password |Y|  
 |username |用户名/邮箱/手机号 |Y|  
 |password |密码  |Y|  
-|type_uhome |固定 type_uhome_common_token |Y|  
-|uhome_client_id |参考前提，透传UHome参数 |Y|  
-|uhome_app_id |参考前提，透传UHome参数  |Y|  
-|uhome_sign |参考前提，透传UHome参数 |Y|   
-|captcha_token | |N|
-|captcha_answe | |N|   
+|captcha_token |&nbsp; |N|  
+|captcha_answer |&nbsp; |N|  
+|client_ip |用户真实IP  |N|  
+|longitude |经度 |N|   
+|latitude |纬度 |N|
+|multiportflag |端的唯一标识 |N|   
 
 Response:
 ```
 {
-"access_token":"2YotnFZFEjr1zCsicMWpAA", //即为所需的访问令牌,
-"expires_in":3600, //access_token过期时间(单位秒，默认有效期10天)
-"scope": "openid profile email", //默认授权范围，可忽略
-"token_type":"bearer", //access_token类型，受个人保护接口可使用
-"refresh_token":"2YotnFZFEjr1zCsicMWpAA", //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
-"uhome_access_token": "TGT91JFPNKDSYT22QTGFGOMZ85U900", //即为所需的 uhome设备令牌
-"uhome_user_id"：13123123 //透传回UHome返回的uhome userid
+  "access_token":"2YotnFZFEjr1zCsicMWpAA",   //即为所需的 访问令牌,
+  "expires_in":3600,                       //access_token过期时间(单位秒，默认有效期10天)
+  "scope": "openid profile email",           //默认授权范围，可忽略
+  "token_type":"bearer",                     //access_token类型，受个人保护接口可使用
+  "refresh_token":"2YotnFZFEjr1zCsicMWpAA"   //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
 }
+
 ```  
 
 Error:   
@@ -473,11 +465,11 @@ Error:
 
 Request:
 ```
-POST /oauth/token HTTP/1.1    
+POST /oauth/token HTTP/1.1
 Host: https://taccount.haier.com [海尔品牌测试环境]
-https://account-api.haier.net [海尔品牌正式环境]
-Content-Type: application/x-www-form-urlencoded  
-client_id=wodeyingyong&client_secret=secret&grant_type=refresh_token&refresh_token=XXXXXXX&type_uhome=type_uhome_common_token&uhome_client_id=123456&uhome_app_id=MBRSQCSAPP-0000&uhome_sign=76dfe3686b3251a223e458db5445711447edbee21943
+      https://account-api.haier.net [海尔品牌正式环境] 
+Content-Type: application/x-www-form-urlencoded
+client_id=wodeyingyong&client_secret=secret&grant_type=refresh_token&refresh_token=XXXXXXX
 
 ```  
 
@@ -487,22 +479,21 @@ client_id=wodeyingyong&client_secret=secret&grant_type=refresh_token&refresh_tok
 |client_secret|用户中心下发的client_secret |Y|  
 |grant_type |固定值传 refresh_token |Y|  
 |refresh_token |短信随机码快速登录接口或者账号密码登录接口或者本接口获取的refresh_token |Y|  
-|type_uhome |固定值传 type_uhome_common_token |Y|  
-|uhome_client_id |参考前提，透传UHome参数 |Y|  
-|uhome_app_id |参考前提，透传UHome参数  |Y|  
-|uhome_sign |参考前提，透传UHome参数 |Y|    
+|client_ip |用户真实IP |N|  
+|longitude |经度 |N|  
+|latitude	 |纬度 |N|  
+  
 
 Response:
 ```
 {
-"access_token":"2YotnFZFEjr1zCsicMWpAA", //即为所需的访问令牌,
-"expires_in":3600, //access_token过期时间(单位秒，默认有效期10天)
-"scope": "openid profile email", //默认授权范围，可忽略
-"token_type":"bearer", //access_token类型，受个人保护接口可使用
-"refresh_token":"2YotnFZFEjr1zCsicMWpAA", //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
-"uhome_access_token": "TGT91JFPNKDSYT22QTGFGOMZ85U900", //即为所需的 uhome设备令牌
-"uhome_user_id"：13123123 //透传回UHome返回的uhome userid
+  "access_token":"2YotnFZFEjr1zCsicMWpAA",   //即为所需的 访问令牌,
+  "expires_in":3600,                       //access_token过期时间(单位秒，默认有效期10天)
+  "scope": "openid profile email",           //默认授权范围，可忽略
+  "token_type":"bearer",                     //access_token类型，受个人保护接口可使用
+  "refresh_token":"2YotnFZFEjr1zCsicMWpAA"   //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
 }
+
 ```  
 
 Error:   
@@ -525,182 +516,7 @@ Error:
 |unauthorized_client| 400|应用未被授权此grant_type|
 |unsupported_grant_type |400|系统不支持此grant_type|  
 |invalid_grant| 400 |refresh_token非法|  
-|uhome_token_request_error| 400 |获取Uhome设备令牌失败|   
 
-### 社交登录后绑定手机          
-
-注: 此接口不受个人或者应用token保护，由特殊参数保护。    
-
-本接口中参数verification_code由发送短信随机码接口参数scenario值为login时发送到用户手机上。    
-
-本接口social_type严格必填，如果不填，则为普通登录接口。  
-
-本接口为POST请求，`Content-Type为application/x-www-form-urlencoded`，不是`application/json`，参数也不是json形式，请接入方注意。  
-
-
-Request:
-```
-POST /oauth/token HTTP/1.1    
-Host: https://taccount.haier.com [海尔品牌测试环境]
-https://account-api.haier.net [海尔品牌正式环境]
-Content-Type: application/x-www-form-urlencoded  
-client_id=wodeyingyong&client_secret=secret&grant_type=password&connection=sms&username=18888888888&password=553412&social_type=wechat&social_open_id:o6h-4w4p6FhAnJkowD_9HpQTDnE0&social_access_token=Cmt4XaSExdtLqNxOxkZGtZ0eZhD4al_2KSX&social_extra=adfadf&type_uhome=type_uhome_social_token&uhome_client_id=123456&uhome_app_id=MB-RSQCSAPP-0000&uhome_sign=76dfe3686b3251a223e458db5445711447edbee21943
-
-```  
-
-| Parameter      | Desc         | Required  | 
-| ------------- |:-------------:|:----------|
-|client_id| 用户中心下发的client_id |Y|
-|client_secret|用户中心下发的client_secret |Y|  
-|grant_type |固定值传 password |Y|   
-|connection |固定值传 sms |Y|  
-|username |手机号 |Y|  
-|password | 短信验证码，由发送短信随机码接口参数scenario值为login获取 |Y|   
-|social_type |固定值，微信传wechat；微信公众号传wechat-public；微博传weibo；QQ传qq；网易传netease；豆瓣传douban |Y|  
-|social_open_id |三方社交返回的唯一userid |Y|  
-|social_access_token |三方社交返回的唯一登录token |Y|  
-|social_extra |三方云端校验token需要的额外授权信息，social_type为qq时，需要必填qq开放者平台申请的秘钥 |N|  
-|type_uhome |固定值传 type_uhome_social_token|Y|  
-|uhome_client_id |参考前提，透传UHome参数 |Y|  
-|uhome_app_id |参考前提，透传UHome参数  |Y|  
-|uhome_sign |参考前提，透传UHome参数 |Y|    
-
-Response:
-```
-{
-"access_token":"2YotnFZFEjr1zCsicMWpAA", //即为所需的访问令牌,
-"expires_in":3600, //access_token过期时间(单位秒，默认有效期10天)
-"scope": "openid profile email", //默认授权范围，可忽略
-"token_type":"bearer", //access_token类型，受个人保护接口可使用
-"refresh_token":"2YotnFZFEjr1zCsicMWpAA", //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
-"uhome_access_token": "TGT91JFPNKDSYT22QTGFGOMZ85U900", //即为所需的 uhome设备令牌
-"uhome_user_id"：13123123 //透传回UHome返回的uhome userid
-}
-```  
-
-Error:   
- 
-```  
-{
-"error": "bad_credentials"  
-}
-```  
-
-错误码表：  
-
-接口调用错误  
-
-| Error Code     | HTTP Status Code       | Description  | 
-| ------------- |:-------------:|:----------|
-|invalid_request| 400 |参数非法或缺失必填参数|  
-|invalid_client| 401 |无权调用，或所传client_id / client_secret非法|  
-|invalid_grant| 400 |授权异常或失败（如密码或短信验证码错误）|
-|unauthorized_client| 400|应用未被授权此grant_type|
-|unsupported_grant_type |400|系统不支持此grant_type|  
-|invalid_scope| 400 |scope非法|  
-     
-
-业务相关错误  
-
-| Error Code     | HTTP Status Code       | Description  | 
-| ------------- |:-------------:|:----------|
-|not_verified| 403 |手机/邮箱未激活|  
-|account_locked| 403 |账户被冻结|  
-|bad_credentials| 400 |密码或短信验证码错误）|
-|social_open_id_error| 400|social_open_id不能为空或错误|
-|social_access_token_error |400|social_access_token不能为空或错误|  
-|social_type_error| 400 |social_type错误|  
-|social_extra_error| 400 |social_extra错误|  
-|uhome_token_request_error| 400 |获取Uhome设备令牌失败|  
-
-
-### 刷新社交登录            
-
-注: 此接口不受个人或者应用token保护，由特殊参数保护。    
-
-本接口使用的refresh_token仰赖短信随机码快速登录接口或者账号密码登录接口或者本接口获取的refresh_token，需缓存至客户端。 
-
-一般情况下，本接口依赖的refresh_token从客户端缓存获取，此时refresh_token字段直接传入；在遭遇用户清理数据或者其他突发情况拿不到refresh_token时，此时refresh_token字段传入social_type值:social_open_id值，由用户中心向三方云端校验真伪后，再获取唯一用户信息返回。  
-
-如果手机更换或者缓存更新等，客户端不知道该社交账号是否绑定过手机，可以通过本接口的报错获悉三方社交账号是否绑定过账号。如果报错􁲙social_connection_null，则未绑定过手机，请调用社交登录后绑定手机接口。  
-
-通常情况下，请客户端返回正常缓存的refresh_token。
-
-本接口为POST请求，`Content-Type为application/x-www-form-urlencoded`，不是`application/json`，参数也不是json形式，请接入方注意。  
-
-
-Request:
-```
-POST /oauth/token HTTP/1.1    
-Host: https://taccount.haier.com [海尔品牌测试环境]
-https://account-api.haier.net [海尔品牌正式环境]
-Content-Type: application/x-www-form-urlencoded  
-client_id=wodeyingyong&client_secret=secret&grant_type=refresh_token&refresh_token=XXXXXXX&social_type=wechat&social_open_id:o6h-4w4p6FhAnJkowD_9HpQTDnE0&social_access_token=Cmt4XaSExdtLqNxOxkZGtZ0eZhD4al_2KSX&social_extra=adfadf&type_uhome=type_uhome_social_token&uhome_client_id=123456&uhome_app_id=MB-RSQCSAPP-0000&uhome_sign=76dfe3686b3251a223e458db5445711447edbee21943
-
-```  
-
-| Parameter      | Desc         | Required  | 
-| ------------- |:-------------:|:----------|
-|client_id| 用户中心下发的client_id |Y|
-|client_secret|用户中心下发的client_secret |Y|  
-|grant_type |固定值传 refresh_token |Y|   
-|refresh_token |短信随机码快速登录接口或者账号密码登录接口返回的refresh_token；如果refresh_token丢失，那么传social_type
-值:social_open_id值 |Y|  
-|social_type |固定值，微信传wechat；微信公众号传wechat-public；微博传weibo；QQ传qq；网易传netease；豆瓣传douban |Y|   
-|social_open_id |三方社交返回的唯一userid |Y|  
-|social_access_token |三方社交返回的唯一登录token |Y|  
-|social_extra |三方云端校验token需要的额外授权信息，social_type为qq时，需要必填qq开放者平台申请的秘钥 |N|  
-|type_uhome |固定值传 type_uhome_social_token|Y|  
-|uhome_client_id |参考前提，透传UHome参数 |Y|  
-|uhome_app_id |参考前提，透传UHome参数  |Y|  
-|uhome_sign |参考前提，透传UHome参数 |Y|    
-
-Response:
-```
-{
-"access_token":"2YotnFZFEjr1zCsicMWpAA", //即为所需的访问令牌,
-"expires_in":3600, //access_token过期时间(单位秒，默认有效期10天)
-"scope": "openid profile email", //默认授权范围，可忽略
-"token_type":"bearer", //access_token类型，受个人保护接口可使用
-"refresh_token":"2YotnFZFEjr1zCsicMWpAA", //刷新token，可调用刷新token接口刷新出新的access_token(默认有效期1年)
-"uhome_access_token": "TGT91JFPNKDSYT22QTGFGOMZ85U900", //即为所需的 uhome设备令牌
-"uhome_user_id"：13123123 //透传回UHome返回的uhome userid
-}
-```  
-
-Error:   
- 
-```  
-{
-"error": "invalid_client",
-"error_description": "Bad client credentials" 
-}
-```  
-
-错误码表：  
-
-接口调用错误  
-
-| Error Code     | HTTP Status Code       | Description  | 
-| ------------- |:-------------:|:----------|
-|invalid_request| 400 |参数非法或缺失必填参数|  
-|invalid_client| 401 |无权调用，或所传client_id / client_secret非法|  
-|invalid_grant| 400 |授权异常或失败（如密码或短信验证码错误）|
-|unauthorized_client| 400|应用未被授权此grant_type|
-|unsupported_grant_type |400|系统不支持此grant_type|  
-|invalid_grant| 400 |refresh_token非法|  
-     
-
-业务相关错误  
-
-| Error Code     | HTTP Status Code       | Description  | 
-| ------------- |:-------------:|:----------|
-|social_access_token_error |400|social_access_token不能为空或错误|  
-|social_refresh_token_error| 400 |refresh_token不能为空或者错误|  
-|social_type_error| 400 |social_type错误|  
-|social_extra_error| 400 |social_extra错误|  
-|uhome_token_request_error| 400 |获取Uhome设备令牌失败|  
-|social_connection_null| 400 |社交账号并没有绑定过手机，刷新失效|  
 
 
 
