@@ -62,6 +62,8 @@
 
 * [设备接入<sup style="color:red">(new)<sup>](zh-cn/Cloudgw)
 
+* [云云设备接入](zh-cn/device-c2c)
+
 
 * 能力服务  
 
