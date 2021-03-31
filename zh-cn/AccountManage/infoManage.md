@@ -335,3 +335,220 @@ Error:
 |unauthorized| 401|未授权接口（未传access_token）|
 |invalid_token|401|access_token非法或失效|  
 |insufficient_scope| 403 |权限不足，未获得接口所需的scope| 
+
+
+
+###  注销接口
+
+#### 发送短信验证码
+
+     参考接口"发送短信验证码"，scenario传**logout**
+
+
+#### 短信账号校验
+
+注: 此接口使用的 access_token (`Authorization: Bearer yyyyy`) 仰赖个人级token。
+
+接口中参数code由接口2参数scenario值为logout时发送到用户手机上。
+
+**Request:**
+
+```
+POST /v2/haier/user/cancel/check/sms HTTP/1.1
+Host: https://taccount.haier.com [海尔品牌测试环境]
+      https://account-api.haier.net [海尔品牌正式环境] 
+Authorization: Bearer yyyyy
+Content-Type:application/x-www-form-urlencoded
+```
+
+| Parameter | Desc                                             | Required |
+| --------- | ------------------------------------------------ | -------- |
+| code      | 注销验证码，由接口1 参数scenario值为logout时获取 | Y        |
+
+**Response:**
+
+```
+{
+  "success": true
+}
+```
+
+**错误码表:**
+
+接口调用错误
+
+| Error Code         | HTTP Status Code | Description                      |
+| ------------------ | ---------------- | -------------------------------- |
+| invalid_request    | 400              | 参数非法或缺失必填参数           |
+| unauthorized       | 401              | 未授权接口 (未传 access_token)   |
+| invalid_token      | 401              | access_token 非法或失效          |
+| insufficient_scope | 403              | 权限不足, 未获得接口所需的 scope |
+
+业务相关错误
+
+| Error Code                  | HTTP Status Code | Description                 |
+| --------------------------- | ---------------- | --------------------------- |
+| social_bind                 | 401              | 账号已绑定第三方登录        |
+| verification_code_not_match | 400              | 短信验证码不匹配 (不需重发) |
+| verification_code_expired   | 400              | 短信验证码过期 (需重发)     |
+
+#### 发送邮箱验证码
+
+注: 此接口使用的 access_token (`Authorization: Bearer yyyyy`) 仰赖应用级token(接口〇获取)
+
+**Request:**
+
+```
+POST /v2/email-verification-code/send HTTP/1.1
+Host: https://taccount.haier.com [海尔品牌测试环境]
+      https://account-api.haier.net [海尔品牌正式环境] 
+Authorization: Bearer yyyyy
+Content-Type: application/json
+{
+  "email": "xxxx@xxx.xxx",
+  "scenario": "logout"
+}
+```
+
+| Parameter | Desc                           | Required |
+| --------- | ------------------------------ | -------- |
+| email     | 邮箱地址                       | Y        |
+| scenario  | 固定值: 传 **logout** 表示注销 | Y        |
+
+**Response:**
+
+```
+{
+  "success": true,   //发送成功
+  "delay": 60        //下次发邮件延迟, 单位秒, 例: 60 秒后才能再次发送
+}
+```
+
+**错误码表:**
+
+接口调用错误
+
+| Error Code         | HTTP Status Code | Description                      |
+| ------------------ | ---------------- | -------------------------------- |
+| invalid_request    | 400              | 参数非法或缺失必填参数           |
+| unauthorized       | 401              | 未授权接口 (未传 access_token)   |
+| invalid_token      | 401              | access_token 非法或失效          |
+| insufficient_scope | 403              | 权限不足, 未获得接口所需的 scope |
+
+业务相关错误
+
+| Error Code             | HTTP Status Code | Description                                               |
+| ---------------------- | ---------------- | --------------------------------------------------------- |
+| invalid_email          | 400              | 邮箱格式非法                                              |
+| invalid_scenario       | 400              | scenario 格式错误                                         |
+| email_limit_send_today | 400              | 已超出当天发送次数                                        |
+| too_often              | 400              | 发送过于频繁, 同时会增加 delay 字段指示需要等待的剩余秒数 |
+
+####  邮箱账号校验
+
+注: 此接口使用的 access_token (`Authorization: Bearer yyyyy`) 仰赖个人级token
+
+**Request:**
+
+```
+POST /v2/haier/user/cancel/check/email HTTP/1.1
+Host: https://taccount.haier.com [海尔品牌测试环境]
+      https://account-api.haier.net [海尔品牌正式环境] 
+Authorization: Bearer yyyyy
+Content-Type: application/x-www-form-urlencoded
+```
+
+| Parameter | Desc                                             | Required |
+| --------- | ------------------------------------------------ | -------- |
+| code      | 注销验证码，由接口3 参数scenario值为logout时获取 | Y        |
+
+**Success Response:**
+
+```
+{
+  "success": "true"
+}
+```
+
+**Error:**
+
+**错误码表:**
+
+接口调用错误
+
+| Error Code         | HTTP Status Code | Description                      |
+| ------------------ | ---------------- | -------------------------------- |
+| invalid_request    | 400              | 参数非法或缺失必填参数           |
+| unauthorized       | 401              | 未授权接口 (未传 access_token)   |
+| invalid_token      | 401              | access_token 非法或失效          |
+| insufficient_scope | 403              | 权限不足, 未获得接口所需的 scope |
+
+业务相关错误
+
+| Error Code                  | HTTP Status Code | Description              |
+| --------------------------- | ---------------- | ------------------------ |
+| verification_code_expired   | 400              | 验证码不存在或者已经过期 |
+| verification_code_not_match | 400              | 验证码不匹配，绑定失败   |
+| social_bind                 | 400              | 账号已绑定第三方社交登录 |
+
+#### 注销账号
+
+注: 此接口使用的 access_token (`Authorization: Bearer yyyyy`) 仰赖个人级token
+
+**Request:**
+
+```
+POST /v2/haier/user/cancel/delete HTTP/1.1
+Host: https://taccount.haier.com [海尔品牌测试环境]
+      https://account-api.haier.net [海尔品牌正式环境] 
+Authorization: Bearer yyyyy
+```
+
+**Success Response:**
+
+```
+{
+  "success": "true"
+}
+```
+
+
+**Error:**
+
+**错误码表:**
+
+接口调用错误
+
+| Error Code         | HTTP Status Code | Description                      |
+| ------------------ | ---------------- | -------------------------------- |
+| invalid_request    | 400              | 参数非法或缺失必填参数           |
+| unauthorized       | 401              | 未授权接口 (未传 access_token)   |
+| invalid_token      | 401              | access_token 非法或失效          |
+| insufficient_scope | 403              | 权限不足, 未获得接口所需的 scope |
+
+#### 订阅注销消息
+
+注: 消息订阅采用RocketMQ 版，需要引入sdk
+
+```
+<dependency>
+    <groupId>org.apache.rocketmq</groupId>
+    <artifactId>rocketmq-client</artifactId>
+    <version>4.7.0</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.rocketmq</groupId>
+    <artifactId>rocketmq-acl</artifactId>
+    <version>4.7.0</version>
+</dependency>
+```
+
+**Request:**
+
+| Parameter   | Desc                                                    | Required |
+| ----------- | ------------------------------------------------------- | -------- |
+| accessKey   | 固定值：用户中心下发 （生产测试不一致）                 | Y        |
+| secretKey   | 固定值：用户中心下发（生产测试不一致）                  | Y        |
+| Topic       | 固定值：TOPIC_LOGOUT_USERINFO                           | Y        |
+| group_id    | 消息组:用户中心下发 （生产测试不一致）                  | Y        |
+| namesrvAddr | 消息集群地址(内网)环境：用户中心下发 （生产测试不一致） | Y        |
