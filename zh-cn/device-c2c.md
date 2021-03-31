@@ -143,7 +143,6 @@ sequenceId|String|Header|是|报文流水(客户端唯一)客户端交易流水�
 sign|String|Header|是|对请求进行签名运算产生的签名
 timestamp|String|Header|是|Unix时间戳，当前UTC标准时间，精确到毫秒，例如：1557900146503    
 Content-Type|String|Header|是|本接口Payload内容仅支持UTF-8编码的Json格式数据，值必须为application/json;charset=UTF-8
-   
 
 请求头信息样例（其中#为占位符，不代表具体含义）：  
 
@@ -177,7 +176,7 @@ Content-Type|String|Header|是|本接口Payload内容仅支持UTF-8编码的Json
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 accessToken|String|Body|是|三方用户token
- 
+
 
 **输出参数:**  
 
@@ -254,7 +253,7 @@ machineId|String|Body|是|注册的设备的物理唯一标识，该标识在同
 productId|String|Body|是|三方产品的标识
 accessToken|String|Body|是|三方用户token
 state|String|Body|是|新增注册状态（失败：0，成功：1）
- 
+
 
 **输出参数:**  
 
@@ -310,7 +309,7 @@ machineId|String|Body|是|注册的设备的物理唯一标识，该标识在同
 machineName|String|Body|是|设备名称
 uPlusID|String|Body|是|海尔设备typeId
 uPlusCode|String|Body|是|海尔设备产品编号
- 
+
 
 **输出参数:**  
 
@@ -362,7 +361,7 @@ openId|String|Body|是|OAuth获取到的三方用户的身份标识
 accessToken|String|Body|是|OAuth获取到的三方用户token
 productId|String|Body|是|三方产品型号
 machineId|String|Body|是|注册的设备的物理唯一标识，该标识在同一systemId下需唯一
- 
+
 
 **输出参数:**  
 
@@ -420,7 +419,7 @@ Body：
 :-|:-:|:-:|:-:|:-
 deviceId|String|Body|是|设备ID,字符串长度范围：1~32
 propertys|Property数组|Body|是|设备属性列表,数组长度范围：1~256
- 
+
 
 **输出参数:**  
 
@@ -481,7 +480,7 @@ Body：
 :-|:-:|:-:|:-:|:-
 deviceId|String|Body|是|设备ID,字符串长度范围：1~32
 alarms|alarm数组|Body|是|设备报警列表,数组长度范围：1~256
- 
+
 
 **输出参数:**  
 
@@ -539,7 +538,7 @@ IoT平台会维护设备的在线状态，设备注册到IoT平台时，会携�
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 deviceId|String|Body|是|设备ID，字符串长度范围：1~32
- 
+
 
 **输出参数:**  
 
@@ -583,7 +582,7 @@ IoT平台会维护设备的在线状态，设备注册到Iot平台时，会携�
 参数名|类型|位置|必填|说明
 :-|:-:|:-:|:-:|:-
 deviceId|String|Body|是|设备ID，字符串长度范围：1~32
- 
+
 
 **输出参数:**  
 
@@ -631,7 +630,7 @@ deviceId|String|Body|是|设备ID，字符串长度范围：1~32
 machineId|String|Body|是|设备注册时使用的设备物理唯一标识，字符串长度范围：1~32
 rptProperty|Boolean|Body|是|是否立即上报属性状态：如果值为true，则第三方云服务在应答本接口后，应立即调用“设备属性状态上报”接口上报设备当前全部属性状态；如果值为false，则忽略
 rptAlarm|Boolean|Body|是|是否立即上报报警状态：如果值为true，则第三方云服务在应答本接口后，应立即调用“设备报警状态上报”接口上报设备当前全部报警状态；如果值为false，则忽略
- 
+
 
 **输出参数:**  
 
@@ -690,7 +689,7 @@ machineId|String|Body|是|设备注册时使用的设备物理唯一标识，字
 token|String|Body|否|设备绑定的第三方用户token，字符串长度范围：1~32，如当前设备没有授权的第三方用户，则无此字段
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同，字符串长度范围：1~64
 propertyName|String|Body|是|要读取的设备属性名，字符串长度范围：无限制
- 
+
 
 **输出参数:**  
 
@@ -745,7 +744,7 @@ sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列�
 errNo|Integer|Body|是|设备控制应答错误码，表示本次设备控制结果，该错误码会直接返回至App处理，可返回错误码见“第三方云设备控制异步应答错误码”定义
 propertyName|String|Body|否|要读取的设备属性名，字符串长度范围：1~64，仅errNo不为0时（表示控制失败），本字段可以不存在
 propertyValue|String|Body|否|读取到的设备属性值，字符串长度范围：0~64，仅errNo不为0时（表示控制失败），本字段可以不存在
- 
+
 
 **输出参数:**  
 
@@ -801,7 +800,7 @@ token|String|Body|否|要设备绑定的第三方用户token，字符串长度�
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同，字符串长度范围：1~64
 propertyName|String|Body|是|要写入的设备属性名，字符串长度范围：无限制
 propertyValue|String|Body|是|要写入的设备属性值，字符串长度范围：无限制
- 
+
 
 **输出参数:**  
 
@@ -855,7 +854,7 @@ Body：
 deviceId|String|Body|是|设备ID，字符串长度范围：1~32
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同，字符串长度范围：1~64
 errNo|Integer|Body|是|设备控制应答错误码，表示本次设备控制结果，该错误码会直接返回至App处理，可返回错误码见“第三方云设备控制异步应答错误码”定义
- 
+
 
 **输出参数:**  
 
@@ -979,7 +978,7 @@ deviceId|String|Body|是|设备ID，字符串长度范围：1~32
 sn|String|Body|是|控制序列号，对于一次控制，控制应答的序列号需要同控制请求的序列号相同，字符串长度范围：1~64
 errNo|Integer|Body|是|设备控制应答错误码，表示本次设备控制结果，该错误码会直接返回至App处理，可返回错误码见“第三方云设备控制异步应答错误码”定义
 parameters|Parameter数组|Body|否|设备操作应答参数列表，如当前操作应答无参数，则值为空数组[]，数组长度范围：0~256，仅errNo不为0时（表示控制失败），本字段可以不存在；
- 
+
 
 **输出参数:**  
 
