@@ -1056,7 +1056,7 @@ Body
 
 | 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
 | ------- |:------:|:-----:|:----:|:----:|:----:|
-| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTT_jsonDataStructure)|           
+| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTTManage/IFTTT_jsonDataStructure)|           
  
 
 **输出参数**  
@@ -1182,7 +1182,7 @@ Body
 
 | 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
 | ------- |:------:|:-----:|:----:|:----:|:----:|
-| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTT_jsonDataStructure)|           
+| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTTManage/IFTTT_jsonDataStructure)|           
  
 
 **输出参数**  
@@ -1211,7 +1211,7 @@ Body
 
 | 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
 | ------- |:------:|:-----:|:----:|:----:|:----:|
-| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTT_jsonDataStructure)|           
+| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTTManage/IFTTT_jsonDataStructure)|           
  
 
 **输出参数**  
@@ -1242,7 +1242,7 @@ Body
 
 | 参数名  | 类型    | 最大长度  |位置  | 必填|说明|
 | ------- |:------:|:-----:|:----:|:----:|:----:|
-| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTT_jsonDataStructure)|           
+| userSceneDto| UserSceneDto |&emsp;| Body| 必填|场景参数 [Json结构](zh-cn/IFTTTManage/IFTTT_jsonDataStructure)|           
  
 
 **输出参数**  
